@@ -66,4 +66,6 @@ class LoginController extends Controller
             'password' => bcrypt($this->username()),
         ]);
     }
+
+    
 }

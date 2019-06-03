@@ -65878,47 +65878,74 @@ var render = function() {
       _vm._l(_vm.songs, function(song) {
         return _c("div", [
           _c("li", { staticClass: "list-group-item" }, [
-            _c("th", [
-              _c("tr", [
-                _c("td", [_vm._v(_vm._s(song.titulo))]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "b-button",
-                      {
-                        directives: [
-                          {
-                            name: "b-modal",
-                            rawName: "v-b-modal.modal-1",
-                            modifiers: { "modal-1": true }
+            _c("table", { staticClass: "table table-hover" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("td", [_vm._v(_vm._s(song.titulo))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          directives: [
+                            {
+                              name: "b-modal",
+                              rawName: "v-b-modal.modal-1",
+                              modifiers: { "modal-1": true }
+                            },
+                            {
+                              name: "b-tooltip",
+                              rawName: "v-b-tooltip.hover",
+                              modifiers: { hover: true }
+                            }
+                          ],
+                          style: { "background-color": "#7d4f9d" },
+                          attrs: { title: "Reproducir audio" },
+                          on: {
+                            click: function($event) {
+                              return _vm.datos(song)
+                            }
                           }
-                        ],
-                        attrs: { variant: "link" },
-                        on: {
-                          click: function($event) {
-                            return _vm.datos(song)
+                        },
+                        [_c("i", { staticClass: "fa fa-volume-up" })]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          directives: [
+                            {
+                              name: "b-modal",
+                              rawName: "v-b-modal.modal-1",
+                              modifiers: { "modal-1": true }
+                            },
+                            {
+                              name: "b-tooltip",
+                              rawName: "v-b-tooltip.hover",
+                              modifiers: { hover: true }
+                            }
+                          ],
+                          attrs: {
+                            variant: "success",
+                            title: "Descargar audio"
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-volume-up" })]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c("b-button", { attrs: { variant: "link" } }, [
-                      _c("i", { staticClass: "fa fa-download" })
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("td")
+                        },
+                        [_c("i", { staticClass: "fa fa-download" })]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td")
+                ])
               ])
             ])
           ])
