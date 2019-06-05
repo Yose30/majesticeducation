@@ -6,9 +6,7 @@
                 <div class="card">
                     <div class="card-header">{{ __("Materias") }}</div>
                     <div class="card-body">
-                        @foreach(auth()->user()->libros as $libro)
-                            <a class="btn btn-outline-success" href="{{ route('contenido', $libro->id) }}">{{ $libro->titulo }}</a></br></br>
-                        @endforeach
+                        @include('partials.lista_materias')
                     </div>
                 </div>
             </div>

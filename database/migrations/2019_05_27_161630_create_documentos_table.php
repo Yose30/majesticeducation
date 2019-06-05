@@ -13,31 +13,19 @@ class CreateDocumentosTable extends Migration
      */
     public function up()
     {
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('categoria');
+            $table->timestamps();
+        });
+
         Schema::create('documentos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('libro_id');
             $table->foreign('libro_id')->references('id')->on('libros');
+            $table->unsignedInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->string('titulo', 100)->unique();
-            $table->text('descripcion');
-            $table->string('nombre', 100)->unique();
-            $table->string('extension');
-            $table->string('size');
-            $table->enum('clasificacion', [
-                'Reactivos adicionales',    //1
-                'Guia del docente',         //2
-                'Conoce más',               //3
-                'Cuadernillo de tareas',    //4
-                'Evaluación diagnostica',
-                'ECAS',
-                'Recursos adicionales',
-                'Cuadernillo de actividades de acuerdo al nuevo modelo educativo',
-                'Audios',
-                'Habilidades socioeconomicas',
-                'Planes y programas vigentes',
-                'Talleres para docentes',
-                'Para saber más',
-                'Teacher book'
-            ]);
             $table->string('url', 100)->unique();
             $table->timestamps();
         });
@@ -51,5 +39,6 @@ class CreateDocumentosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('documentos');
+        Schema::dropIfExists('categorias');
     }
 }
