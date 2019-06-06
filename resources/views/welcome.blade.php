@@ -18,8 +18,7 @@
                  background-repeat: no-repeat;
                  background-size: auto auto;
                  background-position: right;
-                 background-color: #fff;
-                
+                 background-color:#FFFFFF;             
                 font-family: 'Open Sans', sans-serif;
                 font-weight: 200;
                 color: #636b6f;
@@ -58,12 +57,13 @@
                 color:#a9343A;
             }
 
+            
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 15px;
                 font-weight: 600;
-                letter-spacing: .1rem;
+       
                 text-decoration: none;
                 margin-top: 10px;
                 margin-bottom: 10px;
@@ -72,8 +72,7 @@
             }
            
             #logeo{
-                font-size: 15px;
-                font-weight: 600;
+                
                 color:#9E1F63;
                  /*
                 color:#000;
@@ -103,7 +102,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a id="logeo" href="{{ route('login') }}">Iniciar sesión</a>
+                        <a id="logeo" href="{{ route('login') }}">Iniciar sesiÃ³n</a>
 
                         <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
@@ -116,8 +115,6 @@
                 <div class="title m-b-md">
                     Material ME
                 </div>
-
-               
 
                 <div class="links">
                     <a href="https://laravel.com/docs"></a>
@@ -132,3 +129,4 @@
         </div>
     </body>
 </html>
+

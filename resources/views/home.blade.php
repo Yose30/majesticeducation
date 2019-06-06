@@ -1,9 +1,20 @@
 @extends('layouts.app')
 <style type="text/css">
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    
+ html, body {
+     font-family: 'Open Sans', sans-serif;
+     background-image:url({{ asset('img/aves.png')}});               
+     background-repeat: no-repeat;
+     background-size: auto auto;
+     
+    
+    }
+
     a.btn{
        
         font-size: 15px;
-        font-family: sans-serif;   
+        font-family: 'Open Sans', sans-serif;
         padding: 10px;
         background-color:#f2f2f2;
         color:#d91c5c;
@@ -24,44 +35,44 @@
     a.btn i{
         font-size: 50px;
     }
-    #hist {
-        background-color: #a06a13;
-        color: #ffffff;
+   
+
+    #headMM{
+        font-size:20px;
+        font-weight: bold; 
+        background-color:#f7ca39;
+        border: 1px solid #f2991f;
     }
-    #hist:hover {
-        background-color: transparent;
-        border: 1px solid #a06a13;
-        color: #a06a13;
+
+    
+    #headBM{
+        font-size:20px;
+        font-weight: bold; 
+        background-color:#f7ca39;
+        border: 1px solid #f2991f;
+    }
+
+    #btbBuscarM
+    {
+        background-color:#f2991f;
+        color:#000;
+        font-weight: bold; 
+        border: 1px solid #f2991f;
+
 
     }
-    #cult {
-        background-color: #8f6dff;
-        color: #ffffff;
+    #btbBuscarM:hover
+    {
+        background-color:#f7ca39;
+        color:#000;
+        font-weight: bold; 
     }
-    #cult:hover {
-        background-color: transparent;
-        border: 1px solid #8f6dff;
-        color: #8f6dff;
-
+    #cuerpo{
+        border: 1px solid #f2991f;
     }
-    #geo {
-        background-color: #1d75d3;
-        color: #ffffff;
-    }
-    #geo:hover {
-        background-color: transparent;
-        border: 1px solid #1d75d3;
-        color: #1d75d3;
-
-    }
-    #varios {
-        background-color: #a3e822;
-        color: #ffffff;
-    }
-    #varios:hover {
-        background-color: transparent;
-        border: 1px solid #a3e822;
-        color: #a3e822;
+    
+    #clavemat{
+        border: 1px solid #f2991f;
     }
  
   
@@ -71,8 +82,8 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __("Materias") }}</div>
-                    <div class="card-body" id="prueba">
+                    <div class="card-header" id="headMM"><center><b>{{ __("Mis materias") }}</b></center></div>
+                    <div class="card-body" id="Cuerpo">
                         @include('partials.lista_materias')
                     </div>
                 </div>
@@ -80,8 +91,8 @@
 
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header">{{ __("Buscar materia") }}</div>
-                    <div class="card-body">
+                    <div class="card-header" id="headBM"><center><b>{{ __("Buscar materia") }}</b></center></div>
+                    <div class="card-body" id="Cuerpo">
                         @include('partials.buscador_materia')   
                     </div>
                 </div>
