@@ -8,14 +8,21 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        
 
         <!-- Styles -->
         <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
             html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
+                background-image:url({{ asset('img/avion.png')}});               
+                 background-repeat: no-repeat;
+                 background-size: auto auto;
+                 background-position: right;
+                 background-color: #fff;
+                
+                font-family: 'Open Sans', sans-serif;
                 font-weight: 200;
+                color: #636b6f;
                 height: 100vh;
                 margin: 0;
             }
@@ -46,16 +53,42 @@
 
             .title {
                 font-size: 84px;
+                font-weight: 600;
+                font-style:bold;
+                color:#a9343A;
             }
 
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 15px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
-                text-transform: uppercase;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+           
+            #logeo{
+                font-size: 15px;
+                font-weight: 600;
+                color:#9E1F63;
+                 /*
+                color:#000;
+                border: 1px solid #d91c5c;
+                border-radius:10px;
+                padding: 10px;
+                background-color:#d91c5c;
+            */
+            }
+            #logeo:hover{
+                color:#FF5A00;
+            }
+            #logeo:active{
+                color:#A841A6;
+
             }
 
             .m-b-md {
@@ -70,7 +103,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a id="logeo" href="{{ route('login') }}">Iniciar sesión</a>
 
                         <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
@@ -81,17 +114,17 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Material ME
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs"></a>
+                    <a href="https://laracasts.com"></a>
+                    <a href="https://laravel-news.com"></a>
+                    <a href="https://blog.laravel.com"></a>
+                    <a href="https://nova.laravel.com"></a>
+                    <a href="https://forge.laravel.com"></a>
+                    <a href="https://github.com/laravel/laravel"></a>
                 </div>
             </div>
         </div>
