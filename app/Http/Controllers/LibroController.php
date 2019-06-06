@@ -32,6 +32,6 @@ class LibroController extends Controller
         $client = new Google_Client();
         $service = new Google_Service_Drive($client);
         $results = $service->files->listFiles();
-        dd($results);
+        dd($audio);
     }
 }
