@@ -13,13 +13,21 @@
                
     }
     #clavehead{
+        background-color:#f7ca39;
+        font-size:20px;
         font-weight: bold;    
+        border: 1px solid #f2991f;
+        
+    }
+    #contenido{
+        border: 1px solid #f2991f;
     }
     #btnacces
     {
         background-color:#f2991f;
         color:#000;
-        font-weight: bold; 
+        font-weight: bold;
+        border: 1px solid #f2991f;
 
 
     }
@@ -29,6 +37,12 @@
         color:#000;
         font-weight: bold; 
     }
+    #clave{
+        border: 1px solid #f2991f;
+
+    }
+
+
 
 </style>
 
@@ -41,7 +55,7 @@
                     <p><center>{{ __('Comenzar') }}</center><p>
                     </div>
 
-                <div class="card-body">
+                <div class="card-body" id="contenido">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -89,16 +103,16 @@
                             </div>
                         </div> -->
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
+                        <div class="form-group row" >
+                            <div class="col-md-6 offset-md-4" >
+                                <div class="form-check" >
                                     <label>
                                         {{ __('Ingresa la clave para entrar a la plataforma') }}
                                     </label>
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Mantener la sesión iniciada') }}
+                                        {{ __('Mantener la sesiÃ³n iniciada') }}
                                     </label>
                                 </div>
                             </div>

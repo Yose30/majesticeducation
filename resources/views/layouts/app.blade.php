@@ -29,6 +29,12 @@
                 font-family: 'Open Sans', sans-serif;
                
             }
+            #logo{
+                font-size: 28px;
+                font-weight: 600;
+                color:#a9343A;
+
+            }
             #logeo{
                 font-size: 15px;
                 font-weight: 600;
@@ -67,8 +73,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Majestic Education') }}
+                <a class="navbar-brand" href="{{ url('/') }}" id="logo">
+                   Materiales ME
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -85,7 +91,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}" id="logeo">{{ __('Iniciar sesión') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}" id="logeo">{{ __('Iniciar sesiÃ³n') }}</a>
                             </li>
                             <!-- @if (Route::has('register'))
                                 <li class="nav-item">
@@ -96,7 +102,7 @@
                             <a href="{{ route('logout') }}" id="logeooff"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Cerrar sesión') }}
+                                {{ __('Cerrar sesiÃ³n') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -148,6 +154,7 @@
 
 </body>
 <footer>
-            <p><center>Derechos Reservados <b><i>© Majestic Education</i></b>. Aviso de Privacidad.</center></p>
+            <hr/>
+            <p><center>Derechos Reservados <b><i>Â© Majestic Education</i></b>. Aviso de Privacidad.</center></p>
 </footer>
 </html>
