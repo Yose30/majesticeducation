@@ -27,12 +27,11 @@ class LibroController extends Controller
         return view('contenido', compact('libro', 'categorias', 'documentos', 'videos', 'links', 'songs'));
     }
 
-    // public function download($id){
-    //     $audio = Song::whereId($id)->first();
-    //     $client = new Google_Client();
-    //     $service = new Google_Service_Drive($client);
-    //     $results = $service->files->listFiles();
-    //     dd($results);
-    //     return Storage::disk('google')->download('/Aplicaciones/files/'.$file->name);
-    // }
+    public function download($id){
+        $audio = Song::whereId($id)->first();
+        $client = new Google_Client();
+        $service = new Google_Service_Drive($client);
+        $results = $service->files->listFiles();
+        dd($results);
+    }
 }

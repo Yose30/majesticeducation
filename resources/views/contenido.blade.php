@@ -5,9 +5,6 @@
         overflow:auto; 
         height:450px;
     }
-    .nav-link {
-        
-    }
 </style>
 
 @section('content')
@@ -16,27 +13,8 @@
             {{ $libro->titulo }}
         </div>
     </div>
-    <!-- <div class="pos-f-t">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light p-4">
-                @include('partials.lista_materias')
-            </div>
-        </div>
-        <nav class="navbar navbar-light bg-light">
-            <button 
-                class="navbar-toggler" 
-                type="button" 
-                data-toggle="collapse" 
-                data-target="#navbarToggleExternalContent" 
-                aria-controls="navbarToggleExternalContent" 
-                aria-expanded="false">
-                <span class="navbar-toggler-icon"></span> {{ __("Materias") }}
-            </button>
-        </nav>
-    </div>
-    <hr> -->
     <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body" id="scroll-c">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -52,12 +30,23 @@
                             @include('partials.elemento_lista', ['tipo_mat' => $videos, 'titulo_mat' => 'Videos', 'etiqueta' => 'videos', 'clase' => 'eye'])
                             @include('partials.elemento_lista', ['tipo_mat' => $links, 'titulo_mat' => 'Links', 'etiqueta' => 'links', 'clase' => 'location-arrow'])
                             @include('partials.elemento_lista', ['tipo_mat' => $documentos, 'titulo_mat' => 'Material', 'etiqueta' => 'material', 'clase' => 'book'])
+                            <div id="list-example" class="list-group" style="display: none;">
+                                @foreach($categorias as $categoria)
+                                    @if($categoria->documentos->count() > 0)
+                                        <a 
+                                            class="list-group-item list-group-item-action" 
+                                            href="#list-item-{{$categoria->id}}">
+                                            {{ $categoria->categoria }}
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div>
                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-body" id="scroll-c">
 
@@ -77,6 +66,8 @@
                                     @foreach($libro->semestres as $semestre)
                                         {{ $semestre->semestre }}
                                     @endforeach
+
+                                    <a href="{{ route('download', 1) }}">Descargar</a>
                                 </div>
                             </div>
                         </div>
@@ -99,5 +90,58 @@
             </div>
         </div>
 
+        <div class="modal fade" id="viewDoc" tabindex="-1" role="dialog" aria-labelledby="appModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+<script>     
+    jQuery(document).on("click", '.btn-doc', function (e) {
+        e.preventDefault();
+        let modal = jQuery("#viewDoc");
+        const url = jQuery(this).data('url');
+        const titulo = jQuery(this).data('titulo');
+        modal.find('.modal-title').text(titulo);
+        let $contenido = $("<div></div>");
+        $contenido.append(`<object data="${url}" type="application/pdf" width="100%" height="80%"></object>`);
+        modal.find('.modal-body').html($contenido);
+        modal.modal();
+        console.log(modal);
+    });
+
+    jQuery(document).on("click", '#inicio-tab', function (e) {
+        $('#list-example').hide();
+    });
+    jQuery(document).on("click", '#audios-tab', function (e) {
+        $('#list-example').hide();
+    });
+    jQuery(document).on("click", '#videos-tab', function (e) {
+        $('#list-example').hide();
+    });
+
+    jQuery(document).on("click", '#links-tab', function (e) {
+        $('#list-example').hide();
+    });
+
+    jQuery(document).on("click", '#material-tab', function (e) {
+        $('#list-example').show();
+    });
+</script>
+
 

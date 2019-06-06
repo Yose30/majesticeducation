@@ -31,7 +31,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('songs-component', require('./components/SongsComponent.vue').default);
-Vue.component('documentos-component', require('./components/DocumentosComponent.vue').default);
 Vue.component('videos-component', require('./components/VideosComponent.vue').default);
 
 /**
