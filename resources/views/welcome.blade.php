@@ -117,9 +117,7 @@
                     Material ME
                 </div>
 
-                <div class="title m-b-md">
-                    Material ME
-                </div>
+               
 
                 <div class="links">
                     <a href="https://laravel.com/docs"></a>
