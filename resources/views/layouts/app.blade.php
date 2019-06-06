@@ -91,7 +91,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}" id="logeo">{{ __('Iniciar sesiÃ³n') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}" id="logeo">{{ __('Iniciar sesión') }}</a>
                             </li>
                             <!-- @if (Route::has('register'))
                                 <li class="nav-item">
@@ -102,7 +102,7 @@
                             <a href="{{ route('logout') }}" id="logeooff"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Cerrar sesiÃ³n') }}
+                                {{ __('Cerrar sesión') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -155,6 +155,6 @@
 </body>
 <footer>
             <hr/>
-            <p><center>Derechos Reservados <b><i>Â© Majestic Education</i></b>. Aviso de Privacidad.</center></p>
+            <p><center>Derechos Reservados <b><i>© Majestic Education</i></b>. Aviso de Privacidad.</center></p>
 </footer>
 </html>

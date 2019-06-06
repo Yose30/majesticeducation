@@ -102,7 +102,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a id="logeo" href="{{ route('login') }}">Iniciar sesiÃ³n</a>
+                        <a id="logeo" href="{{ route('login') }}">Iniciar sesión</a>
 
                         <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
