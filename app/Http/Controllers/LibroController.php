@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Google_Service_Drive;
 use Google_Client;
-use Google_Service_Plus;
+use Google_Service_Drive_DriveFile;
 use Illuminate\Http\Request;
 use App\Libro;
 use App\Documento;
@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Storage;
 
 class LibroController extends Controller
 {
+    private $drive;
+    public function __construct(Google_Client $client)
+    {
+        $this->middleware(function ($request, $next) use ($client) {
+            $client->refreshToken(Auth::user()->refresh_token);
+            $this->drive = new Google_Service_Drive($client);
+            return $next($request);
+        });
+    }
     
     public function contenido($id){
         $libro = Libro::whereId($id)->with('subsistemas', 'semestres')->first();
