@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Google_Service_Drive;
 use Google_Client;
+use Google_Service_Plus;
 use Illuminate\Http\Request;
 use App\Libro;
 use App\Documento;
