@@ -4,7 +4,7 @@
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
     html, body {
      font-family: 'Open Sans', sans-serif;
-     background-image:url({{ asset('interface/aviondePapek.png')}});               
+     background-image:url({{ asset('interfaz/aviondePapek.png')}});               
      background-repeat: no-repeat;
      background-position: center; /* Center the image */
  
@@ -58,18 +58,27 @@
        color: #000000;
    }
 
-   a.btn:link{
-       background-color: #d91c5c;
-       border: 2px solid #7d4f9d;
-       color: #000000;
-   }
-
-   .nav-link {
+   
+    .nav-link
+    {
+      
+        color:#d91c5c;
+        font-style:bold;
         
     }
-    #pruebita{
-        color:#000;
+    .nav-link:hover
+    {
+        
+        color:#7d4f9d;
+        font-style:bold;
+        
     }
+    
+    .nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: red;
+}
+    
+
 
 
 
