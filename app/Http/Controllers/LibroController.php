@@ -27,8 +27,8 @@ class LibroController extends Controller
         return view('contenido', compact('libro', 'categorias', 'documentos', 'videos', 'links', 'songs'));
     }
 
-    public function download($id){
-        $audio = Song::whereId($id)->first();
+    public function download(){
+        $audio = Song::whereId(1)->first();
         $client = new Google_Client();
         $service = new Google_Service_Drive($client);
         $results = $service->files->listFiles();
