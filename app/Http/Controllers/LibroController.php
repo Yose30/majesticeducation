@@ -29,6 +29,12 @@ class LibroController extends Controller
     }
 
     public function download(){
+        $client = new Google_Client();
+        $driveService = new Google_Service_Drive($client);
+        $fileId = '0BwwA4oUTeiV1UVNwOHItT0xfa2M';
+        $response = $driveService->files->get($fileId, array(
+            'alt' => 'media'));
+        $content = $response->getBody()->getContents();
         // $audio = Song::whereId(1)->first();
         // $client = new Google_Client();
         // $client->addScope("https://www.googleapis.com/auth/drive");
@@ -36,10 +42,10 @@ class LibroController extends Controller
         // dd($client->createAuthUrl());
         // $service = new Google_Service_Drive($client);
         // $results = $service->files->listFiles();
-        $client = new Google_Client();
-        $client->useApplicationDefaultCredentials();
-        $client->addScope(Google_Service_Plus::PLUS_ME);
-        $httpClient = $client->authorize();
-        $response = $httpClient->get('https://www.googleapis.com/plus/v1/people/me');
+        // $client = new Google_Client();
+        // $client->useApplicationDefaultCredentials();
+        // $client->addScope(Google_Service_Plus::PLUS_ME);
+        // $httpClient = $client->authorize();
+        // $response = $httpClient->get('https://www.googleapis.com/plus/v1/people/me');
     }
 }
