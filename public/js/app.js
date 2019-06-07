@@ -1820,6 +1820,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'app',
   props: ['links'],
@@ -65994,37 +65995,28 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(link.titulo))]),
             _vm._v(" "),
-            _c(
-              "td",
-              [
-                _c(
-                  "b-button",
-                  {
-                    directives: [
-                      {
-                        name: "b-modal",
-                        rawName: "v-b-modal.modal-aud",
-                        modifiers: { "modal-aud": true }
-                      },
-                      {
-                        name: "b-tooltip",
-                        rawName: "v-b-tooltip.hover",
-                        modifiers: { hover: true }
-                      }
-                    ],
-                    style: { "background-color": "#7d4f9d" },
-                    attrs: { title: "Abrir link" },
-                    on: {
-                      click: function($event) {
-                        return _vm.datos(link)
-                      }
+            _c("td", [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip.hover",
+                      modifiers: { hover: true }
                     }
-                  },
-                  [_c("i", { staticClass: "fa fa-globe" })]
-                )
-              ],
-              1
-            )
+                  ],
+                  staticClass: "btn",
+                  style: { "background-color": "#7d4f9d", color: "#ffffff" },
+                  attrs: {
+                    href: link.url,
+                    title: "Abrir link",
+                    target: "_blank"
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-globe" })]
+              )
+            ])
           ])
         }),
         0

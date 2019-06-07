@@ -5,14 +5,15 @@
                 <tr v-for="link in links">
                     <td>{{ link.titulo }}</td>
                     <td>
-                        <b-button 
-                            :style="{'background-color': '#7d4f9d'}" 
-                            v-on:click="datos(link)" 
-                            v-b-modal.modal-aud 
+                        <a 
+                            class="btn"
+                            :href="link.url" 
+                            :style="{'background-color': '#7d4f9d', 'color': '#ffffff'}" 
                             v-b-tooltip.hover 
-                            title="Abrir link">
-                                <i class="fa fa-globe"></i>
-                        </b-button>
+                            title="Abrir link"
+                            target="_blank">
+                            <i class="fa fa-globe"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>

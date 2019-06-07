@@ -819,5 +819,16 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => '2019-05-27 00:00:00'
             ],
         ]);
+
+        \DB::table('links')->insert([
+            0 => [
+                'id'        => 1,
+                'libro_id'  => 3,
+                'titulo'    => 'Free resources for teens to help improve your English',
+                'url'       => 'http://learnenglishteens.britishcouncil.org/',
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+        ]);
     }
 }

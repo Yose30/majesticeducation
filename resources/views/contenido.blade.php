@@ -63,8 +63,12 @@
     <div class="card text-center" id="tituloMateria">
         <div class="card-body">
             {{ $libro->titulo }}
-            <hr/>
-            <hr/>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5>{{ __("Mis materias") }}</h5>
+            @include('partials.lista_materias')
         </div>
     </div>
     <div class="row">
