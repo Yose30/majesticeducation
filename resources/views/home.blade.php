@@ -7,7 +7,7 @@
     
  html, body {
      font-family: 'Open Sans', sans-serif;
-     background-image:url({{ asset('img/aves.png')}});               
+     background-image:url({{ asset('interfaz/aves.png')}});               
      background-repeat: no-repeat;
      background-size: auto auto;
      
@@ -19,15 +19,15 @@
         font-size: 15px;
         font-family: 'Open Sans', sans-serif;
         padding: 10px;
-        background-color:#e02e70;
-        color:#FFFFFF;
-        border: 2px solid #d91c5c;    
+        background-color:#f7ca39;
+       color:#000000;
+       border: 2px solid #f2991f;   
     }
 
     a.btn:hover{
-        background-color: #d91c5c;
-        border: 2px solid #7d4f9d;
-        color: #FFFFFF;
+        background-color: #f2991f;
+       border: 2px solid #f7ca39;
+       color: #000000;
     }
 
     a.btn:active{

@@ -4,7 +4,7 @@
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
     html, body {
      font-family: 'Open Sans', sans-serif;
-     background-image:url({{ asset('img/aviondePapek.png')}});               
+     background-image:url({{ asset('interface/aviondePapek.png')}});               
      background-repeat: no-repeat;
      background-position: center; /* Center the image */
  
@@ -47,30 +47,33 @@
        font-size: 15px;
        font-family: 'Open Sans', sans-serif;
        padding: 10px;
-       background-color:#e02e70;
-       color:#FFFFFF;
-       border: 2px solid #d91c5c;    
+       background-color:#f7ca39;
+       color:#000000;
+       border: 2px solid #f2991f;    
    }
 
    #misMaterias:hover{
-       background-color: #d91c5c;
-       border: 2px solid #7d4f9d;
-       color: #FFFFFF;
+       background-color: #f2991f;
+       border: 2px solid #f7ca39;
+       color: #000000;
    }
 
-   a.btn:active{
+   a.btn:link{
        background-color: #d91c5c;
        border: 2px solid #7d4f9d;
-       color: #FFFFFF;
+       color: #000000;
    }
 
-
-
-
-
-    .nav-link {
+   .nav-link {
         
     }
+    #pruebita{
+        color:#000;
+    }
+
+
+
+    
 </style>
 
 @section('content')
@@ -99,7 +102,7 @@
                                 data-toggle="pill" 
                                 href="#v-inicio" 
                                 role="tab">
-                                <i class="fa fa-home"> {{ __("Inicio") }}</i>
+                                <i class="fa fa-home" > {{ __("Inicio") }}</i>
                             </a>
                             @include('partials.elemento_lista', ['tipo_mat' => $songs, 'titulo_mat' => 'Audios', 'etiqueta' => 'audios', 'clase' => 'volume-up'])
                             @include('partials.elemento_lista', ['tipo_mat' => $videos, 'titulo_mat' => 'Videos', 'etiqueta' => 'videos', 'clase' => 'video-camera'])
