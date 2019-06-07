@@ -60,6 +60,15 @@
                 color:#A841A6;
 
             }
+            footer{
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #ffffff;
+                text-align: center;
+}
+            }
 
             
 
@@ -91,7 +100,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}" id="logeo">{{ __('Iniciar sesión') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}" ><i class="fa fa-unlock-alt" id="logeo"> {{ __("Iniciar sesión") }}</i></a>
                             </li>
                             <!-- @if (Route::has('register'))
                                 <li class="nav-item">
@@ -99,10 +108,10 @@
                                 </li>
                             @endif -->
                         @else
-                            <a href="{{ route('logout') }}" id="logeooff"
+                            <a href="{{ route('logout') }}" 
                                 onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Cerrar sesión') }}
+                                                document.getElementById('logout-form').submit();"><i class="fa fa-unlock" id="logeooff"> {{ __('Cerrar sesión') }}</i>
+                                
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -154,6 +163,7 @@
 
 </body>
 <footer>
+            <hr/>
             <hr/>
             <p><center>Derechos Reservados <b><i>© Majestic Education</i></b>. Aviso de Privacidad.</center></p>
 </footer>

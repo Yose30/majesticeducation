@@ -8,6 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         
 
         <!-- Styles -->
@@ -61,9 +63,7 @@
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
-                font-size: 15px;
-                font-weight: 600;
-       
+               
                 text-decoration: none;
                 margin-top: 10px;
                 margin-bottom: 10px;
@@ -74,6 +74,9 @@
             #logeo{
                 
                 color:#9E1F63;
+                font-size: 15px;
+                font-weight: 600;
+                font-style:bold,
                  /*
                 color:#000;
                 border: 1px solid #d91c5c;
@@ -102,7 +105,9 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a id="logeo" href="{{ route('login') }}">Iniciar sesión</a>
+
+                   
+                        <a href="{{ route('login') }}"> <i class="fa fa-unlock-alt" id="logeo" > {{ __("Iniciar sesión") }}</i></a>
 
                         <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>

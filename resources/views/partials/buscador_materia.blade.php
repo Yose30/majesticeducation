@@ -13,5 +13,5 @@
             <strong>{{ $errors->first('clavemat') }}</strong>
         </span>
     @endif
-    <button type="submit" class="btn btn-primary">{{ __("Buscar") }}</button>
+    <button type="submit" class="btn btn-primary" id="btbBuscarM">{{ __("Buscar") }}</button>
 </form>
