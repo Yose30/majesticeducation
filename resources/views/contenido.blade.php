@@ -59,14 +59,14 @@
    }
 
    
-    .nav-link
+    .nav .nav-link
     {
       
         color:#d91c5c;
         font-style:bold;
         
     }
-    .nav-link:hover
+    .nav .nav-link:hover
     {
         
         color:#7d4f9d;
@@ -74,9 +74,11 @@
         
     }
     
-    .nav-pills > .active > a, .nav-pills > .active > a:hover {
-    background-color: red;
-}
+    .nav-pills .nav-link.active,
+    .show>.nav-pills .nav-link{
+        background: #7d4f9d !important
+    }
+   
     
 
 
