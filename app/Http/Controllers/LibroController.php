@@ -31,8 +31,8 @@ class LibroController extends Controller
     public function download(){
         $client = new Google_Client();
         $driveService = new Google_Service_Drive($client);
-        $fileId = '0BwwA4oUTeiV1UVNwOHItT0xfa2M';
-        $response = $driveService->files->get($fileId, array(
+        $fileId = '0B4lctXErlSvzSXVUd3pZelVoakU';
+        $response = $driveService->files->export($fileId, 'application/pdf', array(
             'alt' => 'media'));
         $content = $response->getBody()->getContents();
         // $audio = Song::whereId(1)->first();
