@@ -23,5 +23,5 @@ Route::post('/home/buscar', 'HomeController@buscar')->name('home.buscar');
 Route::get('/contenido/{id}', 'LibroController@contenido')->name('contenido');
 
 
-Route::get('/download/{id}', 'LibroController@download')->name('download');
+Route::get('/download/drive', 'LibroController@download')->name('download.drive');
 
