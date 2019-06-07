@@ -28,7 +28,7 @@
         </table>
         <div>
             <b-modal id="modal-aud" :title="audio.titulo" centered hide-footer>
-                <audio controls :src="audio.url"></audio>
+                <audio width="300" height="326" controls :src="audio.url"></audio>
             </b-modal>
         </div>
   
