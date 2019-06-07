@@ -34,19 +34,24 @@ class HomeController extends Controller
 
         $user = auth()->user();
         $libro = Libro::where('clave', $request->clavemat)->first();
-        $registrados = $user->libros->where('id', $libro->id)->first();
         
-        if($registrados != null){
-            return back()->with('message', ['warning', __("Ya tienes registrada esta materia")]);;
-        }
-        else{
-            if($user->tipo_id == 2 && $libro->tipo == "Profesor" || $user->tipo_id == 3 && $libro->tipo == "Alumno"){
-                $user->libros()->attach($libro->id, ['user_id' => $user->id]);
-                return back()->with('message', ['success', __("Materia guardada")]);;
+        if($libro != null){
+            $registrado = $user->libros->where('id', $libro->id)->first();
+            if($registrado != null){
+                return back()->with('message', ['warning', __("Ya tienes registrada esta materia")]);
             }
             else{
-                return back()->with('message', ['danger', __("No tienes acceso a este material")]);;
+                if($user->tipo_id == 2 && $libro->tipo == "Profesor" || $user->tipo_id == 3 && $libro->tipo == "Alumno"){
+                    $user->libros()->attach($libro->id, ['user_id' => $user->id]);
+                    return back()->with('message', ['success', __("Materia guardada")]);
+                }
+                else{
+                    return back()->with('message', ['danger', __("No tienes acceso a este material")]);
+                }
             }
+        }
+        else{
+            return back()->with('message', ['warning', __("La clave de la materia es incorrecta")]);
         }
     }
 

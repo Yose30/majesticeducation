@@ -75,6 +75,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000119A',
                 'titulo'        => 'Tecnologías de la Información y la Comunicación',
                 'sinopsis'      => 'Actividades para trabajar habilidades sociemocionales, lecturas con temas integradores, dossier con los ejercicios de esfuerzo, material adicional en plataforma.',
+                'image_url'     => 'tics.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //DGETI, 1er semestre
             ],
@@ -84,6 +85,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000219A',
                 'titulo'        => 'Tecnologías de la Información y la Comunicación',
                 'sinopsis'      => 'Actividades para trabajar habilidades sociemocionales, lecturas con temas integradores, dossier con los ejercicios de esfuerzo, material adicional en plataforma.',
+                'image_url'     => 'tics.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //DGETI, 1er semestre
             ],
@@ -93,6 +95,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000319A',
                 'titulo'        => 'Best of English 3',
                 'sinopsis'      => 'Para bachillerato tecnológico: actividades, lecturas literarias, ejercicios para ejercitar las 4 habilidades y alcanzar un nivel B2 del MCC. Con audios y apoyo adicional en plataforma.',
+                'image_url'     => 'the-best-of-english-3.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //DGETI, 3er semestre
             ],
@@ -102,6 +105,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000419A',
                 'titulo'        => 'Best of English 3',
                 'sinopsis'      => 'Para bachillerato tecnológico: actividades, lecturas literarias, ejercicios para ejercitar las 4 habilidades y alcanzar un nivel B2 del MCC. Con audios y apoyo adicional en plataforma.',
+                'image_url'     => 'the-best-of-english-3.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //DGETI, 3er semestre
             ],
@@ -111,6 +115,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000519A',
                 'titulo'        => 'Química 1',
                 'sinopsis'      => 'Actividades para trabajar habilidades socioemocinales, lecturas con temas integradores, dossier con los ejercicios de esfuerzo, material adicional en plataforma.',
+                'image_url'     => 'quimica-1.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //DGETI, 1er semestre
             ],
@@ -120,6 +125,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000619A',
                 'titulo'        => 'Química 1',
                 'sinopsis'      => 'Actividades para trabajar habilidades socioemocionales, lecturas con temas integradores, dossier con los ejercicios de esfuerzo, material adicional en plataforma.',
+                'image_url'     => 'quimica-1.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //DGETI, 1er semestre
             ],
@@ -129,6 +135,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000719A',
                 'titulo'        => 'Manejo de aplicaciones por Medios Digitales',
                 'sinopsis'      => 'Acordes a los programas de CONALEP, actividades de refuerzo a los programas <<Yo no abandono>> y <<Constrúye T>>. Con apoyos y ejercicios en plataforma.',
+                'image_url'     => 'mdap-medios-digitales.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //CONALEP, 2do semestre
             ],
@@ -138,6 +145,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000819A',
                 'titulo'        => 'Manejo de aplicaciones por Medios Digitales',
                 'sinopsis'      => 'Acordes a los programas de CONALEP, actividades de refuerzo a los programas <<Yo no abandono>> y <<Constrúye T>>. Con apoyos y ejercicios en plataforma.',
+                'image_url'     => 'mdap-medios-digitales.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //CONALEP, 2do semestre
             ],
@@ -147,6 +155,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '000919A',
                 'titulo'        => 'Manual de actividades experimentales de Química 3',
                 'sinopsis'      => 'Para el trabajo en laboratorio, sigue paso a paso el método científico, con información para tus investigaciones, medidas de precaución, manejo de residuos y material adicional en plataforma.',
+                'image_url'     => 'mdae-quimica-3.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //CCH, DGB, Cecyt-IPN, 2, 3, 5 semestre
             ],
@@ -156,6 +165,7 @@ class DatabaseSeeder extends Seeder
                 'clave'         => '001019A',
                 'titulo'        => 'Manual de actividades experimentales de Química 3',
                 'sinopsis'      => 'Para el trabajo en laboratorio, sigue paso a paso el método científico, con información para tus investigaciones, medidas de precaución, manejo de residuos y material adicional en plataforma.',
+                'image_url'     => 'mdae-quimica-3.jpg',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00' //CCH, DGB, Cecyt-IPN, 2, 3, 5 semestre
             ],
