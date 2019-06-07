@@ -67,9 +67,24 @@
                 width: 100%;
                 background-color: #ffffff;
                 text-align: center;
-}
-            }
+                }
+            #btbBuscarM
+            {
+                background-color:#f2991f;
+                color:#000;
+                font-weight: bold; 
+                border: 1px solid #f2991f;
 
+
+            }
+            #btbBuscarM:hover
+            {
+                background-color:#f7ca39;
+                color:#000;
+                font-weight: bold; 
+            }
+            
+            
             
 
     </style>
