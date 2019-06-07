@@ -84,7 +84,7 @@
                                 <videos-component :videos="{{ json_encode($videos) }}"></videos-component>   
                             </div>
                             <div class="tab-pane fade" id="v-links" role="tabpanel">
-                                
+                                <links-component :links="{{ json_encode($links) }}"></links-component>
                             </div>
                             <div class="tab-pane fade" id="v-material" role="tabpanel">
                                 @include('partials.documentos')
