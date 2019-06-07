@@ -96,7 +96,20 @@
     </div>
     <div class="card" >
         <div class="card-body">
-            <h5>{{ __("Mis materias") }}</h5>
+            <div class="row">
+                <div class="col-md-11">
+                    <h5>{{ __("Mis materias") }}</h5>
+                </div>
+                <div class="col-md-1">
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-success" 
+                        data-toggle="modal" 
+                        data-target="#buscarMat">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
             @include('partials.lista_materias')
         </div>
     </div>
@@ -148,7 +161,7 @@
                             <div class="tab-pane fade show active" id="v-inicio" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-4">
-                                    
+                                        <img class="img-fluid" style="width:auto; height:auto;" src="{{ $libro->pathAttachment() }}" />
                                     </div>
                                     <div class="col-md-8">
                                        <hr>
@@ -186,22 +199,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="viewDoc" tabindex="-1" role="dialog" aria-labelledby="appModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('partials.modal_doc')
+        @include('partials.modal_buscar')
 
 @endsection
 

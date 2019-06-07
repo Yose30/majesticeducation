@@ -13,6 +13,8 @@ use App\Song;
 
 class Libro extends Model
 {
+    protected $fillable = ['id', 'clave', 'tipo', 'titulo', 'sinopsis', 'image_url'];
+
     //Muchos a muchos
     //Un libro puede pertenecer a muchos subsistemas
     public function subsistemas(){
@@ -51,6 +53,11 @@ class Libro extends Model
     //Un libro puede tener muchos audios
     public function songs(){
         return $this->hasMany(Song::class);
+    }
+
+    //Metodo para poder acceder a la imagen del libro
+    public function pathAttachment(){
+        return url("/storage/images/portadas/".$this->image_url); //revisar
     }
 
 }
