@@ -1,75 +1,21 @@
 @extends('layouts.app')
     
 <style>
-    
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-    html, body {
-     font-family: 'Open Sans', sans-serif;
-     background-image:url({{ asset('img/aviondePapek.png')}});               
-     background-repeat: no-repeat;
-     background-position: center; /* Center the image */
- 
-     
-    
-    }
-    #tituloMateria
-    {
-        background-color: transparent;
-        font-style:bold;
-        font-size:24px;
-        border-color:transparent;
-       
-    }
-    #menuMat{
-        background-color: transparent;
-    }
-    #contenido{
-        background-color: transparent;
-        border-color:transparent;
-    }
-    
-
     #scroll-c{
         overflow:auto; 
         height:450px;
     }
-
-    /*
-    #inicio-tab:hover{
-        background-color:#d91c5c;
-    }
-    #inicio-tab:active{
-        background-color:#d91c5c;
-    }
-    #inicio-tab:visited{
-        background-color:#d91c5c;
-    }
-    #inicio-tab:link{
-        background-color:#d91c5c;
-    }
-    */
-
-
-
-
-
-
-
-    .nav-link {
-        
-    }
 </style>
+
 @section('content')
-    <div class="card text-center" id="tituloMateria">
+    <div class="card text-center">
         <div class="card-body">
             {{ $libro->titulo }}
-            <hr/>
-            <hr/>
         </div>
     </div>
     <div class="row">
             <div class="col-md-4">
-                <div class="card" id="menuMat">
+                <div class="card">
                     <div class="card-body" id="scroll-c">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <a 
@@ -81,7 +27,7 @@
                                 <i class="fa fa-home"> {{ __("Inicio") }}</i>
                             </a>
                             @include('partials.elemento_lista', ['tipo_mat' => $songs, 'titulo_mat' => 'Audios', 'etiqueta' => 'audios', 'clase' => 'volume-up'])
-                            @include('partials.elemento_lista', ['tipo_mat' => $videos, 'titulo_mat' => 'Videos', 'etiqueta' => 'videos', 'clase' => 'video-camera'])
+                            @include('partials.elemento_lista', ['tipo_mat' => $videos, 'titulo_mat' => 'Videos', 'etiqueta' => 'videos', 'clase' => 'eye'])
                             @include('partials.elemento_lista', ['tipo_mat' => $links, 'titulo_mat' => 'Links', 'etiqueta' => 'links', 'clase' => 'location-arrow'])
                             @include('partials.elemento_lista', ['tipo_mat' => $documentos, 'titulo_mat' => 'Material', 'etiqueta' => 'material', 'clase' => 'book'])
                             <div 
@@ -109,30 +55,8 @@
             </div>
 
             <div class="col-md-8">
-                <div class="card"  id="contenido">
+                <div class="card">
                     <div class="card-body" id="scroll-c">
-<<<<<<< HEAD
-
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-inicio" role="tabpanel">
-                            <div class="row">
-                                <div class="col-md-4">
-                                
-                                </div>
-                                <div class="col-md-8">
-                                <hr/>
-                                    {{ $libro->sinopsis }}
-                                    <hr>
-                                    @foreach($libro->subsistemas as $subsistema)
-                                        {{ $subsistema->subsistema }}
-                                    @endforeach
-                                    <br>
-                                    @foreach($libro->semestres as $semestre)
-                                        {{ $semestre->semestre }}
-                                    @endforeach
-                                    <hr/>
-                                    <a href="{{ route('download', 1) }}">Descargar</a>
-=======
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-inicio" role="tabpanel">
                                 <div class="row">
@@ -150,7 +74,6 @@
                                             {{ $semestre->semestre }}
                                         @endforeach
                                     </div>
->>>>>>> origin/master
                                 </div>
                             </div>
                             
@@ -225,5 +148,3 @@
         $('#v-pilld-tab-doc').show();
     });
 </script>
-
-
