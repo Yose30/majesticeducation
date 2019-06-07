@@ -31,8 +31,9 @@ class LibroController extends Controller
         $audio = Song::whereId(1)->first();
         $client = new Google_Client();
         $client->addScope("https://www.googleapis.com/auth/drive");
+        $client->createAuthUrl();
+        dd($client->createAuthUrl());
         $service = new Google_Service_Drive($client);
         $results = $service->files->listFiles();
-        dd($audio);
     }
 }
