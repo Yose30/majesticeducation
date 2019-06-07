@@ -16,7 +16,7 @@
         <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans');
             html, body {
-                background-image:url({{ asset('interface/avion.png')}});               
+                background-image:url({{ asset('img/avion.png')}});               
                  background-repeat: no-repeat;
                  background-size: auto auto;
                  background-position: right;
