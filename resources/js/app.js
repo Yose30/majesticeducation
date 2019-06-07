@@ -32,6 +32,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('songs-component', require('./components/SongsComponent.vue').default);
 Vue.component('videos-component', require('./components/VideosComponent.vue').default);
+Vue.component('links-component', require('./components/LinksComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
