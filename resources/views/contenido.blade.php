@@ -161,6 +161,7 @@
                             <div class="tab-pane fade show active" id="v-inicio" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <!-- Imagen del libro -->
                                         <img class="img-fluid" style="width:auto; height:auto;" src="{{ $libro->pathAttachment() }}" />
                                     </div>
                                     <div class="col-md-8">
