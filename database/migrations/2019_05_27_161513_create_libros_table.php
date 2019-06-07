@@ -19,6 +19,7 @@ class CreateLibrosTable extends Migration
             $table->enum('tipo', ['Profesor', 'Alumno']);
             $table->string('titulo', 200);
             $table->text('sinopsis');
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
