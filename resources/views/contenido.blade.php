@@ -131,26 +131,18 @@
                             @include('partials.elemento_lista', ['tipo_mat' => $songs, 'titulo_mat' => 'Audios', 'etiqueta' => 'audios', 'clase' => 'volume-up'])
                             @include('partials.elemento_lista', ['tipo_mat' => $videos, 'titulo_mat' => 'Videos', 'etiqueta' => 'videos', 'clase' => 'video-camera'])
                             @include('partials.elemento_lista', ['tipo_mat' => $links, 'titulo_mat' => 'Links', 'etiqueta' => 'links', 'clase' => 'location-arrow'])
-                            @include('partials.elemento_lista', ['tipo_mat' => $documentos, 'titulo_mat' => 'Material', 'etiqueta' => 'material', 'clase' => 'book'])
-                            <div 
-                                class="nav flex-column" 
-                                id="v-pilld-tab-doc" 
-                                role="tablist" 
-                                aria-orientation="vertical"
-                                style="display: none;">
-                                @foreach($categorias as $categoria)
-                                     @if($categoria->documentos->count() > 0)
-                                        <a 
-                                            class="nav-link" 
-                                            id="v-{{$categoria->id}}-tab" 
-                                            data-toggle="pill" 
-                                            href="#v-pills-{{$categoria->id}}" 
-                                            role="tab" >
-                                            {{ $categoria->categoria }}
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </div>
+                            @foreach($categorias as $categoria)
+                                @if($categoria->documentos->count() > 0)
+                                    <a 
+                                        class="nav-link" 
+                                        id="v-{{$categoria->id}}-tab" 
+                                        data-toggle="pill" 
+                                        href="#v-pills-{{$categoria->id}}" 
+                                        role="tab" >
+                                        <i class="fa fa-book"></i> {{ $categoria->categoria }}
+                                    </a>
+                                @endif
+                            @endforeach
                        </div>
                     </div>
                 </div>
@@ -193,9 +185,7 @@
                             <div class="tab-pane fade" id="v-links" role="tabpanel">
                                 <links-component :links="{{ json_encode($links) }}"></links-component>
                             </div>
-                            <div class="tab-pane fade" id="v-material" role="tabpanel">
-                                @include('partials.documentos')
-                            </div>
+                            @include('partials.documentos')
                         </div> 
                     </div>
                 </div>
@@ -223,21 +213,5 @@
         console.log(modal);
     });
 
-    jQuery(document).on("click", '#inicio-tab', function (e) {
-        $('#v-pilld-tab-doc').hide();
-    });
-    jQuery(document).on("click", '#audios-tab', function (e) {
-        $('#v-pilld-tab-doc').hide();
-    });
-    jQuery(document).on("click", '#videos-tab', function (e) {
-        $('#v-pilld-tab-doc').hide();
-    });
-
-    jQuery(document).on("click", '#links-tab', function (e) {
-        $('#v-pilld-tab-doc').hide();
-    });
-
-    jQuery(document).on("click", '#material-tab', function (e) {
-        $('#v-pilld-tab-doc').show();
-    });
+    
 </script>

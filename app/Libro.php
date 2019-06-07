@@ -57,7 +57,7 @@ class Libro extends Model
 
     //Metodo para poder acceder a la imagen del libro
     public function pathAttachment(){
-        return url("/storage/images/portadas/".$this->image_url); //revisar
+        return url(asset('img/portadas').'/'.$this->image_url); //revisar
     }
 
 }
