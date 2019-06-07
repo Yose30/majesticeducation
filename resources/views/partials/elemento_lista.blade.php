@@ -5,6 +5,6 @@
         data-toggle="pill" 
         href="#v-{{$etiqueta}}" 
         role="tab">
-        <i class="fa fa-{{$clase}}"></i> {{ $titulo_mat }}
+        <i class="fa fa-{{$clase}}" ></i> {{ $titulo_mat }}
     </a>
 @endif
