@@ -19,19 +19,19 @@
         font-size: 15px;
         font-family: 'Open Sans', sans-serif;
         padding: 10px;
-        background-color:#f2f2f2;
-        color:#d91c5c;
-        border: 2px solid #ef4c44;    
+        background-color:#e02e70;
+        color:#FFFFFF;
+        border: 2px solid #d91c5c;    
     }
 
     a.btn:hover{
-        background-color: #ef4c44;
+        background-color: #d91c5c;
         border: 2px solid #7d4f9d;
         color: #FFFFFF;
     }
 
     a.btn:active{
-        background-color: #7d4f9d;
+        background-color: #d91c5c;
         border: 2px solid #7d4f9d;
         color: #FFFFFF;
     }

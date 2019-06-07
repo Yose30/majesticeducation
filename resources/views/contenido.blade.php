@@ -26,6 +26,9 @@
         background-color: transparent;
         border-color:transparent;
     }
+    #misMaterias{
+        background-color: transparent;
+    }
     
 
     #scroll-c{
@@ -33,22 +36,33 @@
         height:450px;
     }
 
-    /*
-    #inicio-tab:hover{
-        background-color:#d91c5c;
+    #hrtitulo { 
+        border-width: 3px;
     }
-    #inicio-tab:active{
-        background-color:#d91c5c;
+    #misMaterias{
+        
     }
-    #inicio-tab:visited{
-        background-color:#d91c5c;
-    }
-    #inicio-tab:link{
-        background-color:#d91c5c;
-    }
-    */
+    #misMaterias{
+       
+       font-size: 15px;
+       font-family: 'Open Sans', sans-serif;
+       padding: 10px;
+       background-color:#e02e70;
+       color:#FFFFFF;
+       border: 2px solid #d91c5c;    
+   }
 
+   #misMaterias:hover{
+       background-color: #d91c5c;
+       border: 2px solid #7d4f9d;
+       color: #FFFFFF;
+   }
 
+   a.btn:active{
+       background-color: #d91c5c;
+       border: 2px solid #7d4f9d;
+       color: #FFFFFF;
+   }
 
 
 
@@ -62,10 +76,13 @@
 @section('content')
     <div class="card text-center" id="tituloMateria">
         <div class="card-body">
+            
             {{ $libro->titulo }}
+            <hr id="hrtitulo">
+            <hr id="hrtitulo">
         </div>
     </div>
-    <div class="card">
+    <div class="card" >
         <div class="card-body">
             <h5>{{ __("Mis materias") }}</h5>
             @include('partials.lista_materias')
