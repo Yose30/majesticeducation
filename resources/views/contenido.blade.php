@@ -205,9 +205,11 @@
         let modal = jQuery("#viewDoc");
         const url = jQuery(this).data('url');
         const titulo = jQuery(this).data('titulo');
+        const view = "https://drive.google.com/uc?id="+url;
         modal.find('.modal-title').text(titulo);
         let $contenido = $("<div></div>");
-        $contenido.append(`<object data="${url}" type="application/pdf" width="100%" height="80%"></object>`);
+        $contenido.append(`<object data="${view}" type="application/pdf" width="100%" height="80%"></object>`);
+        console.log(view);
         modal.find('.modal-body').html($contenido);
         modal.modal();
         console.log(modal);

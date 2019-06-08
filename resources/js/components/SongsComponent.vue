@@ -15,23 +15,25 @@
                         </b-button>
                     </td>
                     <td>
-                        <b-button 
+                        <a 
+                            class="btn"
+                            :href="audioDescargar" 
                             :style="{'background-color': '#7d4f9d'}" 
                             v-b-tooltip.hover 
                             title="Descargar audio">
-                                <i class="fa fa-download"></i>
-                        </b-button>
+                            <i class="fa fa-download"></i>
+                        </a>
                     </td>
                     <td></td>
                 </tr>
             </tbody>
         </table>
         <div>
-            <b-modal id="modal-aud" :title="audio.titulo" centered hide-footer>
-                <audio controls :src="audio.url"></audio>
+            <b-modal id="modal-aud" :title="audioTitulo" centered hide-footer>
+                <audio controls :src="audioUrl"></audio>
             </b-modal>
         </div>
-  
+
     </div>
 </template>
 
@@ -42,14 +44,17 @@
         props: ['songs'],
         data() {
             return {
-                audio: '',
+                audioUrl: '',
+                audioTitulo: '',
+                audioDescargar: "https://drive.google.com/uc?export=download&id="+this.audioUrl,
             }
         },
         methods: {
             datos(song) {
-                console.log(song);
-                this.audio = song;
-            }
+                console.log("https://drive.google.com/uc?id="+song.url);
+                this.audioUrl = "https://drive.google.com/uc?id="+song.url;
+                this.audioTitulo = song.titulo;
+            },
         }
     }
 </script>

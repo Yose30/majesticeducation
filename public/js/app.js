@@ -1886,18 +1886,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'app',
   props: ['songs'],
   data: function data() {
     return {
-      audio: ''
+      audioUrl: '',
+      audioTitulo: '',
+      audioDescargar: "https://drive.google.com/uc?export=download&id=" + this.audioUrl
     };
   },
   methods: {
     datos: function datos(song) {
-      console.log(song);
-      this.audio = song;
+      console.log("https://drive.google.com/uc?id=" + song.url);
+      this.audioUrl = "https://drive.google.com/uc?id=" + song.url;
+      this.audioTitulo = song.titulo;
     }
   }
 });
@@ -66086,27 +66091,24 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c(
-              "td",
-              [
-                _c(
-                  "b-button",
-                  {
-                    directives: [
-                      {
-                        name: "b-tooltip",
-                        rawName: "v-b-tooltip.hover",
-                        modifiers: { hover: true }
-                      }
-                    ],
-                    style: { "background-color": "#7d4f9d" },
-                    attrs: { title: "Descargar audio" }
-                  },
-                  [_c("i", { staticClass: "fa fa-download" })]
-                )
-              ],
-              1
-            ),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip.hover",
+                      modifiers: { hover: true }
+                    }
+                  ],
+                  staticClass: "btn",
+                  style: { "background-color": "#7d4f9d" },
+                  attrs: { href: _vm.audioDescargar, title: "Descargar audio" }
+                },
+                [_c("i", { staticClass: "fa fa-download" })]
+              )
+            ]),
             _vm._v(" "),
             _c("td")
           ])
@@ -66123,12 +66125,12 @@ var render = function() {
           {
             attrs: {
               id: "modal-aud",
-              title: _vm.audio.titulo,
+              title: _vm.audioTitulo,
               centered: "",
               "hide-footer": ""
             }
           },
-          [_c("audio", { attrs: { controls: "", src: _vm.audio.url } })]
+          [_c("audio", { attrs: { controls: "", src: _vm.audioUrl } })]
         )
       ],
       1

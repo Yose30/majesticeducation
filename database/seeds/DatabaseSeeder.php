@@ -471,7 +471,7 @@ class DatabaseSeeder extends Seeder
                 'id'            => 1,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 001',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzLUc1SlF3NWM4UVE',
+                'url'           => '0B4lctXErlSvzLUc1SlF3NWM4UVE',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -479,7 +479,7 @@ class DatabaseSeeder extends Seeder
                 'id'            => 2,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 002',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzaEl0N0RMWjhSU3c',
+                'url'           => '0B4lctXErlSvzaEl0N0RMWjhSU3c',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -487,7 +487,7 @@ class DatabaseSeeder extends Seeder
                 'id'            => 3,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 003',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzWk5hbWdCamdRLVE',
+                'url'           => '0B4lctXErlSvzWk5hbWdCamdRLVE',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -495,7 +495,7 @@ class DatabaseSeeder extends Seeder
                 'id'            => 4,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 004',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzelREQ3JVY2JqYWs',
+                'url'           => '0B4lctXErlSvzelREQ3JVY2JqYWs',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -503,7 +503,7 @@ class DatabaseSeeder extends Seeder
                 'id'            => 5,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 005',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzc29PRTZhMzdWSWc',
+                'url'           => '0B4lctXErlSvzc29PRTZhMzdWSWc',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -511,7 +511,7 @@ class DatabaseSeeder extends Seeder
                 'id'            => 6,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 006',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzZ2Q0MWRaQVZFLTA',
+                'url'           => '0B4lctXErlSvzZ2Q0MWRaQVZFLTA',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -519,71 +519,71 @@ class DatabaseSeeder extends Seeder
                 'id'            => 7,
                 'libro_id'      => 3,
                 'titulo'        => 'the best english 3 007',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzZWhBU2RHR1B3Vm8',
+                'url'           => '0B4lctXErlSvzZWhBU2RHR1B3Vm8',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
+            // 7 => [
+            //     'id'            => 8,
+            //     'libro_id'      => 3,
+            //     'titulo'        => 'the best english 3 008',
+            //     'url'           => null,
+            //     'created_at' => '2019-05-27 00:00:00',
+            //     'updated_at' => '2019-05-27 00:00:00'
+            // ],
             7 => [
                 'id'            => 8,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 008',
-                'url'           => '',
+                'titulo'        => 'the best english 3 009',
+                'url'           => '0B4lctXErlSvzQXJ1OS1ERVdzdnM',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             8 => [
                 'id'            => 9,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 009',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzQXJ1OS1ERVdzdnM',
+                'titulo'        => 'the best english 3 010',
+                'url'           => '0B4lctXErlSvzRWt3c1hjbk1ib0U',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             9 => [
                 'id'            => 10,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 010',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzRWt3c1hjbk1ib0U',
+                'titulo'        => 'the best english 3 011',
+                'url'           => '0B4lctXErlSvzMzRnQkJ6ckR5aTA',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             10 => [
                 'id'            => 11,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 011',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzMzRnQkJ6ckR5aTA',
+                'titulo'        => 'the best english 3 012',
+                'url'           => '0B4lctXErlSvzRlkwNk1HTEhMd1E',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             11 => [
                 'id'            => 12,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 012',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzRlkwNk1HTEhMd1E',
+                'titulo'        => 'the best english 3 013',
+                'url'           => '0B4lctXErlSvzbW1lanFacXZYVEU',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             12 => [
                 'id'            => 13,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 013',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzbW1lanFacXZYVEU',
+                'titulo'        => 'the best english 3 014',
+                'url'           => '0B4lctXErlSvzYzFEZjlueUR1dUU',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             13 => [
                 'id'            => 14,
                 'libro_id'      => 3,
-                'titulo'        => 'the best english 3 014',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzYzFEZjlueUR1dUU',
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            14 => [
-                'id'            => 15,
-                'libro_id'      => 3,
                 'titulo'        => 'the best english 3 015',
-                'url'           => 'https://drive.google.com/uc?id=0B4lctXErlSvzNUxFcHFfekJ4VVk',
+                'url'           => '0B4lctXErlSvzNUxFcHFfekJ4VVk',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
@@ -674,141 +674,135 @@ class DatabaseSeeder extends Seeder
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            14 => [
-                'id'         => 15,
-                'categoria'  => 'Ninguna',
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
         ]);
 
         \DB::table('documentos')->insert([
+            // 0 => [
+            //     'id'        => 1,
+            //     'libro_id'  => 3,
+            //     'titulo'    => 'Tutorial iGrade Majestic-Docentes',
+            //     'categoria_id' => 14,
+            //     'url'       => null,
+            //     'created_at' => '2019-05-27 00:00:00',
+            //     'updated_at' => '2019-05-27 00:00:00'
+            // ],
             0 => [
                 'id'        => 1,
                 'libro_id'  => 3,
-                'titulo'    => 'Tutorial iGrade Majestic-Docentes',
-                'categoria_id' => 14,
-                'url'       => 'convertir1',
+                'titulo'    => 'The Best-DGTI TG Book 3 Test',
+                'categoria_id' => 13,
+                'url'       => '0B4lctXErlSvzSXVUd3pZelVoakU',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             1 => [
                 'id'        => 2,
                 'libro_id'  => 3,
-                'titulo'    => 'The Best-DGTI TG Book 3 Test',
-                'categoria_id' => 13,
-                'url'       => 'https://drive.google.com/uc?id=0B4lctXErlSvzSXVUd3pZelVoakU',
+                'titulo'    => 'The Best of English 3 SR',
+                'categoria_id' => 8,
+                'url'       => '0B4lctXErlSvzNEEtd1NFeXlCYXc',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
+            // 3 => [
+            //     'id'        => 4,
+            //     'libro_id'  => 3,
+            //     'titulo'    => 'The Best of English 3 SD',
+            //     'categoria_id' => 6,
+            //     'url'       => null,
+            //     'created_at' => '2019-05-27 00:00:00',
+            //     'updated_at' => '2019-05-27 00:00:00'
+            // ],
             2 => [
                 'id'        => 3,
                 'libro_id'  => 3,
-                'titulo'    => 'The Best of English 3 SR',
+                'titulo'    => 'The Best of English 3 CR',
                 'categoria_id' => 8,
-                'url'       => 'https://drive.google.com/uc?id=0B4lctXErlSvzNEEtd1NFeXlCYXc',
+                'url'       => '0B4lctXErlSvzMmNlT1ZxX3c5OXM',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             3 => [
                 'id'        => 4,
                 'libro_id'  => 3,
-                'titulo'    => 'The Best of English 3 SD',
-                'categoria_id' => 6,
-                'url'       => 'convertir2',
+                'titulo'    => 'Teacher´s The Best-DGETI Book 3',
+                'categoria_id' => 13,
+                'url'       => '0B4lctXErlSvzXzdSN2RpVkF2UWs',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             4 => [
                 'id'        => 5,
                 'libro_id'  => 3,
-                'titulo'    => 'The Best of English 3 CR',
-                'categoria_id' => 8,
-                'url'       => 'https://drive.google.com/uc?id=0B4lctXErlSvzMmNlT1ZxX3c5OXM',
+                'titulo'    => 'Resumen Ejecutivo Estrategia Nacional de Inglés',
+                'categoria_id' => 10,
+                'url'       => '1-Hl-NVE5XajF790G0J1KuGFldF3fVPUP',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             5 => [
                 'id'        => 6,
                 'libro_id'  => 3,
-                'titulo'    => 'Teacher´s The Best-DGETI Book 3',
-                'categoria_id' => 13,
-                'url'       => 'https://drive.google.com/uc?id=0B4lctXErlSvzXzdSN2RpVkF2UWs',
+                'titulo'    => 'Qué es ConstruyeT 2017-2018',
+                'categoria_id' => 10,
+                'url'       => '1npP6xY5KgCQQroBmj-icC_z0cYjcg4nF',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             6 => [
                 'id'        => 7,
                 'libro_id'  => 3,
-                'titulo'    => 'Resumen Ejecutivo Estrategia Nacional de Inglés',
-                'categoria_id' => 10,
-                'url'       => 'https://drive.google.com/uc?id=1-Hl-NVE5XajF790G0J1KuGFldF3fVPUP',
+                'titulo'    => 'Oferta de talleres para personal docente 2018 OF',
+                'categoria_id' => 11,
+                'url'       => '1QbAh4704MRNVlC2MFucC5mloqWrZ0oql',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             7 => [
                 'id'        => 8,
                 'libro_id'  => 3,
-                'titulo'    => 'Qué es ConstruyeT 2017-2018',
-                'categoria_id' => 10,
-                'url'       => 'https://drive.google.com/uc?id=1npP6xY5KgCQQroBmj-icC_z0cYjcg4nF',
+                'titulo'    => 'Oferta de talleres para personal docente 2017 OF',
+                'categoria_id' => 15,
+                'url'       => '0B4lctXErlSvza3Z1cFU4VnhHX3c',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             8 => [
                 'id'        => 9,
                 'libro_id'  => 3,
-                'titulo'    => 'Oferta de talleres para personal docente 2018 OF',
+                'titulo'    => 'Oferta certificación inglés-2017',
                 'categoria_id' => 11,
-                'url'       => 'https://drive.google.com/uc?id=1QbAh4704MRNVlC2MFucC5mloqWrZ0oql',
+                'url'       => '1c602wm_7INZE4wKzWM1ZFx74ASdt0Znv',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             9 => [
                 'id'        => 10,
                 'libro_id'  => 3,
-                'titulo'    => 'Oferta de talleres para personal docente 2017 OF',
-                'categoria_id' => 15,
-                'url'       => 'https://drive.google.com/uc?id=0B4lctXErlSvza3Z1cFU4VnhHX3c',
+                'titulo'    => 'Nuevo Modelo Educativo-Gral',
+                'categoria_id' => 10,
+                'url'       => '14CNQN2z5jWzALzUW2raiWO55I5a5eX0F',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             10 => [
                 'id'        => 11,
                 'libro_id'  => 3,
-                'titulo'    => 'Oferta certificación inglés-2017',
-                'categoria_id' => 11,
-                'url'       => 'https://drive.google.com/uc?id=1c602wm_7INZE4wKzWM1ZFx74ASdt0Znv',
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            11 => [
-                'id'        => 12,
-                'libro_id'  => 3,
-                'titulo'    => 'Nuevo Modelo Educativo-Gral',
-                'categoria_id' => 10,
-                'url'       => 'https://drive.google.com/uc?id=14CNQN2z5jWzALzUW2raiWO55I5a5eX0F',
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            12 => [
-                'id'        => 13,
-                'libro_id'  => 3,
                 'titulo'    => 'Ingles-III',
                 'categoria_id' => 10,
-                'url'       => 'https://drive.google.com/uc?id=1p0npd-ByuFL9TEyv03EKpuscMdwPYpH_',
+                'url'       => '1p0npd-ByuFL9TEyv03EKpuscMdwPYpH_',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            13 => [
-                'id'        => 14,
-                'libro_id'  => 3,
-                'titulo'    => 'iGrade Best of English 3 Teachers',
-                'categoria_id' => 14,
-                'url'       => 'convertir3',
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
+            // 13 => [
+            //     'id'        => 14,
+            //     'libro_id'  => 3,
+            //     'titulo'    => 'iGrade Best of English 3 Teachers',
+            //     'categoria_id' => 14,
+            //     'url'       => null,
+            //     'created_at' => '2019-05-27 00:00:00',
+            //     'updated_at' => '2019-05-27 00:00:00'
+            // ],
         ]);
 
         \DB::table('videos')->insert([
