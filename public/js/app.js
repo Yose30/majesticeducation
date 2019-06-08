@@ -66128,16 +66128,7 @@ var render = function() {
               "hide-footer": ""
             }
           },
-          [
-            _c("audio", {
-              attrs: {
-                width: "300",
-                height: "326",
-                controls: "",
-                src: _vm.audio.url
-              }
-            })
-          ]
+          [_c("audio", { attrs: { controls: "", src: _vm.audio.url } })]
         )
       ],
       1
