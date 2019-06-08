@@ -1895,7 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       audioUrl: '',
       audioTitulo: '',
-      audioDescargar: "https://drive.google.com/uc?export=download&id=" + this.audioUrl
+      audioDescargar: 'https://drive.google.com/uc?export=download&id='
     };
   },
   methods: {
@@ -66103,8 +66103,11 @@ var render = function() {
                     }
                   ],
                   staticClass: "btn",
-                  style: { "background-color": "#7d4f9d" },
-                  attrs: { href: _vm.audioDescargar, title: "Descargar audio" }
+                  style: { "background-color": "#7d4f9d", color: "#ffffff" },
+                  attrs: {
+                    href: _vm.audioDescargar + song.url,
+                    title: "Descargar audio"
+                  }
                 },
                 [_c("i", { staticClass: "fa fa-download" })]
               )

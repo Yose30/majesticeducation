@@ -16,9 +16,9 @@
                     </td>
                     <td>
                         <a 
-                            class="btn"
-                            :href="audioDescargar" 
-                            :style="{'background-color': '#7d4f9d'}" 
+                            class="btn" 
+                            :href="audioDescargar+song.url" 
+                            :style="{'background-color': '#7d4f9d', 'color': '#ffffff'}" 
                             v-b-tooltip.hover 
                             title="Descargar audio">
                             <i class="fa fa-download"></i>
@@ -46,7 +46,7 @@
             return {
                 audioUrl: '',
                 audioTitulo: '',
-                audioDescargar: "https://drive.google.com/uc?export=download&id="+this.audioUrl,
+                audioDescargar: 'https://drive.google.com/uc?export=download&id='
             }
         },
         methods: {
