@@ -131,7 +131,7 @@
                             @include('partials.elemento_lista', ['tipo_mat' => $videos, 'titulo_mat' => 'Videos', 'etiqueta' => 'videos', 'clase' => 'video-camera'])
                             @include('partials.elemento_lista', ['tipo_mat' => $links, 'titulo_mat' => 'Links', 'etiqueta' => 'links', 'clase' => 'location-arrow'])
                             @foreach($categorias as $categoria)
-                                @if($categoria->documentos->count() > 0)
+                                @if($categoria->documentos->where('libro_id',$libro->id)->count() > 0)
                                     <a 
                                         class="nav-link" 
                                         id="v-{{$categoria->id}}-tab" 

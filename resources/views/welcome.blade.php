@@ -118,7 +118,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Material ME
+                    ME Digital
                 </div>
 
                 <div class="links">
