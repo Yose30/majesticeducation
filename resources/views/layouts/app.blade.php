@@ -24,6 +24,7 @@
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
    
             html, body {
+                
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Open Sans', sans-serif;

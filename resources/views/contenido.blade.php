@@ -4,10 +4,7 @@
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
     html, body {
      font-family: 'Open Sans', sans-serif;
-     background-image:url({{ asset('interfaz/aviondePapek.png')}});               
-     background-repeat: no-repeat;
-     background-position: center; /* Center the image */
- 
+     
      
     
     }
@@ -39,9 +36,11 @@
     #hrtitulo { 
         border-width: 3px;
     }
-    #misMaterias{
-        
+    #misMat{
+        background-color: transparent;
     }
+        
+    
     #misMaterias{
        
        font-size: 15px;
@@ -96,7 +95,7 @@
             <hr id="hrtitulo">
         </div>
     </div>
-    <div class="card" >
+    <div class="card"  id="misMat">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-11">
