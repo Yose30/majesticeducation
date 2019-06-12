@@ -67,26 +67,7 @@
                 width: 100%;
                 background-color: #ffffff;
                 text-align: center;
-                }
-            #btbBuscarM
-            {
-                background-color:#f2991f;
-                color:#000;
-                font-weight: bold; 
-                border: 1px solid #f2991f;
-
-
-            }
-            #btbBuscarM:hover
-            {
-                background-color:#f7ca39;
-                color:#000;
-                font-weight: bold; 
-            }
-            
-            
-            
-
+                }   
     </style>
 
     <!-- BOOTSTRAP -->
@@ -97,15 +78,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                @guest
-                    <a class="navbar-brand" href="{{ url('/') }}" id="logo">
-                        ME Digital
+                @auth
+                    <a class="navbar-brand" href="#" id="logo">
+                        Evaluaciones
                     </a>
-                @else
-                    <a class="navbar-brand" href="{{ url('home') }}" id="logo">
-                        ME Digital
-                    </a>
-                @endguest
+                @endauth
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -119,16 +96,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}" ><i class="fa fa-unlock-alt" id="logeo"> {{ __("Iniciar sesión") }}</i></a>
-                            </li>
-                            <!-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif -->
-                        @else
+                        @auth
                             <a href="{{ route('logout') }}" 
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();"><i class="fa fa-unlock" id="logeooff"> {{ __('Cerrar sesión') }}</i>
@@ -137,44 +105,43 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
-                            
-                            <!-- <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li> -->
-                        @endguest
+                        @endauth
                     </ul>
                 </div>
             </div>
         </nav>
 
         <main class="container py-4">
-            @if(session('message'))
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="alert alert-{{ session('message')[0] }}">
-                            <h4 class="alert-heading">
-                                <i class="fa fa-exclamation"></i> {{ __("Mensaje") }}
-                            </h4>
-                            <p>{{ session('message')[1] }}</p>
-                        </div>
-                    </div>
+            <div align="center">
+                <h5>Para el correcto funcionamiento, debes descargar los 3 archivos.</h5>
+                <hr>
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Archivo</th>
+                                <th scope="col">Descargar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Generador de preguntas</td>
+                                <td>
+                                    <a class="btn btn-success" style="color:white;"><i class="fa fa-download"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Examen</td>
+                                <td><a class="btn btn-success" style="color:white;"><i class="fa fa-download"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>Graficador</td>
+                                <td><a class="btn btn-success" style="color:white;"><i class="fa fa-download"></i></a></td>
+                            </tr>
+                        <tbody>
+                    </table>
                 </div>
-            @endif
-            @yield('content')
+            </div>
         </main>
     </div>
 

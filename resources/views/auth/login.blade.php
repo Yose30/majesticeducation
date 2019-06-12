@@ -110,7 +110,7 @@
                             <div class="col-md-6 offset-md-4" >
                                 <div class="form-check" >
                                     <label>
-                                        {{ __('Ingresa la clave para entrar a la plataforma') }}
+                                        {{ __('Ingresa la clave para poder consultar los recursos') }}
                                     </label>
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 

@@ -30,7 +30,13 @@ class DatabaseSeeder extends Seeder
                 'tipo'  => 'Alumno',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
-            ]
+            ],
+            3 => [
+                'id'    => 4,
+                'tipo'  => 'Especial',
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
         ]);
 
         \DB::table('users')->insert([
@@ -64,6 +70,14 @@ class DatabaseSeeder extends Seeder
                 'clave'     => 'A0002',
                 'created_at' => '2019-05-27 00:00:00',
                 'password'   => bcrypt('A0002'),
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            4 => [
+                'id'        => 5,
+                'tipo_id'   => 4,
+                'clave'     => 'E0001',
+                'created_at' => '2019-05-27 00:00:00',
+                'password'   => bcrypt('E0001'),
                 'updated_at' => '2019-05-27 00:00:00'
             ],
         ]);

@@ -38,22 +38,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
     
-    // //Metodos sobreescritos
-    // public function login(Request $request)
-    // {
-    //     // validar que el email existe en una base de datos
-    //     $this->validateLogin($request);
-        
-    //     // obtener el usuario según el email
-    //     $user = User::where('clave', $request->clave)->firstOrFail();
-        
-        
-        
-    //     //return \redirect()->route('login.check-email');
-    // }
-    
+    //Funciones sobreescritas
     public function username()
     {
         return 'clave';
@@ -67,5 +53,20 @@ class LoginController extends Controller
         ]);
     }
 
+    public function redirectPath(){
+        if(auth()->user()->tipo_id == 4){
+            return '/evaluaciones';
+        }
+        else{
+            return '/home';
+        }
+    }
+
+    //Sobreescribir metodo logout para cerrar sesion, y nos ubique en la vista login
+    public function logout(){
+        auth()->logout(); //Para poder cerrar sesión de la aplicación
+        session()->flush(); //Limpiar todas las sesiones
+        return redirect('/login');
+    }
     
 }
