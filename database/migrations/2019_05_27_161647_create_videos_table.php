@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('libro_id');
             $table->foreign('libro_id')->references('id')->on('libros');
-            $table->string('titulo', 100)->unique();
+            $table->string('titulo', 100);
             $table->text('descripcion')->nullable();
             $table->string('url', 100)->unique();
             $table->timestamps();
