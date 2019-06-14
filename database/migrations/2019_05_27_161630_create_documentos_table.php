@@ -27,7 +27,7 @@ class CreateDocumentosTable extends Migration
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->string('titulo', 100);
             $table->string('url', 100)->unique();
-            $table->string('url_otros')->nullable();
+            $table->string('url_otro')->nullable();
             $table->timestamps();
         });
     }

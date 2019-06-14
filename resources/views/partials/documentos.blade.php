@@ -19,9 +19,9 @@
                                 </button>
                             </td>
                             <!-- Comprueba si la url_otro existe -->
-                            @if($documento->url_otros != null)
+                            @if($documento->url_otro != null)
                                 <td>
-                                    <a class="btn" href="https://drive.google.com/uc?export=download&id={{$documento->url_otros}}" style="background-color: #7d4f9d; color:white;">
+                                    <a class="btn" href="https://drive.google.com/uc?export=download&id={{$documento->url_otro}}" style="background-color: #7d4f9d; color:white;">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </td>
