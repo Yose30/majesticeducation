@@ -18,7 +18,7 @@ class CreateLinksTable extends Migration
             $table->unsignedInteger('libro_id');
             $table->foreign('libro_id')->references('id')->on('libros');
             $table->string('titulo', 100);
-            $table->string('url', 100)->unique();
+            $table->string('url', 100);
             $table->timestamps();
         });
     }
