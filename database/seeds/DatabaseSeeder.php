@@ -866,58 +866,40 @@ class DatabaseSeeder extends Seeder
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
+            
             5 => [
                 'id'        => 6,
                 'libro_id'  => 3,
-                'titulo'    => 'Qué es ConstruyeT 2017-2018',
-                'categoria_id' => 10,
-                'url'       => '1npP6xY5KgCQQroBmj-icC_z0cYjcg4nF',
-                'url_otro'        => null,
+                'titulo'    => '(Solo Vista Preliminar)iGrade Best of English 3 Teachers',
+                'categoria_id' => 14,
+                'url'       => '1EnBNrwKZVoRjBFjCHmMJ8rqUvUK3uWPe',
+                'url_otro'        =>'1YC17nYYwwfMEoe502kx8pAd0qriiILjd',
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             6 => [
                 'id'        => 7,
                 'libro_id'  => 3,
-                'titulo'    => 'Oferta de talleres para personal docente 2018 OF',
-                'categoria_id' => 11,
-                'url'       => '1QbAh4704MRNVlC2MFucC5mloqWrZ0oql',
+                'titulo'    => 'Tutorial iGrade Majestic-Docentes',
+                'categoria_id' => 14,
+                'url'       => '1g0HxEeiFbb4lwJ_KAx0MpJ8eectAOE3U',
                 'url_otro'        => null,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
+            
             7 => [
                 'id'        => 8,
                 'libro_id'  => 3,
-                'titulo'    => 'Oferta de talleres para personal docente 2017 OF',
-                'categoria_id' => 15,
-                'url'       => '0B4lctXErlSvza3Z1cFU4VnhHX3c',
+                'titulo'    => 'Oferta de talleres para personal docente 2019',
+                'categoria_id' => 11,
+                'url'       => '1_aHOZRDU30lxOfEZZ2lk-xXpmNiMVS12',
                 'url_otro'        => null,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             8 => [
                 'id'        => 9,
-                'libro_id'  => 3,
-                'titulo'    => 'Oferta certificación inglés-2017',
-                'categoria_id' => 11,
-                'url'       => '1c602wm_7INZE4wKzWM1ZFx74ASdt0Znv',
-                'url_otro'        => null,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            9 => [
-                'id'        => 10,
-                'libro_id'  => 3,
-                'titulo'    => 'Nuevo Modelo Educativo-Gral',
-                'categoria_id' => 10,
-                'url'       => '14CNQN2z5jWzALzUW2raiWO55I5a5eX0F',
-                'url_otro'        => null,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            10 => [
-                'id'        => 11,
                 'libro_id'  => 3,
                 'titulo'    => 'Ingles-III',
                 'categoria_id' => 10,
@@ -927,8 +909,8 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => '2019-05-27 00:00:00'
             ],
             //The Best English 3 Alumno 
-            11 => [
-                'id'        => 12,
+            9 => [
+                'id'        => 10,
                 'libro_id'  => 4,
                 'titulo'    => 'The Best of English 3 Cuadernillo actividades alumno',
                 'categoria_id' => 8,
@@ -937,6 +919,31 @@ class DatabaseSeeder extends Seeder
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
+
+
+            10 => [
+                'id'        => 11,
+                'libro_id'  => 4,
+                'titulo'    => 'Tutorial iGrade Majestic-Alumnos',
+                'categoria_id' => 14,
+                'url'       => '1L83GityYJzSYjT0mqqSdFweMQJAOo2w-',
+                'url_otro'        => null,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+
+            11 => [
+                'id'        => 12,
+                'libro_id'  => 4,
+                'titulo'    => '(Solo Vista Preliminar) The Best of English 3 Module 1 Student',
+                'categoria_id' => 14,
+                'url'       => '1uffThyKmOobXVyR3D51hvgc0_OMtg6kj',
+                'url_otro'        => '10AhX7yHiS4KtisBayztH0jv0Ug7RCRx4',
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+
+
             //TIC´s Profesor
             12 => [
                 'id'        => 13,

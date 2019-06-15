@@ -14,7 +14,8 @@
         font-style:bold;
         font-size:24px;
         border-color:transparent;
-       
+
+
     }
     #menuMat{
         background-color: transparent;
@@ -26,13 +27,10 @@
     #misMaterias{
         background-color: transparent;
     }
-    
-
     #scroll-c{
         overflow:auto; 
         height:450px;
     }
-
     #hrtitulo { 
         border-width: 3px;
     }
@@ -57,12 +55,12 @@
        color: #000000;
    }
 
-   
     .nav .nav-link
     {
       
         color:#d91c5c;
         font-style:bold;
+  
         
     }
     .nav .nav-link:hover
@@ -71,18 +69,15 @@
         color:#7d4f9d;
         font-style:bold;
         
+        
     }
     
     .nav-pills .nav-link.active,
     .show>.nav-pills .nav-link{
         background: #7d4f9d !important
     }
+  
    
-    
-
-
-
-
     
 </style>
 
