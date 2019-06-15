@@ -18,13 +18,13 @@ class Libro extends Model
     //Muchos a muchos
     //Un libro puede pertenecer a muchos subsistemas
     public function subsistemas(){
-        return $this->belongsToMany(Subsistema::class, 'libro_semestre_subsistema');
+        return $this->belongsToMany(Subsistema::class, 'libro_subsistema');
     }
 
     //Muchos a muchos
     //Un libro puede pertenecer a muchos semestres
     public function semestres(){
-        return $this->belongsToMany(Semestre::class, 'libro_semestre_subsistema');
+        return $this->belongsToMany(Semestre::class, 'libro_semestre');
     }
 
     //Muchos a muchos (Inversa)

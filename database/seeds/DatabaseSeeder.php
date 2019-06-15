@@ -269,10 +269,9 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        \DB::table('libro_semestre_subsistema')->insert([
+        \DB::table('libro_semestre')->insert([
             0 => [
                 'id'            => 1,
-                'subsistema_id' => 3,
                 'semestre_id'   => 1,
                 'libro_id'      => 1,
                 'created_at' => '2019-05-27 00:00:00',
@@ -280,7 +279,6 @@ class DatabaseSeeder extends Seeder
             ],
             1 => [
                 'id'            => 2,
-                'subsistema_id' => 3,
                 'semestre_id'   => 1,
                 'libro_id'      => 2,
                 'created_at' => '2019-05-27 00:00:00',
@@ -288,7 +286,6 @@ class DatabaseSeeder extends Seeder
             ],
             2 => [
                 'id'            => 3,
-                'subsistema_id' => 3,
                 'semestre_id'   => 3,
                 'libro_id'      => 3,
                 'created_at' => '2019-05-27 00:00:00',
@@ -296,7 +293,6 @@ class DatabaseSeeder extends Seeder
             ],
             3 => [
                 'id'            => 4,
-                'subsistema_id' => 3,
                 'semestre_id'   => 3,
                 'libro_id'      => 4,
                 'created_at' => '2019-05-27 00:00:00',
@@ -304,7 +300,6 @@ class DatabaseSeeder extends Seeder
             ],
             4 => [
                 'id'            => 5,
-                'subsistema_id' => 3,
                 'semestre_id'   => 1,
                 'libro_id'      => 5,
                 'created_at' => '2019-05-27 00:00:00',
@@ -312,7 +307,6 @@ class DatabaseSeeder extends Seeder
             ],
             5 => [
                 'id'            => 6,
-                'subsistema_id' => 3,
                 'semestre_id'   => 1,
                 'libro_id'      => 6,
                 'created_at' => '2019-05-27 00:00:00',
@@ -320,7 +314,6 @@ class DatabaseSeeder extends Seeder
             ],
             6 => [
                 'id'            => 7,
-                'subsistema_id' => 4,
                 'semestre_id'   => 2,
                 'libro_id'      => 7,
                 'created_at' => '2019-05-27 00:00:00',
@@ -328,7 +321,6 @@ class DatabaseSeeder extends Seeder
             ],
             7 => [
                 'id'            => 8,
-                'subsistema_id' => 4,
                 'semestre_id'   => 2,
                 'libro_id'      => 8,
                 'created_at' => '2019-05-27 00:00:00',
@@ -336,7 +328,6 @@ class DatabaseSeeder extends Seeder
             ],
             8 => [
                 'id'            => 9,
-                'subsistema_id' => 7,
                 'semestre_id'   => 2,
                 'libro_id'      => 9,
                 'created_at' => '2019-05-27 00:00:00',
@@ -344,7 +335,6 @@ class DatabaseSeeder extends Seeder
             ],
             9 => [
                 'id'            => 10,
-                'subsistema_id' => 7,
                 'semestre_id'   => 2,
                 'libro_id'      => 10,
                 'created_at' => '2019-05-27 00:00:00',
@@ -352,7 +342,6 @@ class DatabaseSeeder extends Seeder
             ],
             10 => [
                 'id'            => 11,
-                'subsistema_id' => 7,
                 'semestre_id'   => 3,
                 'libro_id'      => 9,
                 'created_at' => '2019-05-27 00:00:00',
@@ -360,7 +349,6 @@ class DatabaseSeeder extends Seeder
             ],
             11 => [
                 'id'            => 12,
-                'subsistema_id' => 7,
                 'semestre_id'   => 3,
                 'libro_id'      => 10,
                 'created_at' => '2019-05-27 00:00:00',
@@ -368,7 +356,6 @@ class DatabaseSeeder extends Seeder
             ],
             12 => [
                 'id'            => 13,
-                'subsistema_id' => 7,
                 'semestre_id'   => 5,
                 'libro_id'      => 9,
                 'created_at' => '2019-05-27 00:00:00',
@@ -376,104 +363,108 @@ class DatabaseSeeder extends Seeder
             ],
             13 => [
                 'id'            => 14,
+                'semestre_id'   => 5,
+                'libro_id'      => 10,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+        ]);
+
+        \DB::table('libro_subsistema')->insert([
+            0 => [
+                'id'            => 1,
+                'subsistema_id' => 3,
+                'libro_id'      => 1,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            1 => [
+                'id'            => 2,
+                'subsistema_id' => 3,
+                'libro_id'      => 2,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            2 => [
+                'id'            => 3,
+                'subsistema_id' => 3,
+                'libro_id'      => 3,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            3 => [
+                'id'            => 4,
+                'subsistema_id' => 3,
+                'libro_id'      => 4,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            4 => [
+                'id'            => 5,
+                'subsistema_id' => 3,
+                'libro_id'      => 5,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            5 => [
+                'id'            => 6,
+                'subsistema_id' => 3,
+                'libro_id'      => 6,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            6 => [
+                'id'            => 7,
+                'subsistema_id' => 4,
+                'libro_id'      => 7,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            7 => [
+                'id'            => 8,
+                'subsistema_id' => 4,
+                'libro_id'      => 8,
+                'created_at' => '2019-05-27 00:00:00',
+                'updated_at' => '2019-05-27 00:00:00'
+            ],
+            8 => [
+                'id'            => 9,
                 'subsistema_id' => 7,
-                'semestre_id'   => 5,
-                'libro_id'      => 10,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            14 => [
-                'id'            => 15,
-                'subsistema_id' => 1,
-                'semestre_id'   => 2,
                 'libro_id'      => 9,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            15 => [
-                'id'            => 16,
+            9 => [
+                'id'            => 10,
                 'subsistema_id' => 7,
-                'semestre_id'   => 2,
                 'libro_id'      => 10,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            16 => [
-                'id'            => 17,
+            10 => [
+                'id'            => 11,
                 'subsistema_id' => 1,
-                'semestre_id'   => 3,
                 'libro_id'      => 9,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            17 => [
-                'id'            => 18,
+            11 => [
+                'id'            => 12,
                 'subsistema_id' => 1,
-                'semestre_id'   => 3,
                 'libro_id'      => 10,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            18 => [
-                'id'            => 19,
-                'subsistema_id' => 1,
-                'semestre_id'   => 5,
+            12 => [
+                'id'            => 13,
+                'subsistema_id' => 6,
                 'libro_id'      => 9,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
             ],
-            19 => [
-                'id'            => 20,
-                'subsistema_id' => 1,
-                'semestre_id'   => 5,
-                'libro_id'      => 10,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            20 => [
-                'id'            => 21,
+            13 => [
+                'id'            => 14,
                 'subsistema_id' => 6,
-                'semestre_id'   => 2,
-                'libro_id'      => 9,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            21 => [
-                'id'            => 22,
-                'subsistema_id' => 6,
-                'semestre_id'   => 2,
-                'libro_id'      => 10,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            22 => [
-                'id'            => 23,
-                'subsistema_id' => 6,
-                'semestre_id'   => 3,
-                'libro_id'      => 9,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            23 => [
-                'id'            => 24,
-                'subsistema_id' => 6,
-                'semestre_id'   => 3,
-                'libro_id'      => 10,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            24 => [
-                'id'            => 25,
-                'subsistema_id' => 6,
-                'semestre_id'   => 5,
-                'libro_id'      => 9,
-                'created_at' => '2019-05-27 00:00:00',
-                'updated_at' => '2019-05-27 00:00:00'
-            ],
-            25 => [
-                'id'            => 26,
-                'subsistema_id' => 6,
-                'semestre_id'   => 5,
                 'libro_id'      => 10,
                 'created_at' => '2019-05-27 00:00:00',
                 'updated_at' => '2019-05-27 00:00:00'
