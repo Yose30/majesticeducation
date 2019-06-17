@@ -17,9 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/construccion', function(){
+    return view('construccion');
+});
+
 Route::get('/evaluaciones', function(){
     return view('evaluaciones');
-})->middleware('auth'); //, sprintf("tipo:%s", 4)
+})->middleware('auth', 'tipo'); //, sprintf("tipo:%s", 4)
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/buscar', 'HomeController@buscar')->name('home.buscar');

@@ -1,11 +1,8 @@
 @extends('layouts.app')
 <style>
-    
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
     html, body {
      font-family: 'Open Sans', sans-serif;
-     
-     
     
     }
     #tituloMateria
@@ -37,7 +34,6 @@
     #misMat{
         background-color: transparent;
     }
-        
     
     #misMaterias{
        
@@ -57,7 +53,6 @@
 
     .nav .nav-link
     {
-      
         color:#d91c5c;
         font-style:bold;
   
@@ -65,20 +60,14 @@
     }
     .nav .nav-link:hover
     {
-        
         color:#7d4f9d;
         font-style:bold;
-        
-        
     }
     
     .nav-pills .nav-link.active,
     .show>.nav-pills .nav-link{
         background: #7d4f9d !important
     }
-  
-   
-    
 </style>
 
 @section('content')
@@ -190,8 +179,6 @@
         @include('partials.modal_buscar')
 
 @endsection
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     
 <script>     
     jQuery(document).on("click", '.btn-doc', function (e) {

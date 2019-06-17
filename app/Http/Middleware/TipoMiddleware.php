@@ -13,9 +13,9 @@ class TipoMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $tipo)
+    public function handle($request, Closure $next)
     {
-        if(auth()->user()->tipo_id !== (int) $tipo){
+        if(auth()->user()->tipo_id != 4){
             abort(401, __("No puedes acceder a este sitio"));
         }
         return $next($request);

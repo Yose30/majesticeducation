@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Storage;
 
 class LibroController extends Controller
 {
-   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function contenido($id){
         $libro = Libro::whereId($id)->with('subsistemas', 'semestres')->first();
