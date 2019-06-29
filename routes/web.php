@@ -30,4 +30,8 @@ Route::post('/home/buscar', 'HomeController@buscar')->name('home.buscar');
 
 Route::get('/contenido/{id}', 'LibroController@contenido')->name('contenido');
 
+Route::get('/interactivos', function(){
+    return view('interactivos');
+});
+
 

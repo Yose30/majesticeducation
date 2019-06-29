@@ -29,8 +29,6 @@
         color:#000;
         font-weight: bold;
         border: 1px solid #f2991f;
-
-
     }
     #btnacces:hover
     {
