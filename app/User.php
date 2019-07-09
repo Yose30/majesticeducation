@@ -5,8 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Tipo;
+use App\Review;
 use App\Libro;
+use App\Clase;
+use App\Tipo;
 
 class User extends Authenticatable
 {
@@ -46,7 +48,7 @@ class User extends Authenticatable
     //Uno a uno
     //Un usuario solo puede tener un tipo
     public function tipo(){
-        return $this->hasOne(Tipo::class);
+        return $this->belongsTo(Tipo::class);
     }
 
     //Muchps a muchos
@@ -54,4 +56,21 @@ class User extends Authenticatable
     public function libros(){
         return $this->belongsToMany(Libro::class);
     }
+
+    //Uno a muchos 
+    //Un usuario puede tener muchas clases
+    public function clases(){
+        return $this->hasMany(Clase::class);
+    }
+
+    //Uno a muchos
+    //Un usuario puede hacer muchas valoraciones
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+    public static function navigation(){
+        return auth()->check() ? auth()->user()->tipo->tipo : 'guest';
+    }
+
 }

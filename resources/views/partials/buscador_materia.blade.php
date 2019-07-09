@@ -6,7 +6,7 @@
         class="form-control{{ $errors->has('clavemat') ? ' is-invalid' : '' }}" 
         name="clavemat" 
         value="{{ old('clavemat') }}" 
-        placeholder="Clave de la materia" 
+        placeholder="Clave de la asignatura" 
         required autofocus>
     @if ($errors->has('clavemat'))
         <span class="invalid-feedback">

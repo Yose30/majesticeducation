@@ -34,6 +34,9 @@ Vue.component('songs-component', require('./components/SongsComponent.vue').defa
 Vue.component('videos-component', require('./components/VideosComponent.vue').default);
 Vue.component('links-component', require('./components/LinksComponent.vue').default);
 
+Vue.component('recursos-component', require('./components/RecursosComponent.vue').default);
+Vue.component('menu-component', require('./components/MenuComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

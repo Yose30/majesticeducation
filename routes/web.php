@@ -17,21 +17,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/construccion', function(){
-    return view('construccion');
-});
-
-Route::get('/evaluaciones', function(){
-    return view('evaluaciones');
-})->middleware('auth', 'tipo'); //, sprintf("tipo:%s", 4)
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/buscar', 'HomeController@buscar')->name('home.buscar');
 
-Route::get('/contenido/{id}', 'LibroController@contenido')->name('contenido');
-
-Route::get('/interactivos', function(){
-    return view('interactivos');
+//PROFESOR
+Route::name('profesor.')->prefix('profesor')->middleware(['auth', 'tipo:2'])->group(function () {
+    //Pagina principal
+    Route::get('inicio', 'ProfesorController@index')->name('inicio');
+    //Acceder al contenido de la clase
+    Route::get('contenido/{slug}', 'ProfesorController@contenido_clase')->name('contenido');
+    //RUTAS DEL CONTROLADOR DE CLASE
+    //Crear una nueva clase
+    Route::post('nueva_clase', 'ClaseController@store')->name('nueva_clase');
+    //Crear una nueva unidad
+    Route::post('nueva_unidad', 'ClaseController@nueva_unidad')->name('nueva_unidad');
+    //RUTAS DEL CONTROLADOR DE DOCUMENTO
+    //Subir un documento
+    Route::post('subir_archivo', 'DocumentoController@store')->name('subir_archivo');
 });
-
 

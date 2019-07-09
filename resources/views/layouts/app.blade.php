@@ -19,10 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style type="text/css">
-   
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-   
-            html, body {
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+        html, body {
                 
                 background-color: #fff;
                 color: #636b6f;
@@ -75,15 +73,29 @@
                 font-weight: bold; 
                 border: 1px solid #f2991f;
 
-
+            }
+            #btbBuscarM i {
+                font-size: 20px !important
             }
             #btbBuscarM:hover
             {
                 background-color:#f7ca39;
                 color:#000;
                 font-weight: bold; 
+            } 
+
+            /* Plataform - Nuevo */
+            /* #btnDetalles
+            {
+                background-color:#f2991f;
+                color:#ffffff;
+                font-weight: bold; 
+                border: 1px solid #f2991f;
+
+            } */
+            #btnDetalles i {
+                font-size: 20px !important
             }
-            
     </style>
 
     <!-- BOOTSTRAP -->
@@ -92,58 +104,19 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                @guest
-                    <a class="navbar-brand" href="{{ url('/') }}" id="logo">
-                        ME Digital
-                    </a>
-                @else
-                    <a class="navbar-brand" href="{{ url('home') }}" id="logo">
-                        ME Digital
-                    </a>
-                @endguest
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}" ><i class="fa fa-unlock-alt" id="logeo"> {{ __("Iniciar sesión") }}</i></a>
-                            </li>
-                        @else
-                            <a href="{{ route('logout') }}" 
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();"><i class="fa fa-unlock" id="logeooff"> {{ __('Cerrar sesión') }}</i>
-                                
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        @include('partials.menu_general')
         <main class="container py-4">
             @if(session('message'))
                 <div class="row justify-content-center">
                     <div class="col-md-10">
-                        <div class="alert alert-{{ session('message')[0] }}">
+                        <div class="alert alert-{{ session('message')[0] }} alert-dismissible fade show" role="alert">
                             <h4 class="alert-heading">
                                 <i class="fa fa-exclamation"></i> {{ __("Mensaje") }}
                             </h4>
                             <p>{{ session('message')[1] }}</p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </div>
                 </div>

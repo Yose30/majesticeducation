@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Libro;
+use App\Clase;
 
 class HomeController extends Controller
 {

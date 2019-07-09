@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLibroUser extends Migration
+class CreateClasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateLibroUser extends Migration
      */
     public function up()
     {
-        Schema::create('libro_user', function (Blueprint $table) {
+        Schema::create('clases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('libro_id');
-            $table->foreign('libro_id')->references('id')->on('libros');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('nombre', 100)->unique();
+            $table->string('codigo', 10)->unique();
+            $table->string('slug');
+            $table->string('imagen')->nullable(); 
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateLibroUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('libro_user');
+        Schema::dropIfExists('clases');
     }
 }

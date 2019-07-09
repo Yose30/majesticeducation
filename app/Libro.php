@@ -43,11 +43,7 @@ class Libro extends Model
     public function links(){
         return $this->hasMany(Link::class);
     }
-    //Uno a muchos
-    //Un libro puede tener muchos documentos
-    public function documentos(){
-        return $this->hasMany(Documento::class);
-    }
+    
 
     //Uno a muchos
     //Un libro puede tener muchos audios
