@@ -9,12 +9,12 @@
                 <b-row>
                     <b-col sm="4">
                         <b-form-group label="Elegir recurso">
-                            <b-form-radio v-model="selected" name="actividad" value="1" @change="inicializar">Actividad</b-form-radio>
+                            <!-- <b-form-radio v-model="selected" name="actividad" value="1" @change="inicializar">Actividad</b-form-radio> -->
                             <b-form-radio v-model="selected" name="archivo" value="2" @change="inicializar">Archivo</b-form-radio>
                             <b-form-radio v-model="selected" name="audio" value="3" @change="inicializar">Audio</b-form-radio>
                             <b-form-radio v-model="selected" name="video" value="4" @change="inicializar">Video</b-form-radio>
                             <b-form-radio v-model="selected" name="link" value="5" @change="inicializar">Enlace</b-form-radio>
-                            <b-form-radio v-model="selected" name="evaluacion" value="6" @change="inicializar">Evaluación</b-form-radio>
+                            <!-- <b-form-radio v-model="selected" name="evaluacion" value="6" @change="inicializar">Evaluación</b-form-radio> -->
                         </b-form-group>
                     </b-col>
                     <b-col sm="8">
@@ -141,7 +141,6 @@
  
                 axios.post('/profesor/subir_archivo', formData, config).then(response => {
                     this.comprobarError(response);
-                    this.$emit('updateArchivos', response.data) 
                 })
                 .catch(error => {
                     this.mostrarErrores(error);
@@ -182,6 +181,7 @@
                         titulo: '',
                         url: 'https://'
                     };
+                    this.$emit('updateEnlaces', response.data);
                 })
                 .catch(error => {
                     this.mostrarErrores(error);
@@ -199,6 +199,7 @@
                     this.titulo = '';
                     this.file = '';
                     this.success = true;
+                    this.$emit('updateArchivos', response.data);
                 }
                 else{
                     this.errorExist = response.data.message;

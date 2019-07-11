@@ -20,7 +20,7 @@
                 </b-modal>
             </b-col>
             <b-col sm="6">
-                <recursos-component :seccion_id="seccion_id" @updateArchivos="update"></recursos-component>
+                <recursos-component :seccion_id="seccion_id" @updateArchivos="updateA" @updateEnlaces="updateE"></recursos-component>
             </b-col>
         </b-row>
         <b-tabs pills card vertical nav-wrapper-class="w-25">
@@ -49,7 +49,7 @@
                 </b-card>
                 <hr>
                 <b-card no-body header="Enlaces">
-                    <b-list-group flush v-for="enlace in unidad.enlaces" :key="enlace.id">
+                    <b-list-group flush v-for="enlace in enlaces" :key="enlace.id">
                         <b-list-group-item href="#">
                             {{ enlace.titulo }}
                         </b-list-group-item>
@@ -74,6 +74,7 @@
                seccion_id: null,
                respuestaUnidad: false,
                archivos: [],
+               enlaces: [],
             }
         },
         methods: {
@@ -89,10 +90,20 @@
             },
             getContenido(unidad){
                 this.seccion_id = unidad.id;
-                this.archivos = unidad.archivos;
+                if(unidad.archivos != undefined){
+                    this.archivos = unidad.archivos;
+                }
+                if(unidad.enlaces != undefined){
+                    this.enlaces = unidad.enlaces;
+                }
             },
-            update(newArchivo){
+            updateA(newArchivo){
                 this.archivos.push(newArchivo);
+                console.log(this.archivos);
+            },
+            updateE(newEnlace){
+                this.enlaces.push(newEnlace);
+                console.log(this.enlaces);
             }
         }
     }
