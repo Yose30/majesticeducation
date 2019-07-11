@@ -3,26 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Libro;
 use App\Categoria;
 use App\Seccione;
 
-class Documento extends Model
+class Archivo extends Model
 {
     protected $fillable = [
-        'id', 'seccione_id', 'titulo', 'public_url', 'size', 'extension'
+        'id', 'categoria_id', 'titulo', 'public_url', 'size', 'extension'
     ];
 
     //Uno a muchos (Inversa)
-    //Un documento solo puede pertencer a una sección
-    public function seccione(){
-        return $this->belongsTo(Seccione::class);
-    }
-
-    //Uno a muchos (Inversa)
-    //Un documento solo puede pertencer a una categoria
+    //Un archivo solo puede pertencer a una categoria
     public function categoria(){
         return $this->belongsTo(Categoria::class);
+    }
+
+    //Muchos a muchos
+    //Un archivo puede pertenecer a muchas secciones
+    public function secciones(){
+        return $this->belongsToMany(Seccione::class);
     }
 
     //Obtener el tamaño del archivo

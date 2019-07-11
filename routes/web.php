@@ -31,8 +31,13 @@ Route::name('profesor.')->prefix('profesor')->middleware(['auth', 'tipo:2'])->gr
     Route::post('nueva_clase', 'ClaseController@store')->name('nueva_clase');
     //Crear una nueva unidad
     Route::post('nueva_unidad', 'ClaseController@nueva_unidad')->name('nueva_unidad');
-    //RUTAS DEL CONTROLADOR DE DOCUMENTO
+    //RUTAS DEL CONTROLADOR DE ARCHIVO
     //Subir un documento
-    Route::post('subir_archivo', 'DocumentoController@store')->name('subir_archivo');
+    Route::post('subir_archivo', 'ArchivoController@store_documento')->name('subir_archivo');
+    //Subir un audio
+    Route::post('subir_audio', 'ArchivoController@store_audio')->name('subir_audio');
+    //RUTAS DEL CONTROLADOR DE ENLACE
+    //Subir enlace
+    Route::post('store_enlace', 'EnlaceController@store')->name('store_enlace');
 });
 

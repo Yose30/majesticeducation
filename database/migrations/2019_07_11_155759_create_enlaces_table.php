@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubsistemasTable extends Migration
+class CreateEnlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateSubsistemasTable extends Migration
      */
     public function up()
     {
-        Schema::create('subsistemas', function (Blueprint $table) {
+        //Para links de videos, paginas o cualquier otro archivo
+        Schema::create('enlaces', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('subsistema');
+            $table->unsignedInteger('categoria_id')->nullable();
+            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->string('titulo', 100);
+            $table->string('url', 100);
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateSubsistemasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subsistemas');
+        Schema::dropIfExists('enlaces');
     }
 }

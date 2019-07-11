@@ -86,7 +86,7 @@ return [
     'min'                  => [
         'numeric' => 'El campo :attribute debe ser al menos :min.',
         'file'    => 'El archivo :attribute debe pesar al menos :min kilobytes.',
-        'string'  => 'La clave de materia no es valida.',
+        'string'  => 'El campo :attribute debe tener al menos :min caracteres.',
         'array'   => 'El campo :attribute debe contener al menos :min elementos.',
     ],
     'not_in'               => 'El campo :attribute seleccionado es inválido.',

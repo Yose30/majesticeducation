@@ -44,20 +44,6 @@
             border: 2px solid #f7ca39;
             color: #000000;
         }
-        .nav .nav-link{
-            color:#d91c5c;
-            font-style:bold;
-        }
-        .nav .nav-link:hover{
-            color:#7d4f9d;
-            font-style:bold;
-        }
-        .nav-pills .nav-link.active,
-        .show>.nav-pills .nav-link{
-            background: #7d4f9d !important
-        }
-
-
         #btnNewUnidad{
             background-color: transparent;
             color: #039111;
@@ -74,63 +60,13 @@
             {{ $clase->nombre }}
             <div align="right">
                 <h6><b>{{ __("Codigo de la clase") }}</b>: {{ $clase->codigo }}</h6>
+
             </div>
             <hr id="hrtitulo">
             <hr id="hrtitulo">
         </div>
     </div>
     <div>
-        <menu-component :secciones="{{$clase->secciones}}" :clase_id="{{$clase->id}}"></menu-component>
+        <menu-component :secciones="{{$secciones}}" :clase_id="{{$clase->id}}"></menu-component>
     </div>
-    <!-- <div class="row">
-        <div class="col-md-4">
-            <div class="card" id="menuMat">
-                <div class="card-body" id="scroll-c">
-                    <div align="right">
-                        @include('partials.clase.btn_nueva_unidad')
-                    </div>
-                    <hr> -->
-                    <!-- <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" 
-                            data-toggle="pill" 
-                            href="#v-home" 
-                            role="tab">
-                            <i class="fa fa-home"></i> Inicio
-                        </a>
-                        @foreach($clase->secciones as $seccion)
-                            <a class="nav-link" 
-                                data-toggle="pill" 
-                                href="#v-{{$seccion->slug}}" 
-                                role="tab">
-                                <i class="fa fa-book"></i> {{ $seccion->seccion }}
-                            </a>
-                        @endforeach
-                    </div> -->
-                <!-- </div>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="card" id="contenido">
-                <div class="card-body" id="scroll-c">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-home" role="tabpanel">
-                            
-                        </div>
-                        @forelse($clase->secciones as $seccion)
-                            <div class="tab-pane fade" id="v-{{$seccion->slug}}" role="tabpanel">
-                                
-                            </div>
-                        @empty
-                            <div class="alert alert-secondary" role="alert" align="center" id="alert-unidad">
-                                {{ __("Crear unidades ") }} @include('partials.clase.btn_nueva_unidad')
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- <recursos-component></recursos-component> -->
-    @include('partials.clase.modal_nueva_unidad')
 @endsection

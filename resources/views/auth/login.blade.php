@@ -48,7 +48,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header" id="claveHead">
-                    <p><center>{{ __('Comenzar') }}</center><p>
+                    <p><center>{{ __('Iniciar sesión') }}</center><p>
                     </div>
 
                 <div class="card-body" id="contenido">
@@ -74,9 +74,9 @@
                         <div class="form-group row" >
                             <div class="col-md-6 offset-md-4" >
                                 <div class="form-check" >
-                                    <label>
+                                    <!-- <label>
                                         {{ __('Ingresa la clave para poder consultar los recursos') }}
-                                    </label>
+                                    </label> -->
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">

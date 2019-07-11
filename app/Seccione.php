@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Archivo;
+use App\Enlace;
 use App\Clase;
-use App\Documento;
 
 class Seccione extends Model
 {
@@ -30,9 +31,15 @@ class Seccione extends Model
         });
     }
 
-    //Uno a muchos
-    //Una seccion puede tener muchos documentos
-    public function documentos(){
-        return $this->hasMany(Documento::class);
+    //Muchos a muchos
+    //Una seccion puede tener muchos archivos
+    public function archivos(){
+        return $this->belongsToMany(Archivo::class);
+    }
+
+    //Muchos a muchos
+    //Una seccion puede tener muchos enlaces
+    public function enlaces(){
+        return $this->belongsToMany(Enlace::class);
     }
 }
