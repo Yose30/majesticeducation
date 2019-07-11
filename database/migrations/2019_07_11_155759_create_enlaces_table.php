@@ -19,7 +19,7 @@ class CreateEnlacesTable extends Migration
             $table->unsignedInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->string('titulo', 100);
-            $table->string('url', 100);
+            $table->text('url');
             $table->timestamps();
         });
     }
