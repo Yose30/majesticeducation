@@ -9,7 +9,7 @@ use App\Seccione;
 class Archivo extends Model
 {
     protected $fillable = [
-        'id', 'categoria_id', 'titulo', 'public_url', 'size', 'extension'
+        'id', 'categoria_id', 'titulo', 'name', 'public_url', 'size', 'extension'
     ];
 
     //Uno a muchos (Inversa)

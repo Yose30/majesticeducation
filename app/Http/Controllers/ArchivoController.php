@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Spatie\Dropbox\Client;
 use App\Seccione;
@@ -24,9 +25,10 @@ class ArchivoController extends Controller
             'file' => 'required|mimes:pdf,xls,xlsx,doc,docx,ppt,pptx|max:9000'
         ]);
         
+        $seccion = Seccione::whereId($request->seccione_id)->first();
         //Comprueba que el archivo no exista en la carpeta
         if(Storage::disk('dropbox')
-            ->exists('/Documentos/'.$request->seccione_id.'/'.$request->file('file')->getClientOriginalName())){
+            ->exists('/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
             $jsondata['status'] = 422;
             $jsondata['message'] =  'El archivo ya existe en la unidad';
             return response()->json($jsondata);
@@ -36,36 +38,38 @@ class ArchivoController extends Controller
         // el directorio donde será almacenado, el archivo y el nombre.
         // ¡No olvides validar todos estos datos antes de guardar el archivo!
         Storage::disk('dropbox')->putFileAs(
-            '/Documentos/'.$request->seccione_id.'/', 
+            '/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/', 
             $request->file('file'), 
             $request->file('file')->getClientOriginalName()
         );
         // Creamos el enlace publico en dropbox utilizando la propiedad dropbox
         // definida en el constructor de la clase y almacenamos la respuesta.
         $response = $this->dropbox->createSharedLinkWithSettings(
-            '/Documentos/'.$request->seccione_id.'/'.$request->file('file')->getClientOriginalName(), 
+            '/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
             ["requested_visibility" => "public"]
         );
         // Creamos un nuevo registro en la tabla archivos con los datos de la respuesta.
         $archivo = Archivo::create([
             'categoria_id' =>  1,
             'titulo' => $request->titulo,
+            'name' => $response['name'],
             'public_url' => $response['url'],
             'size' => $response['size'],
             'extension' => $request->file('file')->getClientOriginalExtension()
         ]);
 
         //Insertar en la tabla pivote
-        $archivo->secciones()->attach((integer) $request->seccione_id);
+        $archivo->secciones()->attach($seccion->id);
         
         return response()->json($archivo);
     }
 
     //Guardar audio
     public function store_audio(Request $request){
+        $seccion = Seccione::whereId($request->seccione_id)->first();
         //Comprueba que el archivo no exista en la carpeta
         if(Storage::disk('dropbox')
-            ->exists('/Audios/'.$request->seccione_id.'/'.$request->file('file')->getClientOriginalName())){
+            ->exists('/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
             $jsondata['status'] = 422;
             $jsondata['message'] =  'El audio ya existe en la unidad';
             return response()->json($jsondata);
@@ -75,14 +79,14 @@ class ArchivoController extends Controller
         // el directorio donde será almacenado, el archivo y el nombre.
         // ¡No olvides validar todos estos datos antes de guardar el archivo!
         Storage::disk('dropbox')->putFileAs(
-            '/Audios/'.$request->seccione_id.'/', 
+            '/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/', 
             $request->file('file'), 
             $request->file('file')->getClientOriginalName()
         );
         // Creamos el enlace publico en dropbox utilizando la propiedad dropbox
         // definida en el constructor de la clase y almacenamos la respuesta.
         $response = $this->dropbox->createSharedLinkWithSettings(
-            '/Audios/'.$request->seccione_id.'/'.$request->file('file')->getClientOriginalName(), 
+            '/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
             ["requested_visibility" => "public"]
         );
         // Creamos un nuevo registro en la tabla files con los datos de la respuesta.
@@ -90,13 +94,50 @@ class ArchivoController extends Controller
             'categoria_id' =>  2,
             'titulo' => $request->titulo,
             'public_url' => $response['url'],
+            'name' => $response['name'],
             'size' => $response['size'],
             'extension' => $request->file('file')->getClientOriginalExtension()
         ]);
 
         //Insertar en la tabla pivote
-        $archivo->secciones()->attach((integer) $request->seccione_id);
+        $archivo->secciones()->attach($seccion->id);
         
         return response()->json($archivo);
+    }
+
+    //Borrar archivo
+    public function destroy(){
+        $seccion_id = Input::get('seccion_id');
+        $id = Input::get('id');
+
+        $seccion = Seccione::whereId($seccion_id)->first();
+        $archivo = Archivo::whereId($id)->first();
+        $ubicacion = $seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name;
+        // Eliminamos el archivo en dropbox llamando a la clase
+        // instanciada en la propiedad dropbox.
+        if($archivo->categoria_id == 1){
+            $this->dropbox->delete('/Documentos/'.$ubicacion);
+        }
+        if($archivo->categoria_id == 2){
+            $this->dropbox->delete('/Audios/'.$ubicacion);
+        }
+        // Eliminamos el registro de nuestra tabla.
+        $archivo->delete();
+        return response()->json(null, 200);
+    }
+
+    //Descargar archivo
+    public function download($seccion_id, $id){
+        $seccion = Seccione::whereId($seccion_id)->first();
+        $archivo = Archivo::whereId($id)->first();
+        $ubicacion = $seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name;
+        // Retornamos una descarga especificando el driver dropbox
+        // e indicándole al método download el nombre del archivo.
+        if($archivo->categoria_id == 1){
+            return Storage::disk('dropbox')->download('/Documentos/'.$ubicacion);
+        }
+        if($archivo->categoria_id == 2){
+            return Storage::disk('dropbox')->download('/Audios/'.$ubicacion);
+        }
     }
 }

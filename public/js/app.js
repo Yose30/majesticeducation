@@ -1910,6 +1910,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'app',
   props: ['secciones', 'clase_id'],
@@ -1943,6 +1985,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getContenido: function getContenido(unidad) {
+      this.seccion_id = null;
+      this.archivos = [];
+      this.enlaces = [];
       this.seccion_id = unidad.id;
 
       if (unidad.archivos != undefined) {
@@ -1960,6 +2005,18 @@ __webpack_require__.r(__webpack_exports__);
     updateE: function updateE(newEnlace) {
       this.enlaces.push(newEnlace);
       console.log(this.enlaces);
+    },
+    destroy: function destroy(archivo, i) {
+      var _this2 = this;
+
+      axios["delete"]('/profesor/borrar_archivo', {
+        params: {
+          seccion_id: this.seccion_id,
+          id: archivo.id
+        }
+      }).then(function (response) {
+        _this2.archivos.splice(i, 1);
+      });
     }
   }
 });
@@ -1975,6 +2032,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2099,29 +2183,28 @@ __webpack_require__.r(__webpack_exports__);
       },
       errors: {},
       success: false,
-      errorExist: ''
+      errorExist: '',
+      processing: false,
+      disabled: false
     };
   },
   methods: {
     onArchivoChange: function onArchivoChange(e) {
       this.file = e.target.files[0];
-      console.log(this.file);
     },
     submitArchivo: function submitArchivo(e) {
       var _this = this;
 
       e.preventDefault();
-      var config = {
+      this.processing = true;
+      this.disabled = true;
+      var fileInput = document.getElementById('archivoType');
+      axios.post('/profesor/subir_archivo', this.getDatos(), {
         headers: {
           'content-type': 'multipart/form-data'
         }
-      };
-      var formData = new FormData();
-      formData.append('file', this.file);
-      formData.append('seccione_id', this.seccion_id);
-      formData.append('titulo', this.titulo);
-      axios.post('/profesor/subir_archivo', formData, config).then(function (response) {
-        _this.comprobarError(response);
+      }).then(function (response) {
+        _this.comprobarError(response, fileInput);
       })["catch"](function (error) {
         _this.mostrarErrores(error);
       });
@@ -2130,21 +2213,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       e.preventDefault();
-      var fileInput = document.getElementById('audioType');
+      this.processing = true;
+      this.disabled = true;
+      var fileInput = document.getElementById('archivoType');
       var allowedExtensions = /(\.wav|\.mp3|\.mp4|\.aac)$/i;
 
       if (allowedExtensions.exec(fileInput.value)) {
-        var config = {
+        axios.post('/profesor/subir_audio', this.getDatos(), {
           headers: {
             'content-type': 'multipart/form-data'
           }
-        };
-        var formData = new FormData();
-        formData.append('file', this.file);
-        formData.append('seccione_id', this.seccion_id);
-        formData.append('titulo', this.titulo);
-        axios.post('/profesor/subir_audio', formData, config).then(function (response) {
-          _this2.comprobarError(response);
+        }).then(function (response) {
+          _this2.comprobarError(response, fileInput);
         })["catch"](function (error) {
           _this2.mostrarErrores(error);
         });
@@ -2152,11 +2232,17 @@ __webpack_require__.r(__webpack_exports__);
         this.errorExist = 'El audio debe ser de tipo: mp3, mp4, mpeg, aac ó wav.';
       }
     },
+    submitVideo: function submitVideo(e) {
+      e.preventDefault();
+      console.log(this.file);
+    },
     submitEnlace: function submitEnlace(categoria) {
       var _this3 = this;
 
       this.enlace.seccione_id = this.seccion_id;
       this.enlace.categoria_id = categoria;
+      this.processing = true;
+      this.disabled = true;
       axios.post('/profesor/store_enlace', this.enlace).then(function (response) {
         _this3.errors = {};
         _this3.success = true;
@@ -2166,6 +2252,8 @@ __webpack_require__.r(__webpack_exports__);
           titulo: '',
           url: 'https://'
         };
+        _this3.processing = false;
+        _this3.disabled = false;
 
         _this3.$emit('updateEnlaces', response.data);
       })["catch"](function (error) {
@@ -2173,25 +2261,49 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     inicializar: function inicializar() {
+      this.titulo = '';
       this.errors = {};
+      this.errorExist = '';
       this.success = false;
+      this.enlace = {
+        seccione_id: null,
+        categoria_id: 0,
+        titulo: '',
+        url: 'https://'
+      };
     },
-    comprobarError: function comprobarError(response) {
+    getDatos: function getDatos() {
+      var formData = new FormData();
+      formData.append('file', this.file);
+      formData.append('seccione_id', this.seccion_id);
+      formData.append('titulo', this.titulo);
+      return formData;
+    },
+    comprobarError: function comprobarError(response, fileInput) {
       if (response.data.status != 422) {
         this.errorExist = '';
         this.errors = {};
         this.titulo = '';
         this.file = '';
+        fileInput.value = null;
         this.success = true;
         this.$emit('updateArchivos', response.data);
       } else {
         this.errorExist = response.data.message;
       }
+
+      this.processing = false;
+      this.disabled = false;
     },
     mostrarErrores: function mostrarErrores(error) {
+      this.errors = {};
+
       if (error.response.status === 422) {
         this.errors = error.response.data.errors || {};
       }
+
+      this.processing = false;
+      this.disabled = false;
     }
   }
 });
@@ -66666,19 +66778,91 @@ var render = function() {
                 _c(
                   "b-card",
                   { attrs: { "no-body": "", header: "Archivos" } },
-                  _vm._l(_vm.archivos, function(archivo) {
+                  _vm._l(_vm.archivos, function(archivo, i) {
                     return _c(
                       "b-list-group",
-                      { key: archivo.id, attrs: { flush: "" } },
+                      { key: i, attrs: { flush: "" } },
                       [
                         archivo.categoria_id == 1
-                          ? _c("b-list-group-item", { attrs: { href: "#" } }, [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(archivo.titulo) +
-                                  "\n                    "
-                              )
-                            ])
+                          ? _c(
+                              "b-list-group-item",
+                              [
+                                _c(
+                                  "b-row",
+                                  [
+                                    _c("b-col", [
+                                      _c("a", { attrs: { href: "" } }, [
+                                        _vm._v(_vm._s(archivo.titulo))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-col", { staticClass: "text-right" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "d-block text-right" },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-outline-primary",
+                                              attrs: {
+                                                href:
+                                                  "/descargar_archivo/" +
+                                                  _vm.seccion_id +
+                                                  "/" +
+                                                  archivo.id
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-download"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                variant: "outline-warning"
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-pencil"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                variant: "outline-danger"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.destroy(archivo, i)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-remove"
+                                              })
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
                           : _vm._e()
                       ],
                       1
@@ -66692,19 +66876,91 @@ var render = function() {
                 _c(
                   "b-card",
                   { attrs: { "no-body": "", header: "Audio" } },
-                  _vm._l(_vm.archivos, function(archivo) {
+                  _vm._l(_vm.archivos, function(archivo, i) {
                     return _c(
                       "b-list-group",
-                      { key: archivo.id, attrs: { flush: "" } },
+                      { key: i, attrs: { flush: "" } },
                       [
                         archivo.categoria_id == 2
-                          ? _c("b-list-group-item", { attrs: { href: "#" } }, [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(archivo.titulo) +
-                                  "\n                    "
-                              )
-                            ])
+                          ? _c(
+                              "b-list-group-item",
+                              [
+                                _c(
+                                  "b-row",
+                                  [
+                                    _c("b-col", [
+                                      _c("a", { attrs: { href: "" } }, [
+                                        _vm._v(_vm._s(archivo.titulo))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-col", { staticClass: "text-right" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "d-block text-right" },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-outline-primary",
+                                              attrs: {
+                                                href:
+                                                  "/descargar_archivo/" +
+                                                  _vm.seccion_id +
+                                                  "/" +
+                                                  archivo.id
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-download"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                variant: "outline-warning"
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-pencil"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                variant: "outline-danger"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.destroy(archivo, i)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-remove"
+                                              })
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
                           : _vm._e()
                       ],
                       1
@@ -66718,18 +66974,67 @@ var render = function() {
                 _c(
                   "b-card",
                   { attrs: { "no-body": "", header: "Enlaces" } },
-                  _vm._l(_vm.enlaces, function(enlace) {
+                  _vm._l(_vm.enlaces, function(enlace, i) {
                     return _c(
                       "b-list-group",
-                      { key: enlace.id, attrs: { flush: "" } },
+                      { key: i, attrs: { flush: "" } },
                       [
-                        _c("b-list-group-item", { attrs: { href: "#" } }, [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(enlace.titulo) +
-                              "\n                    "
-                          )
-                        ])
+                        enlace.categoria_id == 4
+                          ? _c(
+                              "b-list-group-item",
+                              [
+                                _c(
+                                  "b-row",
+                                  [
+                                    _c("b-col", [
+                                      _c("a", { attrs: { href: "" } }, [
+                                        _vm._v(_vm._s(enlace.titulo))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-col", { staticClass: "text-right" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "d-block text-right" },
+                                        [
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                variant: "outline-warning"
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-pencil"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-button",
+                                            {
+                                              attrs: {
+                                                variant: "outline-danger"
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-remove"
+                                              })
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
                       ],
                       1
                     )
@@ -66787,7 +67092,8 @@ var render = function() {
                       modifiers: { "modal-1": true }
                     }
                   ],
-                  attrs: { id: "btnAgregarRec" }
+                  attrs: { id: "btnAgregarRec" },
+                  on: { click: _vm.inicializar }
                 },
                 [
                   _c("i", { staticClass: "fa fa-plus" }),
@@ -66816,7 +67122,12 @@ var render = function() {
                     [
                       _c(
                         "b-form-group",
-                        { attrs: { label: "Elegir recurso" } },
+                        {
+                          attrs: {
+                            label: "Elegir recurso",
+                            disabled: _vm.disabled
+                          }
+                        },
                         [
                           _c(
                             "b-form-radio",
@@ -66913,6 +67224,7 @@ var render = function() {
                                   [
                                     _c("b-form-input", {
                                       attrs: {
+                                        disabled: _vm.disabled,
                                         id: "input-titulo-archivo",
                                         required: ""
                                       },
@@ -66949,7 +67261,11 @@ var render = function() {
                                   [
                                     _c("input", {
                                       staticClass: "custom-file",
-                                      attrs: { type: "file" },
+                                      attrs: {
+                                        type: "file",
+                                        id: "archivoType",
+                                        disabled: _vm.disabled
+                                      },
                                       on: { change: _vm.onArchivoChange }
                                     }),
                                     _vm._v(" "),
@@ -66983,7 +67299,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "d-block text-right" },
                                   [
-                                    _vm.file != ""
+                                    _vm.file != "" && !_vm.processing
                                       ? _c(
                                           "b-button",
                                           {
@@ -66999,6 +67315,12 @@ var render = function() {
                                             _vm._v(" Guardar")
                                           ]
                                         )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.processing
+                                      ? _c("b-spinner", {
+                                          attrs: { label: "Loading..." }
+                                        })
                                       : _vm._e()
                                   ],
                                   1
@@ -67048,6 +67370,7 @@ var render = function() {
                                   [
                                     _c("b-form-input", {
                                       attrs: {
+                                        disabled: _vm.disabled,
                                         id: "input-titulo-audio",
                                         required: ""
                                       },
@@ -67084,7 +67407,11 @@ var render = function() {
                                   [
                                     _c("input", {
                                       staticClass: "custom-file",
-                                      attrs: { type: "file", id: "audioType" },
+                                      attrs: {
+                                        type: "file",
+                                        id: "archivoType",
+                                        disabled: _vm.disabled
+                                      },
                                       on: { change: _vm.onArchivoChange }
                                     }),
                                     _vm._v(" "),
@@ -67118,7 +67445,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "d-block text-right" },
                                   [
-                                    _vm.file != ""
+                                    _vm.file != "" && !_vm.processing
                                       ? _c(
                                           "b-button",
                                           {
@@ -67134,6 +67461,12 @@ var render = function() {
                                             _vm._v(" Guardar")
                                           ]
                                         )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.processing
+                                      ? _c("b-spinner", {
+                                          attrs: { label: "Loading..." }
+                                        })
                                       : _vm._e()
                                   ],
                                   1
@@ -67164,105 +67497,303 @@ var render = function() {
                           "div",
                           [
                             _c(
-                              "b-form",
-                              {
-                                on: {
-                                  submit: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.submitEnlace(3)
-                                  }
-                                }
-                              },
+                              "b-tabs",
+                              { attrs: { "content-class": "mt-3" } },
                               [
                                 _c(
-                                  "b-form-group",
-                                  {
-                                    attrs: {
-                                      "label-cols": "4",
-                                      "label-cols-lg": "2",
-                                      label: "Titulo",
-                                      "label-for": "input-titulo-video"
-                                    }
-                                  },
+                                  "b-tab",
+                                  { attrs: { title: "Video", active: "" } },
                                   [
-                                    _c("b-form-input", {
-                                      attrs: { id: "input-titulo-video" },
-                                      model: {
-                                        value: _vm.enlace.titulo,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.enlace, "titulo", $$v)
+                                    _c(
+                                      "form",
+                                      {
+                                        attrs: {
+                                          enctype: "multipart/form-data"
                                         },
-                                        expression: "enlace.titulo"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _vm.errors && _vm.errors.titulo
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "text-danger" },
-                                          [_vm._v(_vm._s(_vm.errors.titulo[0]))]
-                                        )
-                                      : _vm._e()
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-form-group",
-                                  {
-                                    attrs: {
-                                      "label-cols": "4",
-                                      "label-cols-lg": "2",
-                                      label: "Link del video",
-                                      "label-for": "input-video"
-                                    }
-                                  },
-                                  [
-                                    _c("b-form-input", {
-                                      attrs: { id: "input-video" },
-                                      model: {
-                                        value: _vm.enlace.url,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.enlace, "url", $$v)
-                                        },
-                                        expression: "enlace.url"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _vm.errors && _vm.errors.url
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "text-danger" },
-                                          [_vm._v(_vm._s(_vm.errors.url[0]))]
-                                        )
-                                      : _vm._e()
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("hr"),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-block text-right" },
-                                  [
-                                    _vm.enlace.url.length > 10
-                                      ? _c(
-                                          "b-button",
+                                        on: { submit: _vm.submitVideo }
+                                      },
+                                      [
+                                        _c(
+                                          "b-form-group",
                                           {
                                             attrs: {
-                                              type: "submit",
-                                              variant: "success"
+                                              "label-cols": "4",
+                                              "label-cols-lg": "2",
+                                              label: "Titulo",
+                                              "label-for": "input-titulo-v"
                                             }
                                           },
                                           [
-                                            _c("i", {
-                                              staticClass: "fa fa-check"
+                                            _c("b-form-input", {
+                                              attrs: {
+                                                id: "input-titulo-v",
+                                                required: ""
+                                              },
+                                              model: {
+                                                value: _vm.titulo,
+                                                callback: function($$v) {
+                                                  _vm.titulo = $$v
+                                                },
+                                                expression: "titulo"
+                                              }
                                             }),
-                                            _vm._v(" Guardar")
+                                            _vm._v(" "),
+                                            _vm.errors && _vm.errors.titulo
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "text-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.errors.titulo[0]
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-group",
+                                          {
+                                            attrs: {
+                                              "label-cols": "4",
+                                              "label-cols-lg": "2",
+                                              label: "Video",
+                                              "label-for": "input-v"
+                                            }
+                                          },
+                                          [
+                                            _c("input", {
+                                              staticClass: "custom-file",
+                                              attrs: {
+                                                type: "file",
+                                                id: "archivoType"
+                                              },
+                                              on: {
+                                                change: _vm.onArchivoChange
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.errors && _vm.errors.file
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "text-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(_vm.errors.file[0])
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.errorExist != ""
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "text-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(_vm.errorExist)
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _c("p", [_vm._v("Extensión: .mp4")])
                                           ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("hr"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "d-block text-right" },
+                                          [
+                                            _vm.file != "" && !_vm.processing
+                                              ? _c(
+                                                  "b-button",
+                                                  {
+                                                    attrs: {
+                                                      type: "submit",
+                                                      variant: "success"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass: "fa fa-check"
+                                                    }),
+                                                    _vm._v(" Guardar")
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.processing
+                                              ? _c("b-spinner", {
+                                                  attrs: { label: "Loading..." }
+                                                })
+                                              : _vm._e()
+                                          ],
+                                          1
                                         )
-                                      : _vm._e()
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-tab",
+                                  { attrs: { title: "Link de video" } },
+                                  [
+                                    _c(
+                                      "b-form",
+                                      {
+                                        on: {
+                                          submit: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.submitEnlace(3)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "b-form-group",
+                                          {
+                                            attrs: {
+                                              "label-cols": "4",
+                                              "label-cols-lg": "2",
+                                              label: "Titulo",
+                                              "label-for": "input-titulo-video"
+                                            }
+                                          },
+                                          [
+                                            _c("b-form-input", {
+                                              attrs: {
+                                                disabled: _vm.disabled,
+                                                id: "input-titulo-video"
+                                              },
+                                              model: {
+                                                value: _vm.enlace.titulo,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.enlace,
+                                                    "titulo",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "enlace.titulo"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.errors && _vm.errors.titulo
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "text-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.errors.titulo[0]
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-group",
+                                          {
+                                            attrs: {
+                                              "label-cols": "4",
+                                              "label-cols-lg": "2",
+                                              label: "Link del video",
+                                              "label-for": "input-video"
+                                            }
+                                          },
+                                          [
+                                            _c("b-form-input", {
+                                              attrs: {
+                                                disabled: _vm.disabled,
+                                                id: "input-video"
+                                              },
+                                              model: {
+                                                value: _vm.enlace.url,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.enlace,
+                                                    "url",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "enlace.url"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.errors && _vm.errors.url
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "text-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(_vm.errors.url[0])
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c("hr"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "d-block text-right" },
+                                          [
+                                            _vm.enlace.url.length > 10 &&
+                                            !_vm.processing
+                                              ? _c(
+                                                  "b-button",
+                                                  {
+                                                    attrs: {
+                                                      type: "submit",
+                                                      variant: "success"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass: "fa fa-check"
+                                                    }),
+                                                    _vm._v(" Guardar")
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.processing
+                                              ? _c("b-spinner", {
+                                                  attrs: { label: "Loading..." }
+                                                })
+                                              : _vm._e()
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
                                   ],
                                   1
                                 )
@@ -67277,7 +67808,7 @@ var render = function() {
                                   [
                                     _c("i", { staticClass: "fa fa-check" }),
                                     _vm._v(
-                                      " Link del video agregado\n                        "
+                                      " Video agregado\n                        "
                                     )
                                   ]
                                 )
@@ -67374,7 +67905,8 @@ var render = function() {
                                   "div",
                                   { staticClass: "d-block text-right" },
                                   [
-                                    _vm.enlace.url.length > 12
+                                    _vm.enlace.url.length > 12 &&
+                                    !_vm.processing
                                       ? _c(
                                           "b-button",
                                           {
@@ -67390,6 +67922,12 @@ var render = function() {
                                             _vm._v(" Guardar")
                                           ]
                                         )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.processing
+                                      ? _c("b-spinner", {
+                                          attrs: { label: "Loading..." }
+                                        })
                                       : _vm._e()
                                   ],
                                   1
