@@ -34,6 +34,8 @@ Route::name('profesor.')->prefix('profesor')->middleware(['auth', 'tipo:2'])->gr
     //RUTAS DEL CONTROLADOR DE ARCHIVO
     //Subir un documento
     Route::post('subir_archivo', 'ArchivoController@store_documento')->name('subir_archivo');
+    //Subir video
+    Route::post('subir_video', 'ArchivoController@store_video')->name('subir_video');
     //Subir un audio
     Route::post('subir_audio', 'ArchivoController@store_audio')->name('subir_audio');
     //Borrar archivo
@@ -41,6 +43,8 @@ Route::name('profesor.')->prefix('profesor')->middleware(['auth', 'tipo:2'])->gr
     //RUTAS DEL CONTROLADOR DE ENLACE
     //Subir enlace
     Route::post('store_enlace', 'EnlaceController@store')->name('store_enlace');
+    //Borrar enlace
+    Route::delete('borrar_enlace', 'EnlaceController@destroy')->name('borrar_enlace');
 });
 
 //Descargar archivo

@@ -67,6 +67,6 @@
         </div>
     </div>
     <div>
-        <menu-component :secciones="{{$secciones}}" :clase_id="{{$clase->id}}"></menu-component>
+        <contenido-component :secciones="{{$secciones}}" :clase_id="{{$clase->id}}"></contenido-component>
     </div>
 @endsection

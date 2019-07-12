@@ -42,10 +42,10 @@
                                         <a class="btn btn-outline-primary" :href="'/descargar_archivo/' + seccion_id + '/' + archivo.id">
                                             <i class="fa fa-download"></i>
                                         </a>
-                                        <b-button variant="outline-warning">
+                                        <b-button variant="outline-warning" @click="editarRecurso(archivo)">
                                             <i class="fa fa-pencil"></i>
                                         </b-button>
-                                        <b-button variant="outline-danger" @click="destroy(archivo, i)">
+                                        <b-button variant="outline-danger" @click="destroyArchivo(archivo, i)">
                                             <i class="fa fa-remove"></i>
                                         </b-button>
                                     </div>
@@ -68,7 +68,27 @@
                                         <b-button variant="outline-warning">
                                             <i class="fa fa-pencil"></i>
                                         </b-button>
-                                        <b-button variant="outline-danger" @click="destroy(archivo, i)">
+                                        <b-button variant="outline-danger" @click="destroyArchivo(archivo, i)">
+                                            <i class="fa fa-remove"></i>
+                                        </b-button>
+                                    </div>
+                                </b-col>
+                            </b-row>
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-card>
+                <hr>
+                <b-card no-body header="Videos">
+                    <b-list-group flush v-for="(enlace, i) in enlaces" v-bind:key="i">
+                        <b-list-group-item v-if="enlace.categoria_id == 3">
+                            <b-row>
+                                <b-col><a href="">{{ enlace.titulo }}</a></b-col>
+                                <b-col class="text-right">
+                                    <div class="d-block text-right">
+                                        <b-button variant="outline-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </b-button>
+                                        <b-button variant="outline-danger" @click="destroyEnlace(enlace, i)">
                                             <i class="fa fa-remove"></i>
                                         </b-button>
                                     </div>
@@ -88,7 +108,7 @@
                                         <b-button variant="outline-warning">
                                             <i class="fa fa-pencil"></i>
                                         </b-button>
-                                        <b-button variant="outline-danger">
+                                        <b-button variant="outline-danger" @click="destroyEnlace(enlace, i)">
                                             <i class="fa fa-remove"></i>
                                         </b-button>
                                     </div>
@@ -99,6 +119,11 @@
                 </b-card>
             </b-tab>
         </b-tabs>
+
+        <b-modal id="modal-edit" title="Editar recurso">
+            
+        </b-modal>
+
     </div>
 </template>
 
@@ -117,6 +142,7 @@
                respuestaUnidad: false,
                archivos: [],
                enlaces: [],
+               show: false,
             }
         },
         methods: {
@@ -134,7 +160,6 @@
                 this.seccion_id = null;
                 this.archivos = [];
                 this.enlaces = [];
-                
                 this.seccion_id = unidad.id;
                 if(unidad.archivos != undefined){
                     this.archivos = unidad.archivos;
@@ -151,11 +176,19 @@
                 this.enlaces.push(newEnlace);
                 console.log(this.enlaces);
             },
-            destroy(archivo, i){
+            destroyArchivo(archivo, i){
                 axios.delete('/profesor/borrar_archivo', {params: {seccion_id: this.seccion_id, id: archivo.id}}).then(response => {
                     this.archivos.splice(i, 1);
                 });
             },
+            destroyEnlace(enlace, i){
+                axios.delete('/profesor/borrar_enlace', {params: {seccion_id: this.seccion_id, id: enlace.id}}).then(response => {
+                    this.enlaces.splice(i, 1);
+                });
+            },
+            editarRecurso(archivo){
+                // $bvModal.show('modal-edit')
+            }
         }
     }
 </script>

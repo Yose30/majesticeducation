@@ -22,7 +22,7 @@ class ArchivoController extends Controller
         //Validacion de los datos
         $this->validate($request, [
             'titulo'    => 'required|string|min:3|max:100',
-            'file' => 'required|mimes:pdf,xls,xlsx,doc,docx,ppt,pptx|max:9000'
+            'file' => 'required|mimes:pdf,xls,xlsx,doc,docx,ppt,pptx|max:2000'
         ]);
         
         $seccion = Seccione::whereId($request->seccione_id)->first();
@@ -64,8 +64,62 @@ class ArchivoController extends Controller
         return response()->json($archivo);
     }
 
+    //Guardar video
+    public function store_video(Request $request){
+        //Validacion de los datos
+        $this->validate($request, [
+            'titulo'    => 'required|string|min:3|max:100',
+            'file' => 'required|mimes:mp4|max:5000'
+        ]);
+
+        $seccion = Seccione::whereId($request->seccione_id)->first();
+        
+        //Comprueba que el archivo no exista en la carpeta
+        if(Storage::disk('dropbox')
+            ->exists('/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+            $jsondata['status'] = 422;
+            $jsondata['message'] =  'El video ya existe en la unidad';
+            return response()->json($jsondata);
+        }
+        
+        // Guardamos el archivo indicando el driver y el método putFileAs el cual recibe
+        // el directorio donde será almacenado, el archivo y el nombre.
+        // ¡No olvides validar todos estos datos antes de guardar el archivo!
+        Storage::disk('dropbox')->putFileAs(
+            '/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/', 
+            $request->file('file'), 
+            $request->file('file')->getClientOriginalName()
+        );
+        // Creamos el enlace publico en dropbox utilizando la propiedad dropbox
+        // definida en el constructor de la clase y almacenamos la respuesta.
+        $response = $this->dropbox->createSharedLinkWithSettings(
+            '/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+            ["requested_visibility" => "public"]
+        );
+        // Creamos un nuevo registro en la tabla files con los datos de la respuesta.
+        $archivo = Archivo::create([
+            'categoria_id' =>  3,
+            'titulo' => $request->titulo,
+            'public_url' => $response['url'],
+            'name' => $response['name'],
+            'size' => $response['size'],
+            'extension' => $request->file('file')->getClientOriginalExtension()
+        ]);
+
+        //Insertar en la tabla pivote
+        $archivo->secciones()->attach($seccion->id);
+        
+        return response()->json($archivo);
+    }
+
     //Guardar audio
     public function store_audio(Request $request){
+        //Validacion de los datos
+        $this->validate($request, [
+            'titulo'    => 'required|string|min:3|max:100',
+            'file' => 'required|mimes:mp4|max:3000'
+        ]);
+
         $seccion = Seccione::whereId($request->seccione_id)->first();
         //Comprueba que el archivo no exista en la carpeta
         if(Storage::disk('dropbox')

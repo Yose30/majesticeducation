@@ -50,7 +50,7 @@
                                     <input type="file" id="archivoType" :disabled="disabled" class="custom-file" v-on:change="onArchivoChange">
                                     <div v-if="errors && errors.file" class="text-danger">{{ errors.file[0] }}</div>
                                     <div v-if="errorExist != ''" class="text-danger">{{ errorExist }}</div>
-                                    <p>Extensión: .mp4, .mpeg, .aac, .wav</p>
+                                    <p>Extensión: .mp3, .mpeg, .aac, .wav</p>
                                 </b-form-group>
                                 <hr>
                                 <div class="d-block text-right">
@@ -67,11 +67,11 @@
                                 <b-tab title="Video" active>
                                     <form @submit="submitVideo" enctype="multipart/form-data">
                                         <b-form-group label-cols="4" label-cols-lg="2" label="Titulo" label-for="input-titulo-v">
-                                            <b-form-input v-model="titulo" id="input-titulo-v" required></b-form-input>
+                                            <b-form-input v-model="titulo" :disabled="disabled" id="input-titulo-v" required></b-form-input>
                                             <div v-if="errors && errors.titulo" class="text-danger">{{ errors.titulo[0] }}</div>
                                         </b-form-group>
                                         <b-form-group label-cols="4" label-cols-lg="2" label="Video" label-for="input-v">
-                                            <input type="file" id="archivoType" class="custom-file" v-on:change="onArchivoChange">
+                                            <input type="file" id="archivoType" :disabled="disabled" class="custom-file" v-on:change="onArchivoChange">
                                             <div v-if="errors && errors.file" class="text-danger">{{ errors.file[0] }}</div>
                                             <div v-if="errorExist != ''" class="text-danger">{{ errorExist }}</div>
                                             <p>Extensión: .mp4</p>
@@ -108,11 +108,11 @@
                         <div v-if="selected == 5">
                             <b-form @submit.prevent="submitEnlace(4)">
                                 <b-form-group label-cols="4" label-cols-lg="2" label="Titulo" label-for="input-titulo-url">
-                                    <b-form-input v-model="enlace.titulo" id="input-titulo-url"></b-form-input>
+                                    <b-form-input v-model="enlace.titulo" :disabled="disabled" id="input-titulo-url"></b-form-input>
                                     <div v-if="errors && errors.titulo" class="text-danger">{{ errors.titulo[0] }}</div>
                                 </b-form-group>
                                 <b-form-group label-cols="4" label-cols-lg="2" label="Url del sitio web" label-for="input-url">
-                                    <b-form-input v-model="enlace.url" id="input-url"></b-form-input>
+                                    <b-form-input v-model="enlace.url" :disabled="disabled" id="input-url"></b-form-input>
                                     <div v-if="errors && errors.url" class="text-danger">{{ errors.url[0] }}</div>
                                 </b-form-group>
                                 <hr>
@@ -177,7 +177,7 @@
                 this.processing = true;
                 this.disabled = true;
                 var fileInput = document.getElementById('archivoType');
-                var allowedExtensions = /(\.wav|\.mp3|\.mp4|\.aac)$/i;
+                var allowedExtensions = /(\.wav|\.mp3|\.mpeg|\.aac)$/i;
                 if(allowedExtensions.exec(fileInput.value)){
                     axios.post('/profesor/subir_audio', this.getDatos(), { headers: { 'content-type': 'multipart/form-data' } })
                         .then(response => {
@@ -188,12 +188,21 @@
                         });
                 }
                 else{
-                    this.errorExist = 'El audio debe ser de tipo: mp3, mp4, mpeg, aac ó wav.';
+                    this.errorExist = 'El audio debe ser de tipo: mp3, mpeg, aac ó wav.';
                 }  
             },
             submitVideo(e){
                 e.preventDefault();
-                console.log(this.file);
+                this.processing = true;
+                this.disabled = true;
+                var fileInput = document.getElementById('archivoType');
+                axios.post('/profesor/subir_video', this.getDatos(), { headers: { 'content-type': 'multipart/form-data' } })
+                    .then(response => {
+                        this.comprobarError(response, fileInput);
+                    })
+                    .catch(error => {
+                        this.mostrarErrores(error);
+                    });  
             },
             submitEnlace(categoria){
                 this.enlace.seccione_id = this.seccion_id;
@@ -237,9 +246,9 @@
                 return formData;
             },
             comprobarError(response, fileInput){
+                this.errorExist = '';
+                this.errors = {};
                 if(response.data.status != 422){
-                    this.errorExist = '';
-                    this.errors = {};
                     this.titulo = '';
                     this.file = '';
                     fileInput.value = null;

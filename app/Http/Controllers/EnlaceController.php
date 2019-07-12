@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Enlace;
 
@@ -26,5 +27,13 @@ class EnlaceController extends Controller
         }
     
         return response()->json($enlace);
+    }
+
+    //Borrar enlace
+    public function destroy(){
+        $seccion_id = Input::get('seccion_id');
+        $id = Input::get('id');
+        $enlace = Enlace::whereId($id)->delete();
+        return response()->json(null, 200);
     }
 }
