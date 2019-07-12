@@ -59,7 +59,7 @@
     </style>
 @section('content')
     <div class="card">
-        <div class="card-header" id="headMM"><center><b>{{ __("Mis clases----") }}</b></center></div>
+        <div class="card-header" id="headMM"><center><b>{{ __("Mis clases") }}</b></center></div>
         <div class="card-body" id="Cuerpo">
             @include('partials.clase.card_clases')
             @if(auth()->user()->clases->count() == 0)
