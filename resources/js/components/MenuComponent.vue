@@ -33,25 +33,67 @@
                 :title="`${unidad.seccion}`" 
                 @click="getContenido(unidad)">
                 <b-card no-body header="Archivos">
-                    <b-list-group flush v-for="archivo in archivos" :key="archivo.id">
-                        <b-list-group-item href="#" v-if="archivo.categoria_id == 1">
-                            {{ archivo.titulo }}
+                    <b-list-group flush v-for="(archivo, i) in archivos" v-bind:key="i">
+                        <b-list-group-item v-if="archivo.categoria_id == 1">
+                            <b-row>
+                                <b-col><a href="">{{ archivo.titulo }}</a></b-col>
+                                <b-col class="text-right">
+                                    <div class="d-block text-right">
+                                        <a class="btn btn-outline-primary" :href="'/descargar_archivo/' + seccion_id + '/' + archivo.id">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                        <b-button variant="outline-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </b-button>
+                                        <b-button variant="outline-danger" @click="destroy(archivo, i)">
+                                            <i class="fa fa-remove"></i>
+                                        </b-button>
+                                    </div>
+                                </b-col>
+                            </b-row>
                         </b-list-group-item>
                     </b-list-group>
                 </b-card>
                 <hr>
                 <b-card no-body header="Audio">
-                    <b-list-group flush v-for="archivo in archivos" :key="archivo.id">
-                        <b-list-group-item href="#" v-if="archivo.categoria_id == 2">
-                            {{ archivo.titulo }}
+                    <b-list-group flush v-for="(archivo, i) in archivos" v-bind:key="i">
+                        <b-list-group-item v-if="archivo.categoria_id == 2">
+                            <b-row>
+                                <b-col><a href="">{{ archivo.titulo }}</a></b-col>
+                                <b-col class="text-right">
+                                    <div class="d-block text-right">
+                                        <a class="btn btn-outline-primary" :href="'/descargar_archivo/' + seccion_id + '/' + archivo.id">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                        <b-button variant="outline-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </b-button>
+                                        <b-button variant="outline-danger" @click="destroy(archivo, i)">
+                                            <i class="fa fa-remove"></i>
+                                        </b-button>
+                                    </div>
+                                </b-col>
+                            </b-row>
                         </b-list-group-item>
                     </b-list-group>
                 </b-card>
                 <hr>
                 <b-card no-body header="Enlaces">
-                    <b-list-group flush v-for="enlace in enlaces" :key="enlace.id">
-                        <b-list-group-item href="#">
-                            {{ enlace.titulo }}
+                    <b-list-group flush v-for="(enlace, i) in enlaces" v-bind:key="i">
+                        <b-list-group-item v-if="enlace.categoria_id == 4">
+                            <b-row>
+                                <b-col><a href="">{{ enlace.titulo }}</a></b-col>
+                                <b-col class="text-right">
+                                    <div class="d-block text-right">
+                                        <b-button variant="outline-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </b-button>
+                                        <b-button variant="outline-danger">
+                                            <i class="fa fa-remove"></i>
+                                        </b-button>
+                                    </div>
+                                </b-col>
+                            </b-row>
                         </b-list-group-item>
                     </b-list-group>
                 </b-card>
@@ -89,6 +131,10 @@
                 });
             },
             getContenido(unidad){
+                this.seccion_id = null;
+                this.archivos = [];
+                this.enlaces = [];
+                
                 this.seccion_id = unidad.id;
                 if(unidad.archivos != undefined){
                     this.archivos = unidad.archivos;
@@ -104,7 +150,12 @@
             updateE(newEnlace){
                 this.enlaces.push(newEnlace);
                 console.log(this.enlaces);
-            }
+            },
+            destroy(archivo, i){
+                axios.delete('/profesor/borrar_archivo', {params: {seccion_id: this.seccion_id, id: archivo.id}}).then(response => {
+                    this.archivos.splice(i, 1);
+                });
+            },
         }
     }
 </script>
