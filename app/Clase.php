@@ -4,19 +4,26 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Seccione;
+use App\Profesore;
+use App\Alumno;
 use App\Review;
-use App\User;
 
 class Clase extends Model
 {
     protected $fillable = [
-        'id', 'user_id', 'nombre', 'codigo', 'slug', 'imagen'
+        'id', 'profesore_id', 'nombre', 'codigo', 'slug', 'imagen'
     ];
 
     //Uno a muchos (inverso)
-    //Una clase solo puede pertenecer a un usuario
-    public function user(){
-        return $this->belongsTo(User::class);
+    //Una clase solo puede pertenecer a un profesor
+    public function profesore(){
+        return $this->belongsTo(Profesore::class);
+    }
+
+    //Muchos a muchos
+    //Una clase puede tener muchos alumnos
+    public function alumnos(){
+        return $this->belongsToMany(Alumno::class);
     }
 
     //Uno a muchos

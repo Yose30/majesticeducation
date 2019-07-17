@@ -57,8 +57,8 @@ class LoginController extends Controller
         if(auth()->user()->tipo_id == 2){
             return '/profesor/inicio';
         }
-        if(auth()->user()->tipo_id == 4){
-            return '/evaluaciones';
+        if(auth()->user()->tipo_id == 3){
+            return '/alumno/inicio';
         }
     }
 

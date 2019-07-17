@@ -15,10 +15,10 @@ class CreateArchivoSeccioneTable extends Migration
     {
         Schema::create('archivo_seccione', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('archivo_id');
+            $table->unsignedBigInteger('archivo_id');
             $table->foreign('archivo_id')->references('id')->on('archivos');
-            $table->unsignedInteger('seccione_id');
-            $table->foreign('seccione_id')->references('id')->on('secciones');
+            $table->unsignedBigInteger('seccione_id');
+            $table->foreign('seccione_id')->references('id')->on('secciones')->onDelete('cascade');
             $table->timestamps();
         });
     }

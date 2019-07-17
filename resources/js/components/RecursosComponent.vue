@@ -1,9 +1,6 @@
 <template>
     <div>
-        <div class="d-block text-right" v-if="seccion_id != null">
-            <b-button v-b-modal.modal-1 id="btnAgregarRec" @click="inicializar"><i class="fa fa-plus"></i> Agregar recurso</b-button>
-        </div>
-
+        <b-button v-if="seccion_id != null" v-b-modal.modal-1 id="btnAgregarRec" @click="inicializar"><i class="fa fa-plus"></i> Agregar recurso</b-button>
         <b-modal id="modal-1" size="xl" title="Agregar recurso">
             <b-container class="bv-example-row">
                 <b-row>
@@ -34,7 +31,7 @@
                                 <div class="d-block text-right">
                                     <b-button v-if="file != '' && !processing" type="submit" variant="success"><i class="fa fa-check"></i> Guardar</b-button>
                                     <b-spinner v-if="processing" label="Loading..."></b-spinner>
-                                </div>
+                                </div>    
                             </form>
                             <b-alert show dismissible v-if="success">
                                 <i class="fa fa-check"></i> Archivo agregado
@@ -74,7 +71,7 @@
                                             <input type="file" id="archivoType" :disabled="disabled" class="custom-file" v-on:change="onArchivoChange">
                                             <div v-if="errors && errors.file" class="text-danger">{{ errors.file[0] }}</div>
                                             <div v-if="errorExist != ''" class="text-danger">{{ errorExist }}</div>
-                                            <p>Extensión: .mp4</p>
+                                            <p>Extensión: .mp4, .mpeg, .ogg, .webm</p>
                                         </b-form-group>
                                         <hr>
                                         <div class="d-block text-right">
@@ -179,6 +176,7 @@
                 var fileInput = document.getElementById('archivoType');
                 var allowedExtensions = /(\.wav|\.mp3|\.mpeg|\.aac)$/i;
                 if(allowedExtensions.exec(fileInput.value)){
+                    this.errorExist = '';
                     axios.post('/profesor/subir_audio', this.getDatos(), { headers: { 'content-type': 'multipart/form-data' } })
                         .then(response => {
                             this.comprobarError(response, fileInput);
@@ -189,6 +187,8 @@
                 }
                 else{
                     this.errorExist = 'El audio debe ser de tipo: mp3, mpeg, aac ó wav.';
+                    this.processing = false;
+                    this.disabled = false;
                 }  
             },
             submitVideo(e){
@@ -268,7 +268,7 @@
                 }
                 this.processing = false;
                 this.disabled = false;
-            }
+            },
         }
     }
 </script>

@@ -4,8 +4,7 @@
    
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
    
-    html, body {
-        background-image:url({{ asset('img/avion.png')}});               
+    html, body {              
         background-repeat: no-repeat;
         background-position: right top;
         background-size: cover;

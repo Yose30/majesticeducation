@@ -16,7 +16,7 @@ class CreateArchivosTable extends Migration
         //Para documentos, audios y videos
         Schema::create('archivos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('categoria_id')->nullable();
+            $table->unsignedBigInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->string('titulo', 100);
             $table->string('name');

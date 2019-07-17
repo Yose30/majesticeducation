@@ -30,7 +30,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.component('recursos-component', require('./components/RecursosComponent.vue').default);
 Vue.component('contenido-component', require('./components/ContenidoComponent.vue').default);
-Vue.component('editar-component', require('./components/EditarComponent.vue').default);
+Vue.component('contenidoa-component', require('./components/ContenidoAComponent.vue').default);
+Vue.component('datos-component', require('./components/DatosComponent.vue').default);
+Vue.component('form-component', require('./components/FormComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

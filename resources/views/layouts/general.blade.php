@@ -15,7 +15,7 @@
         <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans');
             html, body {
-                background-image:url({{ asset('img/avionbarco.png')}});               
+                /* background-image:url({{ asset('img/avionbarco.png')}});                */
                  background-repeat: no-repeat;
                  background-size: auto auto;
                  background-position: right;

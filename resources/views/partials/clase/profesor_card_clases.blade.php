@@ -1,5 +1,5 @@
 <div class="row">
-    @foreach(auth()->user()->clases as $clase)
+    @foreach(auth()->user()->profesore->clases as $clase)
         <div class="col-md-3" style="display: flex;">
             <div class="card" style="width: 18rem; margin-bottom: 10px;">
                 @if($clase->imagen != NULL)

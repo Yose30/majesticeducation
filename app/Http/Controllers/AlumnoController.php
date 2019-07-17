@@ -5,19 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Seccione;
 use App\Clase;
-use App\Archivo;
-use App\Enlace;
-class ProfesorController extends Controller
-{   
-    //Pagina principal
+
+class AlumnoController extends Controller
+{
     public function index(){
-        return view('profesor.inicio');
+        return view('alumno.inicio');
     }
 
-    //Mostrar el contenido de la clase
     public function contenido_clase($slug){
         $clase = Clase::whereSlug($slug)->first();
         $secciones = Seccione::where('clase_id', $clase->id)->with('archivos')->with('enlaces')->get();
-        return view('profesor.contenido', compact('clase', 'secciones'));
+        return view('alumno.contenido', compact('clase', 'secciones'));
     }
 }

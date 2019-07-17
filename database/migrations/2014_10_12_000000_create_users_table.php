@@ -21,10 +21,25 @@ class CreateUsersTable extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('tipo_id');
+            $table->unsignedBigInteger('tipo_id');
             $table->foreign('tipo_id')->references('id')->on('tipos');
+            $table->string('name');
             $table->string('clave', 50)->unique();
             $table->string('password');
+            $table->timestamps();
+        });
+
+        Schema::create('profesores', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
+        });
+
+        Schema::create('alumnos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -38,5 +53,7 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('tipos');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('profesores');
+        Schema::dropIfExists('alumnos');
     }
 }

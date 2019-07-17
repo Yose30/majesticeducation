@@ -15,10 +15,10 @@ class CreateEnlaceSeccioneTable extends Migration
     {
         Schema::create('enlace_seccione', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('enlace_id');
+            $table->unsignedBigInteger('enlace_id');
             $table->foreign('enlace_id')->references('id')->on('enlaces');
-            $table->unsignedInteger('seccione_id');
-            $table->foreign('seccione_id')->references('id')->on('secciones');
+            $table->unsignedBigInteger('seccione_id');
+            $table->foreign('seccione_id')->references('id')->on('secciones')->onDelete('cascade');
             $table->timestamps();
         });
     }
