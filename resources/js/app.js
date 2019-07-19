@@ -28,9 +28,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('recursos-component', require('./components/RecursosComponent.vue').default);
-Vue.component('contenido-component', require('./components/ContenidoComponent.vue').default);
 Vue.component('contenidoa-component', require('./components/ContenidoAComponent.vue').default);
+Vue.component('contenido-component', require('./components/ContenidoComponent.vue').default);
+Vue.component('preguntas-component', require('./components/PreguntasComponent.vue').default);
+Vue.component('recursos-component', require('./components/RecursosComponent.vue').default);
 Vue.component('datos-component', require('./components/DatosComponent.vue').default);
 Vue.component('form-component', require('./components/FormComponent.vue').default);
 

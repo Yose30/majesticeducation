@@ -11,7 +11,7 @@
                             <b-form-radio v-model="selected" name="audio" value="3" @change="inicializar">Audio</b-form-radio>
                             <b-form-radio v-model="selected" name="video" value="4" @change="inicializar">Video</b-form-radio>
                             <b-form-radio v-model="selected" name="link" value="5" @change="inicializar">Enlace</b-form-radio>
-                            <!-- <b-form-radio v-model="selected" name="evaluacion" value="6" @change="inicializar">Evaluación</b-form-radio> -->
+                            <b-form-radio v-model="selected" name="evaluacion" value="6" @change="inicializar">Evaluación</b-form-radio>
                         </b-form-group>
                     </b-col>
                     <b-col sm="8">
@@ -122,6 +122,19 @@
                                 <i class="fa fa-check"></i> Enlace agregado a la unidad
                             </b-alert>
                         </div>
+                        <div v-if="selected == 6">
+                            <b-form @submit.prevent="submitEvaluacion()">
+                                <b-form-group label-cols="4" label-cols-lg="2" label="Titulo" label-for="input-titulo-evaluacion">
+                                    <b-form-input v-model="evaluacion.titulo" :disabled="disabled" id="input-titulo-evaluacion"></b-form-input>
+                                    <div v-if="errors && errors.titulo" class="text-danger">{{ errors.titulo[0] }}</div>
+                                </b-form-group>
+                                <hr>
+                                <div class="d-block text-right">
+                                    <b-button v-if="evaluacion.titulo.length > 4 && !processing" type="submit" variant="success"><i class="fa fa-check"></i> Continuar</b-button>
+                                    <b-spinner v-if="processing" label="Loading..."></b-spinner>
+                                </div>
+                            </b-form>
+                        </div>
                     </b-col>
                 </b-row>
             </b-container>
@@ -150,6 +163,7 @@
                 errorExist: '',
                 processing: false,
                 disabled: false,
+                evaluacion: {titulo: ''}
             }
         },
         methods: {
@@ -268,6 +282,9 @@
                 }
                 this.processing = false;
                 this.disabled = false;
+            },
+            submitEvaluacion(){
+                console.log(this.evaluacion);
             },
         }
     }

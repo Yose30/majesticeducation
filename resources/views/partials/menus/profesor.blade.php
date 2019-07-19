@@ -1,6 +1,13 @@
 <li class="nav-item">
     <a 
         class="nav-link" 
+        href="{{ route('profesor.evaluaciones') }}" >
+        <i class="fa fa-thumb-tack" id="logeo"> {{ __("Evaluaciones") }}</i>
+    </a>
+</li>
+<li class="nav-item">
+    <a 
+        class="nav-link" 
         href="{{ route('profesor.inicio') }}" >
         <i class="fa fa-book" id="logeo"> {{ __("Mis clases") }}</i>
     </a>

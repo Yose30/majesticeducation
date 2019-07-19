@@ -159,7 +159,6 @@
                 </b-card>
             </b-tab>
         </b-tabs>
-
         <b-modal v-model="show" title="Editar recurso">
             <form-component 
                 :archivo="archivo" 
@@ -170,7 +169,6 @@
             </form-component>
             <div slot="modal-footer"></div>
         </b-modal>
-
         <b-modal v-model="editarU" title="Editar unidad">
             <b-form @submit.prevent="updateSeccion">
                 <label for="input-nombre-unidad">Nombre de la unidad</label>

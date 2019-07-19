@@ -3,8 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Evaluacione;
+use App\Pregunta;
 use App\Clase;
+use App\User;
 
 class Profesore extends Model
 {
@@ -18,5 +20,17 @@ class Profesore extends Model
     //Un profesor puede tener un solo usuario
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    //Uno a muchos
+    //Un profesor puede crear muchas evaluaciones
+    public function evaluaciones(){
+        return $this->hasMany(Evaluacione::class);
+    }
+
+    //Uno a muchos
+    //Una profesor puede crear muchas preguntas
+    public function preguntas(){
+        return $this->hasMany(Pregunta::class);
     }
 }

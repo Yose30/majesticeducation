@@ -26,6 +26,8 @@ Route::name('profesor.')->prefix('profesor')->middleware(['auth', 'tipo:2'])->gr
     Route::get('inicio', 'ProfesorController@index')->name('inicio');
     //Acceder al contenido de la clase
     Route::get('contenido/{slug}', 'ProfesorController@contenido_clase')->name('contenido');
+    //Contenido de las evaluaciones
+    Route::get('evaluaciones', 'ProfesorController@contenido_evaluaciones')->name('evaluaciones');
     //RUTAS DEL CONTROLADOR DE CLASE
     //Crear una nueva clase
     Route::post('nueva_clase', 'ClaseController@store')->name('nueva_clase');
@@ -57,6 +59,9 @@ Route::name('profesor.')->prefix('profesor')->middleware(['auth', 'tipo:2'])->gr
     Route::post('editar_enlace', 'EnlaceController@update')->name('editar_enlace');
     //Borrar enlace
     Route::delete('borrar_enlace', 'EnlaceController@destroy')->name('borrar_enlace');
+
+    //RUTAS DEL CONTROLADOR DE PREGUNTAS
+    Route::post('nueva_pregunta', 'PreguntaController@store')->name('nueva_pregunta');
 });
 
 //ALUMNO
