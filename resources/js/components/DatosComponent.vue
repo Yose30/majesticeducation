@@ -8,16 +8,17 @@
                         :href="'/descargar_archivo/' + unidad.id + '/' + archivo.id">
                         <i class="fa fa-download"></i>
                     </a>
-                    <b-button variant="primary"
+                    <b-button 
+                        variant="info"
                         v-if="archivo.extension == 'pdf' || archivo.extension == 'mp4'" 
-                        @click="viewM()" >
-                        <i class="fa fa-eye"></i>
+                        @click="viewM" >
+                        Ver contenido
                     </b-button>
-                    <b-button variant="primary"
+                    <b-button variant="info"
                         v-if="archivo.extension != 'pdf' && archivo.extension != 'mp4'" 
                         target="_blank" 
                         :href="`${archivo.public_url}`">
-                        <i class="fa fa-eye"></i>
+                        Ver contenido
                     </b-button>
                 </div>
             </b-col>

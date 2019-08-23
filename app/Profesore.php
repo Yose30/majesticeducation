@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Evaluacione;
 use App\Pregunta;
+use App\Archivo;
+use App\Enlace;
 use App\Clase;
 use App\User;
 
@@ -32,5 +34,17 @@ class Profesore extends Model
     //Una profesor puede crear muchas preguntas
     public function preguntas(){
         return $this->hasMany(Pregunta::class);
+    }
+
+    //Uno a muchos
+    //Una profesor puede subir muchos archivos
+    public function archivos(){
+        return $this->hasMany(Archivo::class);
+    }
+
+    //Uno a muchos
+    //Una profesor puede crear muchos enlaces
+    public function enlaces(){
+        return $this->hasMany(Enlace::class);
     }
 }

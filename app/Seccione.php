@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Evaluacione;
+use App\Resultado;
 use App\Archivo;
 use App\Enlace;
 use App\Clase;
@@ -10,7 +12,7 @@ use App\Clase;
 class Seccione extends Model
 {
     protected $fillable = [
-        'id', 'clase_id', 'seccion', 'slug'
+        'id', 'clase_id', 'evaluacione_id', 'seccion', 'slug'
     ];
 
     //Uno a muchos (inverso)
@@ -34,12 +36,18 @@ class Seccione extends Model
     //Muchos a muchos
     //Una seccion puede tener muchos archivos
     public function archivos(){
-        return $this->belongsToMany(Archivo::class);
+        return $this->belongsToMany(Archivo::class)->withPivot('titulo');
     }
 
     //Muchos a muchos
     //Una seccion puede tener muchos enlaces
     public function enlaces(){
-        return $this->belongsToMany(Enlace::class);
+        return $this->belongsToMany(Enlace::class)->withPivot('titulo');
+    }
+
+    //Uno a muchos (Inversa)
+    //Una seccion puede tener solo una evaluacion
+    public function evaluacione(){
+        return $this->belongsTo(Evaluacione::class);
     }
 }

@@ -16,6 +16,8 @@ class CreateEnlacesTable extends Migration
         //Para links de videos, paginas o cualquier otro archivo
         Schema::create('enlaces', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('profesore_id');
+            $table->foreign('profesore_id')->references('id')->on('profesores');
             $table->unsignedBigInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->string('titulo', 100);

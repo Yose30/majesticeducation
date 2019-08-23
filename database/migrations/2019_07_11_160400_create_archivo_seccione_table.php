@@ -19,6 +19,7 @@ class CreateArchivoSeccioneTable extends Migration
             $table->foreign('archivo_id')->references('id')->on('archivos');
             $table->unsignedBigInteger('seccione_id');
             $table->foreign('seccione_id')->references('id')->on('secciones')->onDelete('cascade');
+            $table->string('titulo', 100);
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <preguntas-component :preguntas="{{ $preguntas }}"></preguntas-component>
+    <evaluacion-component :preguntas="{{ $preguntas }}"></evaluacion-component>
 @endsection

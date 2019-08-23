@@ -24,35 +24,47 @@ class ArchivoController extends Controller
             'file' => 'required|mimes:pdf,xls,xlsx,doc,docx|max:2000'
         ]);
         
-        $seccion = Seccione::whereId($request->seccione_id)->first();
         //Comprueba que el archivo no exista en la carpeta
         if(Storage::disk('dropbox')
-            ->exists('/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+            ->exists('/profesore_id'.auth()->user()->profesore->id.'/Documentos/'.$request->file('file')->getClientOriginalName())){
             $jsondata['status'] = 422;
-            $jsondata['message'] =  'El archivo ya existe en la unidad';
+            $jsondata['message'] =  'El archivo ya se encuentra guardado';
             return response()->json($jsondata);
         }
-        $this->insertar($seccion, $request, 'Documentos');
+
+        $this->insertar($request, 'Documentos');
+
         // Creamos el enlace publico en dropbox utilizando la propiedad dropbox
         // definida en el constructor de la clase y almacenamos la respuesta.
         $response = $this->dropbox->createSharedLinkWithSettings(
-            '/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+            '/profesore_id'.auth()->user()->profesore->id.'/Documentos/'.$request->file('file')->getClientOriginalName(), 
             ["requested_visibility" => "public"]
         );
         $url = $this->remplazar($response['url'], $request);
-        $archivo = Archivo::create([
-            'categoria_id' =>  1,
-            'titulo' => $request->titulo,
-            'name' => $response['name'],
-            'public_url' => $url,
-            'size' => $response['size'],
-            'extension' => $request->file('file')->getClientOriginalExtension()
-        ]);
+        try{
+            \DB::beginTransaction();
+            $archivo = Archivo::create([
+                'profesore_id' => auth()->user()->profesore->id,
+                'categoria_id' =>  1,
+                'titulo' => $request->titulo,
+                'name' => $response['name'],
+                'public_url' => $url,
+                'size' => $response['size'],
+                'extension' => $request->file('file')->getClientOriginalExtension()
+            ]);
 
-        //Insertar en la tabla pivote
-        $archivo->secciones()->attach($seccion->id);
+            //Insertar en la tabla pivote
+            if($request->seccione_id != 'undefined'){
+                $archivo->secciones()->attach($request->seccione_id, ['titulo' => $request->titulo]);
+            }
+            $dato = $this->datos_array($archivo);
+            \DB::commit();
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json($exception->getMessage());
+        }
         
-        return response()->json($archivo);
+        return response()->json($dato);
     }
 
     public function remplazar($resposeUrl, $request){
@@ -68,7 +80,6 @@ class ArchivoController extends Controller
 
     //Actualizar el archivo
     public function update_documento(Request $request){
-        $seccion = Seccione::whereId($request->seccione_id)->first();
         $archivo = Archivo::whereId($request->archivo_id)->first();
         $this->validar($request);
         if($request->file != null){
@@ -76,17 +87,18 @@ class ArchivoController extends Controller
                 'file' => 'required|mimes:pdf,xls,xlsx,doc,docx|max:2000'
             ]);
             if(Storage::disk('dropbox')
-                ->exists('/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+                ->exists('/profesore_id'.auth()->user()->profesore->id.'/Documentos/'.$request->file('file')->getClientOriginalName())){
                 $jsondata['status'] = 422;
-                $jsondata['message'] =  'El archivo ya existe en la unidad';
+                $jsondata['message'] =  'El archivo ya se encuentra guardado';
                 return response()->json($jsondata);
             }
-            $this->dropbox->delete('/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name);
-            $this->insertar($seccion, $request, 'Documentos');
+            $this->dropbox->delete('/profesore_id'.auth()->user()->profesore->id.'/Documentos/'.$archivo->name);
+            $this->insertar($request, 'Documentos');
             $response = $this->dropbox->createSharedLinkWithSettings(
-                '/Documentos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+                '/profesore_id'.auth()->user()->profesore->id.'/Documentos/'.$request->file('file')->getClientOriginalName(), 
                 ["requested_visibility" => "public"]
             );
+            
             $url = $this->remplazar($response['url'], $request);
             $archivo->name = $response['name']; 
             $archivo->public_url = $url; 
@@ -103,49 +115,57 @@ class ArchivoController extends Controller
         $this->validar($request);
         $seccion = Seccione::whereId($request->seccione_id)->first();
         if(Storage::disk('dropbox')
-            ->exists('/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+            ->exists('/profesore_id'.auth()->user()->profesore->id.'/Audios/'.$request->file('file')->getClientOriginalName())){
             $jsondata['status'] = 422;
-            $jsondata['message'] =  'El audio ya existe en la unidad';
+            $jsondata['message'] =  'El audio ya se encuentra guardado';
             return response()->json($jsondata);
         }
-        $this->insertar($seccion, $request, 'Audios');
+        $this->insertar($request, 'Audios');
 
         $response = $this->dropbox->createSharedLinkWithSettings(
-            '/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+            '/profesore_id'.auth()->user()->profesore->id.'/Audios/'.$request->file('file')->getClientOriginalName(), 
             ["requested_visibility" => "public"]
         );
         $url = $this->remplazar($response['url'], $request);
-        $archivo = Archivo::create([
-            'categoria_id' =>  2,
-            'titulo' => $request->titulo,
-            'public_url' => $url,
-            'name' => $response['name'],
-            'size' => $response['size'],
-            'extension' => $request->file('file')->getClientOriginalExtension()
-        ]);
+        try{
+            \DB::beginTransaction();
+            $archivo = Archivo::create([
+                'profesore_id' => auth()->user()->profesore->id,
+                'categoria_id' =>  2,
+                'titulo' => $request->titulo,
+                'public_url' => $url,
+                'name' => $response['name'],
+                'size' => $response['size'],
+                'extension' => $request->file('file')->getClientOriginalExtension()
+            ]);
 
-        //Insertar en la tabla pivote
-        $archivo->secciones()->attach($seccion->id);
-        
-        return response()->json($archivo);
+            //Insertar en la tabla pivote
+            $archivo->secciones()->attach($seccion->id, ['titulo' => $request->titulo]);
+            $dato = $this->datos_array($archivo);
+            \DB::commit();
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json($exception->getMessage());
+        }
+        return response()->json($dato);
     }
 
     //Actualizar audio
     public function update_audio(Request $request){
-        $seccion = Seccione::whereId($request->seccione_id)->first();
+        // $seccion = Seccione::whereId($request->seccione_id)->first();
         $archivo = Archivo::whereId($request->archivo_id)->first();
         $this->validar($request);
         if($request->file != null){
             if(Storage::disk('dropbox')
-                ->exists('/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+                ->exists('/profesore_id'.auth()->user()->profesore->id.'/Audios/'.$request->file('file')->getClientOriginalName())){
                 $jsondata['status'] = 422;
-                $jsondata['message'] =  'El audio ya existe en la unidad';
+                $jsondata['message'] =  'El audio ya se encuentra guardado';
                 return response()->json($jsondata);
             }
-            $this->dropbox->delete('/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name);
-            $this->insertar($seccion, $request, 'Audios');
+            $this->dropbox->delete('/profesore_id'.auth()->user()->profesore->id.'/Audios/'.$archivo->name);
+            $this->insertar($request, 'Audios');
             $response = $this->dropbox->createSharedLinkWithSettings(
-                '/Audios/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+                '/profesore_id'.auth()->user()->profesore->id.'/Audios/'.$request->file('file')->getClientOriginalName(), 
                 ["requested_visibility" => "public"]
             );
             $url = $this->remplazar($response['url'], $request);
@@ -170,37 +190,44 @@ class ArchivoController extends Controller
         $seccion = Seccione::whereId($request->seccione_id)->first();
 
         if(Storage::disk('dropbox')
-            ->exists('/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+            ->exists('/profesore_id'.auth()->user()->profesore->id.'/Videos/'.$request->file('file')->getClientOriginalName())){
             $jsondata['status'] = 422;
-            $jsondata['message'] =  'El video ya existe en la unidad';
+            $jsondata['message'] =  'El video ya se encuentra guardado';
             return response()->json($jsondata);
         }
 
-        $this->insertar($seccion, $request, 'Videos');
+        $this->insertar($request, 'Videos');
 
         $response = $this->dropbox->createSharedLinkWithSettings(
-            '/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+            '/profesore_id'.auth()->user()->profesore->id.'/Videos/'.$request->file('file')->getClientOriginalName(), 
             ["requested_visibility" => "public"]
         );
         $url = $this->remplazar($response['url'], $request);
-        // Creamos un nuevo registro en la tabla files con los datos de la respuesta.
-        $archivo = Archivo::create([
-            'categoria_id' =>  3,
-            'titulo' => $request->titulo,
-            'public_url' => $url,
-            'name' => $response['name'],
-            'size' => $response['size'],
-            'extension' => $request->file('file')->getClientOriginalExtension()
-        ]);
-
-        //Insertar en la tabla pivote
-        $archivo->secciones()->attach($seccion->id);
-        
-        return response()->json($archivo);
+        try{
+            \DB::beginTransaction();
+            // Creamos un nuevo registro en la tabla files con los datos de la respuesta.
+            $archivo = Archivo::create([
+                'profesore_id' => auth()->user()->profesore->id,
+                'categoria_id' =>  3,
+                'titulo' => $request->titulo,
+                'public_url' => $url,
+                'name' => $response['name'],
+                'size' => $response['size'],
+                'extension' => $request->file('file')->getClientOriginalExtension()
+            ]);
+            //Insertar en la tabla pivote
+            $archivo->secciones()->attach($seccion->id, ['titulo' => $request->titulo]);
+            $dato = $this->datos_array($archivo);
+            \DB::commit();
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json($exception->getMessage());
+        }
+        return response()->json($dato);
     }
 
     public function update_video(Request $request){
-        $seccion = Seccione::whereId($request->seccione_id)->first();
+        // $seccion = Seccione::whereId($request->seccione_id)->first();
         $archivo = Archivo::whereId($request->archivo_id)->first();
         $this->validar($request);
         if($request->file != null){
@@ -208,15 +235,15 @@ class ArchivoController extends Controller
                 'file' => 'required|mimes:mp4|max:5000'
             ]);
             if(Storage::disk('dropbox')
-                ->exists('/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName())){
+                ->exists('/profesore_id'.auth()->user()->profesore->id.'/Videos/'.$request->file('file')->getClientOriginalName())){
                 $jsondata['status'] = 422;
-                $jsondata['message'] =  'El video ya existe en la unidad';
+                $jsondata['message'] =  'El video ya se encuentra guardado';
                 return response()->json($jsondata);
             }
-            $this->dropbox->delete('/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name);
-            $this->insertar($seccion, $request, 'Videos');
+            $this->dropbox->delete('/profesore_id'.auth()->user()->profesore->id.'/Videos/'.$archivo->name);
+            $this->insertar($request, 'Videos');
             $response = $this->dropbox->createSharedLinkWithSettings(
-                '/Videos/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/'.$request->file('file')->getClientOriginalName(), 
+                '/profesore_id'.auth()->user()->profesore->id.'/Videos/'.$request->file('file')->getClientOriginalName(), 
                 ["requested_visibility" => "public"]
             );
             $url = $this->remplazar($response['url'], $request);
@@ -230,52 +257,67 @@ class ArchivoController extends Controller
         return response()->json($archivo);
     }
 
-    //Borrar archivo
-    public function destroy(){
+    //Borrar archivo de la unidad
+    public function borrar_archivo(){
         $seccion_id = Input::get('seccion_id');
         $id = Input::get('id');
-
         $seccion = Seccione::whereId($seccion_id)->first();
-        $archivo = Archivo::whereId($id)->first();
-        $ubicacion = $seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name;
-        // Eliminamos el archivo en dropbox llamando a la clase
-        // instanciada en la propiedad dropbox.
-        if($archivo->categoria_id == 1){
-            $this->dropbox->delete('/Documentos/'.$ubicacion);
+        try{
+            \DB::beginTransaction();
+            // Eliminamos el registro de nuestra tabla
+            $seccion->archivos()->detach($id);
+            \DB::commit();
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json($exception->getMessage());
         }
-        if($archivo->categoria_id == 2){
-            $this->dropbox->delete('/Audios/'.$ubicacion);
-        }
-        if($archivo->categoria_id == 3){
-            $this->dropbox->delete('/Videos/'.$ubicacion);
-        }
-        // Eliminamos el registro de nuestra tabla
-        \DB::table('archivo_seccione')
-            ->where('seccione_id', '=', $seccion->id)
-            ->where('archivo_id', '=', $archivo->id)
-            ->delete();
-        $archivo->delete();
         return response()->json(null, 200);
     }
 
-    //Descargar archivo
-    public function download($seccion_id, $id){
-        $seccion = Seccione::whereId($seccion_id)->first();
+    //Borrar el archivo
+    public function destroy(){
+        $id = Input::get('id');
         $archivo = Archivo::whereId($id)->first();
-        $ubicacion = $seccion->clase->nombre.'/'.$seccion->seccion.'/'.$archivo->name;
+        $ubicacion = '/profesore_id'.auth()->user()->profesore->id;
+        // Eliminamos el archivo en dropbox llamando a la clase instanciada en la propiedad dropbox.
+        if($archivo->categoria_id == 1){
+            $this->dropbox->delete($ubicacion.'/Documentos/'.$archivo->name);
+        }
+        if($archivo->categoria_id == 2){
+            $this->dropbox->delete($ubicacion.'/Audios/'.$archivo->name);
+        }
+        if($archivo->categoria_id == 3){
+            $this->dropbox->delete($ubicacion.'/Videos/'.$archivo->name);
+        }
+        try{
+            \DB::beginTransaction();
+            // Eliminamos el registro de las unidades
+            $archivo->secciones()->detach();
+            $archivo->delete();
+            \DB::commit();
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json($exception->getMessage());
+        }
+        return response()->json($ubicacion);
+    }
+
+    //Descargar archivo
+    public function download($id){
+        $archivo = Archivo::whereId($id)->first();
+        $ubicacion = '/profesore_id'.auth()->user()->profesore->id;
         // Retornamos una descarga especificando el driver dropbox
         // e indicándole al método download el nombre del archivo.
         if($archivo->categoria_id == 1){
-            return Storage::disk('dropbox')->download('/Documentos/'.$ubicacion);
+            return Storage::disk('dropbox')->download($ubicacion.'/Documentos/'.$archivo->name);
         }
         if($archivo->categoria_id == 2){
-            return Storage::disk('dropbox')->download('/Audios/'.$ubicacion);
+            return Storage::disk('dropbox')->download($ubicacion.'/Audios/'.$archivo->name);
         }
         if($archivo->categoria_id == 3){
-            return Storage::disk('dropbox')->download('/Videos/'.$ubicacion);
+            return Storage::disk('dropbox')->download($ubicacion.'/Videos/'.$archivo->name);
         }
     }
-
 
     //Función para validar el archivo
     public function validar($request){
@@ -286,14 +328,60 @@ class ArchivoController extends Controller
     }
 
     //Función para insertar el archivo en Dropbox
-    public function insertar($seccion, $request, $carpeta){
+    public function insertar($request, $carpeta){
         // Guardamos el archivo indicando el driver y el método putFileAs el cual recibe
         // el directorio donde será almacenado, el archivo y el nombre.
         // ¡No olvides validar todos estos datos antes de guardar el archivo!
         Storage::disk('dropbox')->putFileAs(
-            '/'.$carpeta.'/'.$seccion->clase->nombre.'/'.$seccion->seccion.'/', 
+            '/profesore_id'.auth()->user()->profesore->id.'/'.$carpeta.'/', 
             $request->file('file'), 
             $request->file('file')->getClientOriginalName()
         );
+    }
+
+    public function save_selected(Request $request){
+        $seccion = Seccione::find($request->seccion_id);
+        $archivos = $seccion->archivos;
+
+        $count = 0;
+        foreach($archivos as $archivo){
+            if($archivo->id == $request->archivo_id){
+                $count ++;
+            }
+        }
+
+        if($count > 0){
+            $jsondata['status'] = 422;
+            $jsondata['message'] =  'El archivo ya se encuentra guardado en la unidad';
+            return response()->json($jsondata);
+        }
+        else{
+            try{
+                \DB::beginTransaction();
+                    $archivo = Archivo::whereId($request->archivo_id)->first();
+                    $seccion->archivos()->attach($archivo->id, ['titulo' => $archivo->titulo]);
+                    $dato = $this->datos_array($archivo);
+                \DB::commit();
+            } catch (Exception $e) {
+                \DB::rollBack();
+                return response()->json($exception->getMessage());
+            }
+            
+            return response()->json($dato);
+        }
+    }
+
+    public function datos_array($archivo){
+        $dato = [
+            'id' => $archivo->id,
+            'categoria_id' => $archivo->categoria_id,
+            'titulo' => $archivo->titulo,
+            'public_url' => $archivo->public_url,
+            'pivot' => [
+                'titulo' => $archivo->titulo
+            ]
+        ];
+
+        return $dato;
     }
 }

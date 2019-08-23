@@ -13,8 +13,8 @@ class AlumnoController extends Controller
     }
 
     public function contenido_clase($slug){
-        $clase = Clase::whereSlug($slug)->first();
-        $secciones = Seccione::where('clase_id', $clase->id)->with('archivos')->with('enlaces')->get();
-        return view('alumno.contenido', compact('clase', 'secciones'));
+        $clase = Clase::whereSlug($slug)
+                    ->with(['secciones.archivos', 'secciones.enlaces', 'secciones.evaluacione.resultados'])->first();
+        return view('alumno.contenido', compact('clase'));
     }
 }

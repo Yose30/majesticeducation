@@ -10,7 +10,7 @@ use App\Profesore;
 class Pregunta extends Model
 {
     protected $fillable = [
-        'id', 'profesore_id', 'pregunta'
+        'id', 'profesore_id', 'pregunta', 'respuesta_base'
     ];
 
     //Muchos a muchos
@@ -25,26 +25,9 @@ class Pregunta extends Model
         return $this->hasMany(Respuesta::class);
     }
 
-   //Uno a muchos (Inversa)
+    //Uno a muchos (Inversa)
     //Una pregunta solo puede pertencer a un profesor
     public function profesore(){
         return $this->belongsTo(Profesore::class);
-    }
-
-    protected static function boot () {
-        parent::boot();
-        static::saved(function(Pregunta $pregunta){
-            if(! \App::runningInConsole()){
-                if(request('respuestas')){
-                    foreach(request('respuestas') as $respuesta) {
-                        Respuesta::create([
-                            'pregunta_id'   => $pregunta->id,
-                            'respuesta'     => $respuesta['respuesta'],
-                            'valor'         => $respuesta['valor']
-                        ]);
-                    }
-                }
-            }
-        });
     }
 }

@@ -1,82 +1,70 @@
 <template>
     <div>
         <div class="text-right">
-            <b-button variant="success" @click="formPregunta = true"><i class="fa fa-plus"> Agregar pregunta</i></b-button>
+            <b-button variant="success" v-b-modal.modal-pregunta @click="newPregunta">
+                <i class="fa fa-plus"> Crear pregunta</i>
+            </b-button>
         </div>
-        <div v-if="!formPregunta">
-            <b-row>
-                <b-col>
-                    <b-list-group flush v-for="(question, i) in questions" v-bind:key="i">
-                        <b-list-group-item><b-link @click="pRespuestar(question)">{{ question.pregunta }}</b-link></b-list-group-item>
-                    </b-list-group>
-                </b-col>
-                <b-col>
-                    <b-list-group flush v-for="(respuesta, i) in respuestas" v-bind:key="i">
-                        <b-list-group-item>{{ respuesta.respuesta }}</b-list-group-item>
-                    </b-list-group>
-                </b-col>
-            </b-row>
-        </div>
-        <diV v-if="formPregunta">
-            <hr>
-            <div>
-                <label for="input-pregunta">Pregunta</label>
-                <b-row>
-                    <b-col>
-                        <b-form-input v-model="formP.pregunta" :disabled="processing" id="input-pregunta" required></b-form-input>
-                    </b-col>
-                    <b-col>
-                        <b-button 
-                            variant="outline-info" 
-                            v-if="formP.pregunta.length > 6 && !mostrarRespuestas" 
-                            @click="mostrarRespuestas = true">
-                            Continuar
-                        </b-button>
-                    </b-col>
-                </b-row>
-                <hr>
-                <div v-if="mostrarRespuestas">
-                    <b-row>
-                        <b-col v-if="mostrarForm">
-                            <b-form-group label-cols="5" label-cols-lg="2" label="Respuesta" label-for="input-respuesta">
-                                <b-form-input v-model="formR.respuesta" :disabled="processing" id="input-respuesta" required></b-form-input>
-                            </b-form-group>
-                            <b-form-group label-cols="5" label-cols-lg="2" label="Valor" label-for="input-valor">
-                                <b-form-select v-model="formR.valor" :options="options" :disabled="processing"></b-form-select>
-                            </b-form-group>
-                            <div class="d-block text-right">
-                                <b-button 
-                                    variant="success"
-                                    :disabled="processing" 
-                                    v-if="formR.respuesta.length > 3 && formR.valor != null" 
-                                    @click="agregarRespuesta">
-                                    <i class="fa fa-check"></i> Guardar respuesta
-                                </b-button>
-                            </div>
-                        </b-col>
-                        <b-col>
-                            <b-list-group flush v-for="(respuesta, i) in formRespuestas" v-bind:key="i">
-                                <b-list-group-item>
-                                    <b-row>
-                                        <b-col>{{ respuesta.respuesta }}</b-col>
-                                        <b-col>
-                                            <strong v-if="respuesta.valor == 'Correcto'" style="color: green;">{{ respuesta.valor }}</strong>
-                                            <strong v-if="respuesta.valor == 'Incorrecto'" style="color: red;">{{ respuesta.valor }}</strong>
-                                        </b-col>
-                                    </b-row>
-                                </b-list-group-item>
-                            </b-list-group>
-                        </b-col>
-                    </b-row>
-                </div>
-                <hr>
-                <div class="d-block text-right">
-                    <b-button :disabled="processing" @click="submitPregunta" v-if="formRespuestas.length > 0" variant="success">
-                        <i class="fa fa-check"></i> {{ !processing ? 'Guardar' : 'Guardando' }} <b-spinner small v-if="processing"></b-spinner>
-                    </b-button>
-                </div>
+        <!-- MOSTRAR TABLA DE PREGUNTAS CON SUS RESPUESTAS -->
+        <b-table 
+            :fields="fieldsP" 
+            :items="preguntas" 
+            :current-page="currentPage"
+            :per-page="perPage"
+            id="my-questions">
+            <template slot="respuestas" slot-scope="row">
+                <b-button variant="info" @click="row.toggleDetails"> 
+                    {{ row.detailsShowing ? 'Ocultar' : 'Mostrar'}}
+                </b-button>
+            </template>
+            <template slot="row-details" slot-scope="row">
+                <b-table :items="row.item.respuestas" :fields="fieldsR">
+                    <template slot="valor" slot-scope="row">
+                        <strong v-if="row.item.valor == 'Correcto'" style="color: green;">
+                            <i class="fa fa-check"></i> Correcto
+                        </strong>
+                        <strong v-else style="color: red;">
+                            <i class="fa fa-close"></i> Incorrecto
+                        </strong>
+                    </template>
+                </b-table>
+            </template>
+            <template slot="editar" slot-scope="row">
+                <b-button 
+                    variant="warning" 
+                    v-b-modal.modal-pregunta 
+                    @click="editarPregunta(row.item, row.index)"
+                    style="color: white;">
+                    <i class="fa fa-edit"></i> Editar
+                </b-button>
+            </template>
+            <template slot="eliminar" slot-scope="row">
+                <!-- <b-button variant="danger"><i class="fa fa-minus-circle"></i> Eliminar</b-button> -->
+            </template>
+        </b-table>
+        <b-pagination
+            v-model="currentPage"
+            :total-rows="preguntas.length"
+            :per-page="perPage"
+            class="my-questions">
+        </b-pagination>
+
+        <!-- MODALS -->
+        <b-modal v-model="show" title="">
+            <p><b><i class="fa fa-exclamation-triangle"></i> No se guardara ningún cambio</b></p>
+            <div slot="modal-footer">
+                <b-button @click="func_cancelar_cambios">OK</b-button>
             </div>
-        </diV>
+        </b-modal>  
+
+        <b-modal id="modal-pregunta" size="lg" :title="`${ editar ? 'Editar' : 'Crear' } pregunta`">
+            <form-pregunta-component 
+                :formP="formP" 
+                :editar="editar"
+                @updatePreguntas="actPreguntas">
+            </form-pregunta-component>
+            <div slot="modal-footer"></div>
+        </b-modal>
     </div>
 </template>
 
@@ -86,75 +74,59 @@
         props: ['preguntas'],
         data() {
             return {
-                options: [
-                    { value: null, text: 'Porfavor selecciona una opción' },
-                    { value: 'Correcto', text: 'Correcto' },
-                    { value: 'Incorrecto', text: 'Incorrecto' },
-                ],
+                fieldsP: ['pregunta', 'respuestas', 'editar', { key: 'eliminar', label: '' }],
+                fieldsR: ['respuesta', 'valor'],
                 questions: this.preguntas,
-                mostrarRespuestas: false,
                 formPregunta: false,
-                formRespuestas: [],
-                processing: false,
-                formR: {
-                    respuesta: '',
-                    valor: null,
-                },
                 formP: {
                     pregunta: '',
                     respuestas: []
                 },  
-                mostrarForm: true,
                 respuestas: [],
-                correcta: 0,
+                currentPage: 1,
+                show: false,
+                perPage: 5,
+                editar: false,
+                posicion: 0,
             }
         },
         methods: {
-            submitPregunta(){
-                this.processing = true;
-                this.mostrarForm = false;
-                this.formP.respuestas = this.formRespuestas;
-                axios.post('/profesor/nueva_pregunta', this.formP).then(response => {
-                    this.processing = false;
-                    this.formP = { pregunta: '', respuestas: [] }
-                    this.mostrarRespuestas = false;
-                    this.formPregunta = false;
-                    this.mostrarForm = true;
-                    this.questions.push(response.data);
-                })
-                .catch(error => {
-                    this.processing = false;
-                    this.$bvToast.toast('Ocurrio un problema, vuelve a intentarlo', {
-                        title: "Error",
-                        variant: 'danger',
-                        solid: true
-                    })
-                });
+            newPregunta(){
+                this.formP = { pregunta: '', respuestas: [] };
+                this.editar = false;
             },
-            agregarRespuesta(){
-                if(this.formR.valor == 'Correcto'){
-                    if(this.correcta == 0){
-                        this.correcta = 1;
-                        this.formRespuestas.push(this.formR);
-                        this.formR = { respuesta: '', valor: null, };
-                    }
-                    else{
-                       this.$bvToast.toast('Ya existe una respuesta correcta', {
-                            title: "Error",
-                            variant: 'warning',
-                            solid: true
-                        }) 
-                    }                    
+            editarPregunta(pregunta, i){
+                this.formP = { pregunta: '', respuestas: [] };
+                this.formP = pregunta;
+                this.editar = true;
+                this.posicion = i;
+            },
+            func_cancelar_cambios(){
+                this.formP = { pregunta: '', respuestas: [] };
+                this.formPregunta = false;
+                this.respuestas = [];
+                this.show = false;
+            },
+            actPreguntas(pregunta){
+                if(!this.editar){
+                    this.questions.push(pregunta);
                 }
                 else{
-                    this.formRespuestas.push(this.formR);
-                    this.formR = { respuesta: '', valor: null, };
+                    this.questions[this.posicion] = pregunta;
                 }
-            },
-            pRespuestar(question){
-                this.respuestas = [];
-                this.respuestas = question.respuestas;
+                this.$bvModal.hide('modal-pregunta');
+                this.func_cancelar_cambios();
             }
         }
     }
 </script>
+ 
+ <style>
+    #btnClose{
+        background-color: transparent;
+        color: red;
+        border: none;
+        font-size: 20px;
+    }
+ </style>
+ 

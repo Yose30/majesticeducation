@@ -13,10 +13,20 @@ class CreateSeccionesTable extends Migration
      */
     public function up()
     {
+        Schema::create('evaluaciones', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('profesore_id');
+            $table->foreign('profesore_id')->references('id')->on('profesores');
+            $table->string('titulo');
+            $table->timestamps();
+        });
+
         Schema::create('secciones', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('clase_id');
             $table->foreign('clase_id')->references('id')->on('clases');
+            $table->unsignedBigInteger('evaluacione_id')->nullable();
+            $table->foreign('evaluacione_id')->references('id')->on('evaluaciones');
             $table->string('seccion');
             $table->string('slug');
             $table->timestamps();
@@ -36,6 +46,7 @@ class CreateSeccionesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('evaluaciones');
         Schema::dropIfExists('secciones');
         Schema::dropIfExists('categorias');
     }

@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Categoria;
+use App\Profesore;
 use App\Seccione;
 
 class Archivo extends Model
 {
     protected $fillable = [
-        'id', 'categoria_id', 'titulo', 'name', 'public_url', 'size', 'extension'
+        'id', 'profesore_id', 'categoria_id', 'titulo', 'name', 'public_url', 'size', 'extension'
     ];
 
     //Uno a muchos (Inversa)
@@ -21,7 +22,13 @@ class Archivo extends Model
     //Muchos a muchos
     //Un archivo puede pertenecer a muchas secciones
     public function secciones(){
-        return $this->belongsToMany(Seccione::class);
+        return $this->belongsToMany(Seccione::class)->withPivot('titulo');
+    }
+
+    //Uno a muchos (Inversa)
+    //Una archivo solo puede pertencer a un profesor
+    public function profesore(){
+        return $this->belongsTo(Profesore::class);
     }
 
     //Obtener el tamaño del archivo

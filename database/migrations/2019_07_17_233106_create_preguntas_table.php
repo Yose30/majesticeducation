@@ -18,6 +18,7 @@ class CreatePreguntasTable extends Migration
             $table->unsignedBigInteger('profesore_id');
             $table->foreign('profesore_id')->references('id')->on('profesores');
             $table->string('pregunta');
+            $table->string('respuesta_base')->nullable();
             $table->timestamps();
         });
     }

@@ -92,7 +92,7 @@
 <script>
     export default {
         name: 'app',
-        props: ['archivo', 'enlace', 'seccion_id'],
+        props: ['archivo', 'enlace'],
         data() {
             return {
                 titulo: this.archivo.titulo,
@@ -155,7 +155,6 @@
                 this.processing = true;
                 this.disabled = true;
                 axios.post('/profesor/editar_enlace', this.link).then(response => {
-                    console.log(response.data);
                     this.errors = {};
                     this.$emit('updateEnlace', response.data);
                     this.processing = false;
@@ -182,7 +181,7 @@
             getDatos(){
                 let formData = new FormData();
                 formData.append('file', this.file);
-                formData.append('seccione_id', this.seccion_id);
+                // formData.append('seccione_id', this.seccion_id);
                 formData.append('archivo_id', this.archivo.id);
                 formData.append('titulo', this.titulo);
                 return formData;
@@ -199,7 +198,6 @@
                 }
                 else{
                     this.errorExist = response.data.message;
-                    console.log(response.data.message);
                 }
                 this.processing = false;
                 this.disabled = false;

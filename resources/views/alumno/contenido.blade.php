@@ -11,17 +11,7 @@
             <hr id="hrtitulo">
         </div>
     </div>
-
-    <!-- <audio controls src="https://dl.dropbox.com/s/loh0y804dk8a7mg/VID-20190626-WA0002.mp4"></audio>
-    <embed src="https://dl.dropbox.com/s/vldfd9nvfnftyk1/archivo-pdf.pdf" type="application/pdf" width="100%" height="600px" />
-    <iframe 
-        width="100%" 
-        height="75%" 
-        src="https://dl.dropbox.com/s/loh0y804dk8a7mg/VID-20190626-WA0002.mp4" 
-        frameborder="0" 
-        allowfullscreen>
-    </iframe> -->
     <div>
-        <contenidoa-component :secciones="{{$secciones}}"></contenidoa-component>
+        <contenidoa-component :secciones="{{$clase->secciones}}"></contenidoa-component>
     </div>
 @endsection

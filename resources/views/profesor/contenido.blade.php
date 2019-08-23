@@ -61,13 +61,12 @@
             {{ $clase->nombre }}
             <div align="right">
                 <h6><b>{{ __("Codigo de la clase") }}</b>: {{ $clase->codigo }}</h6>
-
             </div>
             <hr id="hrtitulo">
             <hr id="hrtitulo">
         </div>
     </div>
     <div>
-        <contenido-component :secciones="{{$secciones}}" :clase_id="{{$clase->id}}"></contenido-component>
+        <contenido-component :secciones="{{ $clase->secciones }}" :clase_id="{{ $clase->id }}"></contenido-component>
     </div>
 @endsection

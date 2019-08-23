@@ -90,39 +90,33 @@ class ClaseController extends Controller
         // Buscar unidad
         $seccion = Seccione::whereId($id)->first();
         //Obtener las relaciones de archivos y enlaces con la unidad
-        $relaciones1 = \DB::table('archivo_seccione')->where('seccione_id', '=', $seccion->id)->get();
-        $relaciones2 = \DB::table('enlace_seccione')->where('seccione_id', '=', $seccion->id)->get();
+        // $relaciones1 = \DB::table('archivo_seccione')->where('seccione_id', '=', $seccion->id)->get();
+        // $relaciones2 = \DB::table('enlace_seccione')->where('seccione_id', '=', $seccion->id)->get();
+
         // Declarar la ubicacion principal donde se ubican los archivos
         $ubicacion = $seccion->clase->nombre.'/'.$seccion->seccion.'/';
         try{
             \DB::beginTransaction();
-            if($relaciones1->count() > 0){
+            if($seccion->archivos->count() > 0){
                 //Almacenar los ids de los archivos y los registros de cada uno
                 $ids = array();
-                $archivos = array();
-                foreach($relaciones1 as $relacion){
-                    $archivo_id = $relacion->archivo_id; 
-                    $archivo_datos = Archivo::whereId($relacion->archivo_id)->first();
-                    array_push($ids, $archivo_id);
-                    array_push($archivos, $archivo_datos);
+                foreach($seccion->archivos as $archivo){
+                    // Borrar los archivos de dropbox
+                    // if($archivo->categoria_id == 1)
+                    //     $this->dropbox->delete('/Documentos/'.$ubicacion.$archivo->name);
+                    // if($archivo->categoria_id == 2)
+                    //     $this->dropbox->delete('/Audios/'.$ubicacion.$archivo->name);
+                    // if($archivo->categoria_id == 3)
+                    //     $this->dropbox->delete('/Videos/'.$ubicacion.$archivo->name);
+                    array_push($ids, $archivo->id); 
                 }
+                // Borrar las relaciones de archivos
+                // $seccion->archivos()->detach();
+
+                // // Borrar los registros de los archivos
+                // $pruebas = Archivo::whereIn('id', $ids)->get();  
                 
-                //Borrar las relaciones de archivos
-                \DB::table('archivo_seccione')->where('seccione_id', '=', $seccion->id)->delete();
-                //Borrar los registros de los archivos
-                foreach($ids as $id){
-                    Archivo::whereId($id)->delete();
-                }
-                //Borrar los archivos de dropbox
-                foreach($archivos as $archivo){
-                    if($archivo->categoria_id == 1)
-                        $this->dropbox->delete('/Documentos/'.$ubicacion.$archivo->name);
-                    if($archivo->categoria_id == 2)
-                        $this->dropbox->delete('/Audios/'.$ubicacion.$archivo->name);
-                    if($archivo->categoria_id == 3)
-                        $this->dropbox->delete('/Videos/'.$ubicacion.$archivo->name);
-                }
-                
+                return response()->json($ids);
             }
             if($relaciones2->count() > 0){
                 //Almacenar los registros de enlaces
