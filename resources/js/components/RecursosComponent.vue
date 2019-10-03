@@ -179,7 +179,7 @@
                         .catch(error => {
                             this.mostrarErrores(error);
                         });
-                }
+                } 
                 else{
                     this.errorExist = 'El audio debe ser de tipo: mp3, mpeg, aac ó wav.';
                     this.processing = false;
